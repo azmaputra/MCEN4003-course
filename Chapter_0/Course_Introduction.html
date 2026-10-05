@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Introduction · Module 0 · MCEN4003</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+/* ==========================================================================
+   MCEN4003 Mechanical Vibration — shared chapter stylesheet
+   Reuse this <style> block unchanged for every chapter.
+   ========================================================================== */
+:root{
+  --ink:#15232e; --ink-2:#34434f; --muted:#5a6773; --line:#e2e7ec; --line-2:#cfd7de;
+  --bg:#ffffff; --surface:#f5f7f9; --navy:#0f2a3d; --accent:#0b5c80; --accent-soft:#eaf3f8;
+  --teal:#0b6e77; --teal-soft:#e8f4f5;
+  --green:#1d6b47; --green-soft:#eef7f2;
+  --red:#a4262c; --red-soft:#fcf1f1;
+  --amber:#7f5a05; --amber-soft:#fdf7e8;
+  --violet:#5b3f8c; --violet-soft:#f5f1fa;
+  --radius:12px;
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --topbar:56px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:17px;line-height:1.7;font-feature-settings:"kern","liga";-webkit-font-smoothing:antialiased}
+p{margin:0 0 1rem}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--navy)}
+ul,ol{margin:0 0 1.1rem;padding-left:1.35rem}
+li{margin:0 0 .4rem}
+li::marker{color:var(--accent)}
+sub,sup{line-height:0}
+:focus-visible{outline:3px solid #f2b705;outline-offset:2px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--navy);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+
+/* ---------- top bar & progress ---------- */
+.topbar{position:sticky;top:0;z-index:50;height:var(--topbar);display:flex;align-items:center;gap:16px;
+  padding:0 20px;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar .brand{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand b{color:var(--navy);font-weight:600}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-left:auto;padding:4px 0}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-size:13px;font-weight:500;color:var(--ink-2);text-decoration:none;padding:5px 11px;border-radius:999px;border:1px solid var(--line)}
+.chips a:hover{border-color:var(--accent);color:var(--accent)}
+.chips a.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--accent);transition:width .1s linear}
+
+/* ---------- page layout ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+.toc{display:none}
+main{min-width:0;max-width:760px;margin:0 auto}
+@media (min-width:1140px){
+  .shell{display:grid;grid-template-columns:220px minmax(0,760px);gap:64px;justify-content:center}
+  main{margin:0}
+  .toc{display:block;position:sticky;top:calc(var(--topbar) + 32px);align-self:start;padding-top:48px}
+  .chips{display:none}
+}
+.toc p{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toc ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+.toc li{margin:0}
+.toc a{display:block;padding:6px 0 6px 14px;margin-left:-2px;border-left:2px solid transparent;font-size:14px;line-height:1.4;color:var(--muted);text-decoration:none}
+.toc a span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8793a0}
+.toc a:hover{color:var(--ink)}
+.toc a.active{border-left-color:var(--accent);color:var(--navy);font-weight:600}
+.toc a.active span{color:var(--accent)}
+
+/* ---------- chapter header ---------- */
+.chapter-head{padding:48px 0 8px}
+.chapter-head .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.chapter-head h1{font-size:clamp(36px,5.6vw,56px);line-height:1.06;letter-spacing:-.02em;font-weight:700;color:var(--navy);margin:0 0 12px}
+.chapter-head .sub{font-size:18px;color:var(--muted);max-width:620px;margin:0}
+
+/* ---------- sections & headings ---------- */
+section.part{padding-top:56px;margin-top:56px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--topbar) + 8px)}
+section.part:first-of-type{border-top:0;margin-top:24px;padding-top:16px}
+.kicker{display:block;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-size:clamp(25px,3.2vw,31px);line-height:1.2;letter-spacing:-.015em;font-weight:700;color:var(--navy);margin:0 0 20px}
+h3{font-size:21px;line-height:1.3;letter-spacing:-.01em;font-weight:600;color:var(--navy);margin:44px 0 12px}
+h4{font-size:17px;line-height:1.4;font-weight:600;color:var(--navy);margin:0 0 10px}
+.box h3,.box h4{font-size:16.5px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.ico{font-size:1.05em;line-height:1}
+
+/* ---------- generic box ---------- */
+.box{margin:28px 0;padding:20px 22px 6px;border-radius:var(--radius);border:1px solid var(--line);background:#fff}
+.box > :last-child{margin-bottom:14px}
+
+/* hero */
+.hero-photo{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#2a3d4c}
+.hero{margin:0 0 28px;background:var(--navy);color:#e9eef2;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(15,42,61,.6)}
+.hero > svg{display:block;width:calc(100% - 88px);height:auto;margin:36px 44px 0;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+.hero-body{padding:28px 44px 22px}
+.hero-body p{font-size:17.5px;color:#dce5ec}
+.hero-body strong{color:#fff}
+.hero-question{font-size:21px!important;line-height:1.4;font-weight:600;color:#f4d58d!important;margin-top:4px}
+
+/* predict */
+.predict{--pad:22px;padding:0 var(--pad) 6px;overflow:hidden;background:#fff;border:1px solid #d6daf0;
+  box-shadow:0 1px 2px rgba(42,52,140,.05),0 8px 24px -18px rgba(42,52,140,.35)}
+.predict > h3,.predict > h4{margin:0 calc(var(--pad) * -1) 16px;padding:13px var(--pad);background:#f1f2fb;border-bottom:1px solid #d6daf0;
+  color:#353f94;font-size:15px;letter-spacing:.01em}
+.predict > h3::after,.predict > h4::after{content:"Commit to an answer before you scroll on";margin-left:auto;font-family:var(--mono);
+  font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#6b72b3}
+.predict > p:first-of-type{font-weight:500;color:var(--ink)}
+.predict details.option > summary:hover{color:#353f94}
+.predict details.option[open]{border-color:#7e86cf;background:#f8f8fd}
+.predict .aside-note{border-top:1px dashed #d6daf0;padding-top:10px;margin-top:12px}
+.aside-note{font-size:14.5px;color:var(--muted)}
+
+/* cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 28px}
+.card{padding:16px 18px 4px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 1px 2px rgba(15,42,61,.04)}
+.card .card-title{font-weight:600;color:var(--navy);margin-bottom:6px}
+.card p{font-size:15.5px}
+
+/* callouts */
+.intuition{background:var(--amber-soft);border-color:#ecdcae;border-left:4px solid var(--amber)}
+.intuition h3,.intuition h4{color:var(--amber)}
+.misconception{background:var(--red-soft);border-color:#efcfd1;border-left:4px solid var(--red)}
+.misconception h3,.misconception h4{color:var(--red)}
+.note{background:var(--surface);border-left:4px solid var(--muted)}
+.note h3,.note h4{color:var(--ink-2)}
+.questions{border:1px solid var(--line-2);background:var(--surface)}
+.questions ul{margin-top:6px}
+.explain{background:var(--accent-soft);border-color:#cfe2ec;border-left:4px solid var(--accent)}
+
+/* journey */
+.journey-label{font-weight:600;color:var(--navy);margin:24px 0 6px}
+ol.journey{list-style:none;padding:0;margin:8px 0 20px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+ol.journey li{margin:0;display:flex;align-items:center;gap:6px}
+ol.journey .step{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;padding:6px 12px;border-radius:999px;border:1px solid #bcd3df;background:var(--accent-soft);color:var(--accent)}
+ol.journey .arrow{color:#9aa8b4}
+
+/* equations */
+.equation{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:0 0 var(--radius) var(--radius)}
+.eq-label{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+.eq-display{font-size:1.12rem;overflow-x:auto;overflow-y:hidden;padding:4px 0 8px;text-align:center}
+.eq-meaning{border-top:1px solid var(--line-2);padding-top:14px;margin-top:6px}
+.eq-meaning h4{font-size:15px;color:var(--accent);margin-bottom:8px}
+.eq-meaning p,.eq-meaning li{font-size:16px}
+.katex{font-size:1.05em}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0;margin:.6em 0}
+
+/* simulation */
+.sim{padding:0;overflow:hidden;border-color:#c3dfe2}
+.sim-head{background:var(--teal-soft);padding:16px 22px;border-bottom:1px solid #c3dfe2}
+.sim-head h4{color:var(--teal);margin-bottom:6px}
+.sim-head p{margin:0;font-size:15.5px}
+.sim-tag{font-family:var(--mono);font-size:11.5px!important;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:4px!important}
+.sim iframe{display:block;width:100%;border:0;background:#fff}
+.sim-foot{padding:14px 22px 6px;border-top:1px solid #c3dfe2;font-size:15px}
+
+/* inline simulation UI */
+.sim-app{padding:18px 22px 6px}
+.sim-stage canvas{display:block;width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;margin:0 0 10px}
+.sim-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px;margin:16px 0 10px}
+.ctl label{font-size:14px;font-weight:500;color:var(--ink-2)}
+.ctl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:2px}
+.ctl-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--teal);white-space:nowrap}
+.ctl input[type=range]{width:100%;accent-color:var(--teal);height:26px;margin:0;cursor:pointer}
+.ctl select{width:100%;font:inherit;font-size:15px;padding:7px 10px;border:1px solid var(--line-2);border-radius:8px;background:#fff;color:var(--ink);margin-top:4px}
+.ctl.is-disabled{opacity:.45}
+.sim-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.btn{font:inherit;font-size:14px;font-weight:500;line-height:1.2;padding:8px 14px;border-radius:8px;border:1px solid var(--line-2);background:#fff;color:var(--ink);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.btn:hover{border-color:var(--teal);color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff;min-width:96px}
+.btn.primary:hover{background:#095b63;color:#fff}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:0 0 10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.stat .k{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.35}
+.stat .v{font-size:16px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.35;margin-top:2px}
+.sim-msg{font-size:15px;line-height:1.5;margin:0 0 14px;padding:9px 12px;border-radius:8px;background:var(--teal-soft);color:var(--ink-2)}
+.sim-msg:empty{display:none}
+
+/* checkpoint */
+.checkpoint{background:var(--green-soft);border-color:#c8e3d4;border-top:3px solid var(--green)}
+.checkpoint > h3,.checkpoint > h4{color:var(--green)}
+.lead-note{font-size:14.5px;color:var(--muted)}
+.question{margin:0 0 22px}
+.question > p:first-child{margin-bottom:10px}
+.hint{font-size:13.5px;color:var(--muted);margin:-4px 0 8px}
+
+/* video */
+.video{background:var(--violet-soft);border-color:#ddd2ec}
+.video h3,.video h4{color:var(--violet)}
+
+/* worked example */
+.example{border-left:4px solid var(--navy);box-shadow:0 1px 3px rgba(15,42,61,.06)}
+.ex-label{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:18px 0 6px!important}
+.example h4{font-size:18px}
+
+/* challenge brief */
+.challenge-brief{margin:0 0 28px;padding:24px 26px 10px;background:var(--navy);color:#dce5ec;border-radius:16px}
+.challenge-brief strong{color:#fff}
+.brief-title{font-size:19px;font-weight:600;color:#f4d58d}
+.challenge-brief li::marker{color:#f4d58d}
+
+/* next */
+.next{background:linear-gradient(180deg,#fdf7e8,#fffdf7);border-color:#ecdcae}
+.next-question{font-size:19px;line-height:1.45;font-weight:600;color:var(--navy)}
+
+/* ---------- disclosure (details) ---------- */
+details{margin:0 0 8px;border:1px solid var(--line-2);border-radius:10px;background:#fff;transition:border-color .15s,background .15s}
+details > summary{list-style:none;cursor:pointer;padding:11px 14px 11px 40px;position:relative;line-height:1.5}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:"";position:absolute;left:16px;top:50%;width:7px;height:7px;margin-top:-5px;
+  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg);transition:transform .15s}
+details[open] > summary::before{transform:rotate(45deg);margin-top:-6px}
+details > summary:hover{color:var(--accent)}
+details[open]{border-color:var(--accent)}
+.reveal > summary{font-weight:600}
+.reveal-body{padding:4px 18px 4px;border-top:1px solid var(--line)}
+.reveal-body > :last-child{margin-bottom:12px}
+.reveal-body p{font-size:16.5px}
+/* answer options */
+details.option > summary{padding-left:14px}
+details.option > summary::before{display:none}
+details.option > summary::after{content:"Show feedback";float:right;margin-left:12px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8793a0;line-height:24px}
+details.option[open] > summary::after{content:"Hide"}
+details.option[open]{background:#fafcfd}
+.verdict-ok{color:var(--green)}
+.verdict-no{color:var(--red)}
+
+/* ---------- figures & tables ---------- */
+figure{margin:28px 0;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+figure svg{display:block;width:100%;height:auto;margin:0 auto}
+figcaption{margin-top:12px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.table-wrap{margin:24px 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+caption{text-align:left;font-weight:600;color:var(--navy);padding:0 0 10px;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+thead th{background:var(--surface);border-bottom:2px solid var(--accent);font-weight:600;color:var(--navy)}
+tbody th{font-weight:600}
+.table-note{font-size:13.5px;color:var(--muted);margin-top:8px}
+
+/* ---------- footer ---------- */
+.page-foot{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .shell{padding:0 16px 64px}
+  .topbar{padding:0 14px}
+  .topbar{gap:10px}
+  .topbar .brand,.topbar .where{font-size:10.5px;letter-spacing:.03em}
+  .chips{margin-left:0}
+  .box{padding:16px 16px 4px}
+  .sim-head,.sim-foot,.sim-app{padding-left:14px;padding-right:14px}
+  .hero > svg{width:calc(100% - 44px);margin:22px 22px 0}
+  .hero-body{padding:22px 22px 14px}
+  .challenge-brief{padding-left:18px;padding-right:18px}
+  .predict{--pad:16px}
+  .predict > h3::after,.predict > h4::after{display:none}
+  details.option > summary::after{display:none}
+  figure{padding:10px;overflow-x:auto}
+  figure svg{min-width:620px}
+  figcaption{position:sticky;left:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.topbar,.toc,.progress{display:none}details{border:0}details > summary::before{display:none}}
+
+/* ===== multi-page (one Canvas page per Part) ===== */
+.shell.single{display:block;max-width:808px}
+.shell.single main{max-width:760px;margin:0 auto}
+.topbar .where{flex:none;margin-left:auto;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.topbar .where b{color:var(--accent);font-weight:600}
+.page-head{padding:48px 0 4px}
+.page-head .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.page-head .part-tag{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;background:var(--navy);border-radius:6px;padding:3px 9px;margin:0 0 12px}
+.page-head h1{font-size:clamp(32px,5vw,48px);line-height:1.1;letter-spacing:-.02em;font-weight:700;color:var(--navy);margin:0 0 12px}
+.page-head .sub{font-size:18px;color:var(--muted);margin:0}
+.part-body{margin-top:36px}
+h2.sec{font-size:23px;line-height:1.3;letter-spacing:-.01em;font-weight:600;margin:48px 0 12px}
+.part-body > p.bridge{font-size:18px;color:var(--ink-2);border-left:3px solid var(--accent);padding-left:16px;margin-bottom:24px}
+.module-map{list-style:none;padding:0;margin:18px 0 8px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.module-map li{display:grid;grid-template-columns:70px 1fr;gap:12px;margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.5}
+.module-map li:first-child{border-top:0}
+.module-map li.here{background:var(--accent-soft)}
+.module-map .pl{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+.module-map strong{display:block}
+.module-map span.d{color:var(--muted);font-size:14.5px}
+.up-next{margin:56px 0 0;padding:20px 22px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--navy)}
+.up-next .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.up-next .ttl{font-size:19px;font-weight:600;color:var(--navy);margin:0 0 6px}
+.up-next p{margin:0 0 6px;font-size:16px}
+.up-next .how{font-size:14px;color:var(--muted);margin:8px 0 0}
+@media (max-width:640px){.module-map li{grid-template-columns:1fr;gap:2px}}
+@media (max-width:640px){.topbar .where{font-size:10.5px;letter-spacing:.03em}}
+/* left-align content with the top header (Canvas iframe) */
+.shell.single{margin:0;padding-left:20px;padding-right:20px;max-width:800px}
+.shell.single main{margin:0}
+@media (max-width:640px){.topbar{padding:0 16px}.shell.single{padding-left:16px;padding-right:16px}}
+
+/* ===== Colour scheme: Restrained (one blue accent; red = misconception, green = checkpoint) ===== */
+body{--accent:#1d4f7a;--accent-soft:#edf3f8;--navy:#14283a;--teal:#1d4f7a;--teal-soft:#f1f5f8}
+body .hero-question{color:#bcd7ee!important}
+body .predict{border-color:var(--line-2);box-shadow:none}
+body .predict > h3,body .predict > h4{background:#f6f8fa;border-bottom-color:var(--line);color:var(--ink)}
+body .predict > h3::after,body .predict > h4::after{color:var(--muted)}
+body .predict details.option[open]{border-color:var(--accent);background:#f8fafc}
+body .predict details.option > summary:hover{color:var(--accent)}
+body .predict .aside-note{border-top-color:var(--line)}
+body .intuition{background:#f6f8fa;border-color:var(--line);border-left:4px solid var(--accent)}
+body .intuition h3,body .intuition h4{color:var(--accent)}
+body .misconception{background:#fff;border-color:var(--line);border-left:4px solid var(--red)}
+body .sim{border-color:var(--line-2)}
+body .sim-head{background:#f6f8fa;border-bottom-color:var(--line)}
+body .sim-head h4{color:var(--navy)}
+body .sim-tag{color:var(--accent)}
+body .sim-foot{border-top-color:var(--line)}
+body .btn.primary:hover{background:#163d5f}
+body .checkpoint{background:#fff;border-color:var(--line)}
+body .video{background:#fff;border-color:var(--line);border-left:4px solid var(--muted)}
+body .video h3,body .video h4{color:var(--ink-2)}
+body ol.journey .step{border-color:#c9d8e6}
+
+/* ===== Top header: solid band + two lines ===== */
+:root{--topbar:66px}
+.topbar{height:var(--topbar);background:#14283a;border-bottom:0;backdrop-filter:none;box-shadow:0 2px 10px -4px rgba(10,25,40,.45)}
+.topbar .brand{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;text-transform:none;letter-spacing:0;font-family:var(--font)}
+.topbar .brand .l1{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#9fb4c7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand .l1 b{color:#fff;font-weight:600}
+.topbar .brand .l2{font-size:15.5px;font-weight:600;line-height:1.25;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where{color:#c9d6e2}
+.progress{background:#7fb2dd;bottom:0;height:3px}
+@media (max-width:640px){
+  .topbar .brand .l1{font-size:10px;letter-spacing:.03em}
+  .topbar .brand .l2{font-size:14px}
+  .topbar .where{font-size:10px}
+}
+:root{--topbar:80px}
+.topbar .brand{gap:5px}
+@media (max-width:640px){:root{--topbar:72px}}
+/* header: name on line 1, line 2 same size as line 1 */
+.topbar .brand{flex:1;min-width:0}
+.topbar .brand .l1{display:flex;align-items:baseline;gap:16px;overflow:visible}
+.topbar .brand .l1 .crs{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar .brand .l1 .who{margin-left:auto;flex:none;color:#c9d6e2}
+.topbar .brand .l2{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#fff;line-height:1.4}
+@media (max-width:640px){.topbar .brand .l2{font-size:10px;letter-spacing:.03em}.topbar .brand .l1{gap:10px}}
+.topbar .brand .l2{font-weight:400;color:#9fb4c7}
+.topbar .brand .l2 b{color:#fff;font-weight:600}
+/* image cards (2 x 2) */
+.card-grid.media{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card.has-img{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.card.has-img > img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#e9edf0}
+.card.has-img .card-body{padding:14px 18px 4px}
+.card-cap{font-size:12.5px!important;line-height:1.45;color:var(--muted);margin-top:-4px}
+@media (max-width:560px){.card-grid.media{grid-template-columns:1fr}}
+.card.has-img{box-shadow:4px 5px 12px -4px rgba(20,40,58,.22)}
+/* Predict first: chosen answer keeps its tint, feedback sits on white */
+body .predict details.option[open]{background:#fff}
+body .predict details.option[open] > summary{background:#f8fafc;border-radius:9px 9px 0 0}
+body .predict details.option[open] > .reveal-body{background:#fff;border-radius:0 0 9px 9px}
+/* Predict first: header 20% darker */
+body .predict > h3,body .predict > h4{background:#b6c6d7;border-bottom-color:#a3b5c8;color:#15232e}
+body .predict > h3::after,body .predict > h4::after{color:#2f3c48}
+/* Predict first: header 10% darker (supersedes 20%) */
+body .predict > h3,body .predict > h4{background:#d6dfe8;border-bottom-color:#c5d1dd;color:#15232e}
+body .predict > h3::after,body .predict > h4::after{color:#3a4754}
+/* Top header: soft blue-grey band (blends with Canvas) */
+.topbar{background:#eaf0f5;border-bottom:1px solid #d3dde6;box-shadow:0 2px 8px -6px rgba(20,40,58,.35)}
+.topbar .brand .l1,.topbar .brand .l2{color:#4a5865}
+.topbar .brand .l1 b,.topbar .brand .l2 b{color:#14283a}
+.topbar .brand .l1 .who{color:#4a5865}
+.progress{background:#1d4f7a;bottom:-1px}
+/* Module 0: unit map + box legend */
+h3.stage{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:32px 0 10px;font-size:18px}
+h3.stage > span:first-child{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+h3.stage .rng{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-left:auto}
+.unit-map li{grid-template-columns:96px 1fr}
+.legend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 20px}
+.legend-grid .box{margin:0}
+.legend-grid .box p{font-size:15px;margin-bottom:12px}
+.legend-grid .box h4{font-size:15.5px}
+.legend-grid .predict > h4::after{display:none}
+.legend-grid .predict > h4{margin-bottom:12px}
+.legend-grid .sim .sim-head{border-bottom:0}
+.legend-grid .sim .sim-head p:last-child{margin-top:2px}
+@media (max-width:560px){.legend-grid{grid-template-columns:1fr}.unit-map li{grid-template-columns:1fr}h3.stage .rng{margin-left:0}}
+/* Top header: charcoal #3e3e3e */
+.topbar{background:#3e3e3e;border-bottom:0;box-shadow:0 2px 10px -4px rgba(0,0,0,.45)}
+.topbar .brand .l1,.topbar .brand .l2,.topbar .brand .l1 .who{color:#c8c8c8}
+.topbar .brand .l1 b,.topbar .brand .l2 b{color:#ffffff}
+.progress{background:#9fc3e3;bottom:0}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <div class="brand"><div class="l1"><span class="crs"><b>MCEN4003 Vibration</b> · Module 0: Course Introduction</span><span class="who">Dr Azma Putra Azis</span></div><div class="l2"><b>Start here</b> · Overview and orientation</div></div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="shell single">
+<main id="content">
+<div class="page-head"><h1>Course Introduction</h1><p class="sub">Welcome to MCEN4003 Vibration. This page explains what the unit covers, how the twelve modules fit together, and how each module page works, so you know what to expect before you start Module 1.</p></div>
+<div class="part-body">
+<section class="part" id="overview" aria-labelledby="overview-h"><h2 id="overview-h"><span class="kicker">Overview</span>About this unit</h2>
+<p>Every machine and structure vibrates. Most of the time it is harmless; occasionally it cracks pipes, wrecks bearings, shakes buildings and shuts down plants. This unit takes you from the physics of a single vibrating mass to diagnosing faults in real machines and pipework. You will learn how engineers <strong>describe</strong> a vibration, <strong>model</strong> the structure that is vibrating, <strong>predict</strong> how it responds, <strong>measure</strong> it in the field, and <strong>decide</strong> what to do about it.</p>
+<p>The twelve modules build on each other in three stages. Work through them in order: each module answers a question the previous one leaves open.</p>
+<h3 class="stage"><span>Stage 1</span> Vibration fundamentals <span class="rng">Modules 1–5</span></h3><ol class="module-map unit-map" start="1"><li><span class="pl">Module 1</span><span><strong>Principles of Vibration</strong><span class="d">Describing a vibration, modelling real systems, natural frequency and damping.</span></span></li><li><span class="pl">Module 2</span><span><strong>Forced Vibration</strong><span class="d">What happens when a machine keeps pushing: resonance, frequency response and phase.</span></span></li><li><span class="pl">Module 3</span><span><strong>Vibration Isolation</strong><span class="d">Stopping vibration travelling from a machine into its foundation, and the other way round.</span></span></li><li><span class="pl">Module 4</span><span><strong>Vibration Absorber</strong><span class="d">Adding a tuned mass to cancel vibration at a troublesome frequency.</span></span></li><li><span class="pl">Module 5</span><span><strong>Flexural Vibrations of Beams and Plates</strong><span class="d">Continuous structures, mode shapes and many natural frequencies.</span></span></li></ol><h3 class="stage"><span>Stage 2</span> Measurement and maintenance <span class="rng">Modules 6–7</span></h3><ol class="module-map unit-map" start="6"><li><span class="pl">Module 6</span><span><strong>Understanding Signals and Vibration Measurement</strong><span class="d">Sensors, sampling and the FFT: turning a measurement into a spectrum you can read.</span></span></li><li><span class="pl">Module 7</span><span><strong>Maintenance Practices</strong><span class="d">Reactive, preventive and condition-based maintenance, and where vibration monitoring fits.</span></span></li></ol><h3 class="stage"><span>Stage 3</span> Diagnosing machines and piping <span class="rng">Modules 8–12</span></h3><ol class="module-map unit-map" start="8"><li><span class="pl">Module 8</span><span><strong>Unbalance and Misalignment</strong><span class="d">The two most common rotating-machine faults and their vibration signatures.</span></span></li><li><span class="pl">Module 9</span><span><strong>Faults in Bearings and Gearbox</strong><span class="d">Finding rolling-element bearing and gear faults from their characteristic frequencies.</span></span></li><li><span class="pl">Module 10</span><span><strong>Looseness and Motor Analysis</strong><span class="d">Mechanical looseness, and mechanical and electrical faults in electric motors.</span></span></li><li><span class="pl">Module 11</span><span><strong>Belt Drives, Pumps and Compressor</strong><span class="d">Diagnosing faults in common driven machinery.</span></span></li><li><span class="pl">Module 12</span><span><strong>Piping Vibrations</strong><span class="d">Flow-induced and mechanically driven vibration in pipework, and how to control it.</span></span></li></ol>
+</section>
+<section class="part" id="orientation" aria-labelledby="orientation-h"><h2 id="orientation-h"><span class="kicker">Orientation</span>How each module works</h2>
+<p>Each module is divided into parts (Part A, Part B, …), and each part is a separate page in Canvas. Part A opens with a real engineering problem and sets out what you will learn. The final part brings everything together in an engineering challenge and a knowledge check.</p>
+<p class="journey-label">Your learning journey in every module</p><ol aria-label="Learning journey" class="journey"><li><span class="step">WHY</span><span aria-hidden="true" class="arrow">→</span></li><li><span class="step">UNDERSTAND</span><span aria-hidden="true" class="arrow">→</span></li><li><span class="step">MODEL</span><span aria-hidden="true" class="arrow">→</span></li><li><span class="step">EXPLORE</span><span aria-hidden="true" class="arrow">→</span></li><li><span class="step">APPLY</span><span aria-hidden="true" class="arrow">→</span></li><li><span class="step">CHECK</span></li></ol>
+<h3>What you will see on each page</h3>
+<p>The same kinds of box appear throughout the unit. Each one asks you to do something different.</p>
+<div class="legend-grid"><div class="box predict"><h4><span class="ico" aria-hidden="true">🤔</span>Predict first</h4><p>Commit to an answer before you read on. Being wrong first makes the explanation stick.</p></div><div class="box sim"><div class="sim-head"><p class="sim-tag">Interactive simulation</p><h4>Interactive simulation</h4><p>Change a parameter and watch what physically happens. Always predict before you play.</p></div></div><div class="box intuition"><h4><span class="ico" aria-hidden="true">💡</span>Engineering intuition</h4><p>A short physical insight worth remembering.</p></div><div class="box misconception"><h4><span class="ico" aria-hidden="true">⚠</span>Common misconception</h4><p>A mistake students and engineers often make, and why it is wrong.</p></div><div class="box equation"><p class="eq-label">Key equation</p><p>The result you need, always followed by “What does this equation tell us?”</p></div><div class="box checkpoint"><h4><span class="ico" aria-hidden="true">✔</span>Checkpoint</h4><p>Quick questions every two or three concepts. The feedback explains why each answer is right or wrong.</p></div><div class="box example"><h4><span class="ico" aria-hidden="true">🔧</span>Worked engineering example</h4><p>A realistic problem solved one step at a time, ending with an engineering decision.</p></div><div class="box video"><h4><span class="ico" aria-hidden="true">🎬</span>Suggested video</h4><p>A short video (3–8 minutes) where moving pictures explain better than text.</p></div></div>
+<p class="aside-note">Checkpoints and knowledge checks on these pages are for practice: your answers are not recorded. Graded quizzes are set separately in Canvas.</p>
+</section>
+</div>
+<aside class="up-next" aria-label="Up next"><p class="lbl">Up next · Module 1</p><p class="ttl">Principles of Vibration</p><p>A cooling-water pump that ran quietly for two years has started to shake, and nothing about the pump has changed. Why? Start with Part A.</p><p class="how">Continue with the next page in Canvas.</p></aside>
+</main>
+<footer class="page-foot">MCEN4003 Mechanical Vibration · Curtin University · Module 0</footer>
+</div>
+<script>
+/* MCEN4003 page script: equations + reading progress */
+(function(){
+  function renderMath(){ if(window.renderMathInElement){ renderMathInElement(document.getElementById('content'),{
+      delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false}); } }
+  window.addEventListener('load',renderMath);
+  var bar=document.querySelector('.progress');
+  function prog(){ if(!bar) return; var h=document.documentElement; var max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+  window.addEventListener('scroll',prog,{passive:true}); window.addEventListener('load',prog); prog();
+})();
+
+</script>
+</body>
+</html>
