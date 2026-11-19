@@ -1,0 +1,1591 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part D: Displacement, velocity or acceleration? · Module 1 · MCEN4003</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   MCEN4003 Mechanical Vibration — shared chapter stylesheet
+   Reuse this <style> block unchanged for every chapter.
+   ========================================================================== */
+:root{
+  --ink:#15232e; --ink-2:#34434f; --muted:#5a6773; --line:#e2e7ec; --line-2:#cfd7de;
+  --bg:#ffffff; --surface:#f5f7f9; --navy:#0f2a3d; --accent:#0b5c80; --accent-soft:#eaf3f8;
+  --teal:#0b6e77; --teal-soft:#e8f4f5;
+  --green:#1d6b47; --green-soft:#eef7f2;
+  --red:#a4262c; --red-soft:#fcf1f1;
+  --amber:#7f5a05; --amber-soft:#fdf7e8;
+  --violet:#5b3f8c; --violet-soft:#f5f1fa;
+  --radius:12px;
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --topbar:56px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:17px;line-height:1.7;font-feature-settings:"kern","liga";-webkit-font-smoothing:antialiased}
+p{margin:0 0 1rem}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--navy)}
+ul,ol{margin:0 0 1.1rem;padding-left:1.35rem}
+li{margin:0 0 .4rem}
+li::marker{color:var(--accent)}
+sub,sup{line-height:0}
+:focus-visible{outline:3px solid #f2b705;outline-offset:2px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--navy);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+
+/* ---------- top bar & progress ---------- */
+.topbar{position:sticky;top:0;z-index:50;height:var(--topbar);display:flex;align-items:center;gap:16px;
+  padding:0 20px;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar .brand{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand b{color:var(--navy);font-weight:600}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-left:auto;padding:4px 0}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-size:13px;font-weight:500;color:var(--ink-2);text-decoration:none;padding:5px 11px;border-radius:999px;border:1px solid var(--line)}
+.chips a:hover{border-color:var(--accent);color:var(--accent)}
+.chips a.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--accent);transition:width .1s linear}
+
+/* ---------- page layout ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+.toc{display:none}
+main{min-width:0;max-width:760px;margin:0 auto}
+@media (min-width:1140px){
+  .shell{display:grid;grid-template-columns:220px minmax(0,760px);gap:64px;justify-content:center}
+  main{margin:0}
+  .toc{display:block;position:sticky;top:calc(var(--topbar) + 32px);align-self:start;padding-top:48px}
+  .chips{display:none}
+}
+.toc p{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toc ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+.toc li{margin:0}
+.toc a{display:block;padding:6px 0 6px 14px;margin-left:-2px;border-left:2px solid transparent;font-size:14px;line-height:1.4;color:var(--muted);text-decoration:none}
+.toc a span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8793a0}
+.toc a:hover{color:var(--ink)}
+.toc a.active{border-left-color:var(--accent);color:var(--navy);font-weight:600}
+.toc a.active span{color:var(--accent)}
+
+/* ---------- chapter header ---------- */
+.chapter-head{padding:48px 0 8px}
+.chapter-head .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.chapter-head h1{font-size:clamp(36px,5.6vw,56px);line-height:1.06;letter-spacing:-.02em;font-weight:700;color:var(--navy);margin:0 0 12px}
+.chapter-head .sub{font-size:18px;color:var(--muted);max-width:620px;margin:0}
+
+/* ---------- sections & headings ---------- */
+section.part{padding-top:56px;margin-top:56px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--topbar) + 8px)}
+section.part:first-of-type{border-top:0;margin-top:24px;padding-top:16px}
+.kicker{display:block;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-size:clamp(25px,3.2vw,31px);line-height:1.2;letter-spacing:-.015em;font-weight:700;color:var(--navy);margin:0 0 20px}
+h3{font-size:21px;line-height:1.3;letter-spacing:-.01em;font-weight:600;color:var(--navy);margin:44px 0 12px}
+h4{font-size:17px;line-height:1.4;font-weight:600;color:var(--navy);margin:0 0 10px}
+.box h3,.box h4{font-size:16.5px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.ico{font-size:1.05em;line-height:1}
+
+/* ---------- generic box ---------- */
+.box{margin:28px 0;padding:20px 22px 6px;border-radius:var(--radius);border:1px solid var(--line);background:#fff}
+.box > :last-child{margin-bottom:14px}
+
+/* hero */
+.hero-photo{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#2a3d4c}
+.hero{margin:0 0 28px;background:var(--navy);color:#e9eef2;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(15,42,61,.6)}
+.hero > svg{display:block;width:calc(100% - 88px);height:auto;margin:36px 44px 0;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+.hero-body{padding:28px 44px 22px}
+.hero-body p{font-size:17.5px;color:#dce5ec}
+.hero-body strong{color:#fff}
+.hero-question{font-size:21px!important;line-height:1.4;font-weight:600;color:#f4d58d!important;margin-top:4px}
+
+/* predict */
+.predict{--pad:22px;padding:0 var(--pad) 6px;overflow:hidden;background:#fff;border:1px solid #d6daf0;
+  box-shadow:0 1px 2px rgba(42,52,140,.05),0 8px 24px -18px rgba(42,52,140,.35)}
+.predict > h3,.predict > h4{margin:0 calc(var(--pad) * -1) 16px;padding:13px var(--pad);background:#f1f2fb;border-bottom:1px solid #d6daf0;
+  color:#353f94;font-size:15px;letter-spacing:.01em}
+.predict > h3::after,.predict > h4::after{content:"Commit to an answer before you scroll on";margin-left:auto;font-family:var(--mono);
+  font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#6b72b3}
+.predict > p:first-of-type{font-weight:500;color:var(--ink)}
+.predict details.option > summary:hover{color:#353f94}
+.predict details.option[open]{border-color:#7e86cf;background:#f8f8fd}
+.predict .aside-note{border-top:1px dashed #d6daf0;padding-top:10px;margin-top:12px}
+.aside-note{font-size:14.5px;color:var(--muted)}
+
+/* cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 28px}
+.card{padding:16px 18px 4px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 1px 2px rgba(15,42,61,.04)}
+.card .card-title{font-weight:600;color:var(--navy);margin-bottom:6px}
+.card p{font-size:15.5px}
+
+/* callouts */
+.intuition{background:var(--amber-soft);border-color:#ecdcae;border-left:4px solid var(--amber)}
+.intuition h3,.intuition h4{color:var(--amber)}
+.misconception{background:var(--red-soft);border-color:#efcfd1;border-left:4px solid var(--red)}
+.misconception h3,.misconception h4{color:var(--red)}
+.note{background:var(--surface);border-left:4px solid var(--muted)}
+.note h3,.note h4{color:var(--ink-2)}
+.questions{border:1px solid var(--line-2);background:var(--surface)}
+.questions ul{margin-top:6px}
+.explain{background:var(--accent-soft);border-color:#cfe2ec;border-left:4px solid var(--accent)}
+
+/* journey */
+.journey-label{font-weight:600;color:var(--navy);margin:24px 0 6px}
+ol.journey{list-style:none;padding:0;margin:8px 0 20px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+ol.journey li{margin:0;display:flex;align-items:center;gap:6px}
+ol.journey .step{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;padding:6px 12px;border-radius:999px;border:1px solid #bcd3df;background:var(--accent-soft);color:var(--accent)}
+ol.journey .arrow{color:#9aa8b4}
+
+/* equations */
+.equation{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:0 0 var(--radius) var(--radius)}
+.eq-label{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+.eq-display{font-size:1.12rem;overflow-x:auto;overflow-y:hidden;padding:4px 0 8px;text-align:center}
+.eq-meaning{border-top:1px solid var(--line-2);padding-top:14px;margin-top:6px}
+.eq-meaning h4{font-size:15px;color:var(--accent);margin-bottom:8px}
+.eq-meaning p,.eq-meaning li{font-size:16px}
+.katex{font-size:1.05em}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0;margin:.6em 0}
+
+/* simulation */
+.sim{padding:0;overflow:hidden;border-color:#c3dfe2}
+.sim-head{background:var(--teal-soft);padding:16px 22px;border-bottom:1px solid #c3dfe2}
+.sim-head h4{color:var(--teal);margin-bottom:6px}
+.sim-head p{margin:0;font-size:15.5px}
+.sim-tag{font-family:var(--mono);font-size:11.5px!important;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:4px!important}
+.sim iframe{display:block;width:100%;border:0;background:#fff}
+.sim-foot{padding:14px 22px 6px;border-top:1px solid #c3dfe2;font-size:15px}
+
+/* inline simulation UI */
+.sim-app{padding:18px 22px 6px}
+.sim-stage canvas{display:block;width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;margin:0 0 10px}
+.sim-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px;margin:16px 0 10px}
+.ctl label{font-size:14px;font-weight:500;color:var(--ink-2)}
+.ctl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:2px}
+.ctl-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--teal);white-space:nowrap}
+.ctl input[type=range]{width:100%;accent-color:var(--teal);height:26px;margin:0;cursor:pointer}
+.ctl select{width:100%;font:inherit;font-size:15px;padding:7px 10px;border:1px solid var(--line-2);border-radius:8px;background:#fff;color:var(--ink);margin-top:4px}
+.ctl.is-disabled{opacity:.45}
+.sim-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.btn{font:inherit;font-size:14px;font-weight:500;line-height:1.2;padding:8px 14px;border-radius:8px;border:1px solid var(--line-2);background:#fff;color:var(--ink);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.btn:hover{border-color:var(--teal);color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff;min-width:96px}
+.btn.primary:hover{background:#095b63;color:#fff}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:0 0 10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.stat .k{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.35}
+.stat .v{font-size:16px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.35;margin-top:2px}
+.sim-msg{font-size:15px;line-height:1.5;margin:0 0 14px;padding:9px 12px;border-radius:8px;background:var(--teal-soft);color:var(--ink-2)}
+.sim-msg:empty{display:none}
+
+/* checkpoint */
+.checkpoint{background:var(--green-soft);border-color:#c8e3d4;border-top:3px solid var(--green)}
+.checkpoint > h3,.checkpoint > h4{color:var(--green)}
+.lead-note{font-size:14.5px;color:var(--muted)}
+.question{margin:0 0 22px}
+.question > p:first-child{margin-bottom:10px}
+.hint{font-size:13.5px;color:var(--muted);margin:-4px 0 8px}
+
+/* video */
+.video{background:var(--violet-soft);border-color:#ddd2ec}
+.video h3,.video h4{color:var(--violet)}
+
+/* worked example */
+.example{border-left:4px solid var(--navy);box-shadow:0 1px 3px rgba(15,42,61,.06)}
+.ex-label{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:18px 0 6px!important}
+.example h4{font-size:18px}
+
+/* challenge brief */
+.challenge-brief{margin:0 0 28px;padding:24px 26px 10px;background:var(--navy);color:#dce5ec;border-radius:16px}
+.challenge-brief strong{color:#fff}
+.brief-title{font-size:19px;font-weight:600;color:#f4d58d}
+.challenge-brief li::marker{color:#f4d58d}
+
+/* next */
+.next{background:linear-gradient(180deg,#fdf7e8,#fffdf7);border-color:#ecdcae}
+.next-question{font-size:19px;line-height:1.45;font-weight:600;color:var(--navy)}
+
+/* ---------- disclosure (details) ---------- */
+details{margin:0 0 8px;border:1px solid var(--line-2);border-radius:10px;background:#fff;transition:border-color .15s,background .15s}
+details > summary{list-style:none;cursor:pointer;padding:11px 14px 11px 40px;position:relative;line-height:1.5}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:"";position:absolute;left:16px;top:50%;width:7px;height:7px;margin-top:-5px;
+  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg);transition:transform .15s}
+details[open] > summary::before{transform:rotate(45deg);margin-top:-6px}
+details > summary:hover{color:var(--accent)}
+details[open]{border-color:var(--accent)}
+.reveal > summary{font-weight:600}
+.reveal-body{padding:4px 18px 4px;border-top:1px solid var(--line)}
+.reveal-body > :last-child{margin-bottom:12px}
+.reveal-body p{font-size:16.5px}
+/* answer options */
+details.option > summary{padding-left:14px}
+details.option > summary::before{display:none}
+details.option > summary::after{content:"Show feedback";float:right;margin-left:12px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8793a0;line-height:24px}
+details.option[open] > summary::after{content:"Hide"}
+details.option[open]{background:#fafcfd}
+.verdict-ok{color:var(--green)}
+.verdict-no{color:var(--red)}
+
+/* ---------- figures & tables ---------- */
+figure{margin:28px 0;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+figure svg{display:block;width:100%;height:auto;margin:0 auto}
+figcaption{margin-top:12px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.table-wrap{margin:24px 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+caption{text-align:left;font-weight:600;color:var(--navy);padding:0 0 10px;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+thead th{background:var(--surface);border-bottom:2px solid var(--accent);font-weight:600;color:var(--navy)}
+tbody th{font-weight:600}
+.table-note{font-size:13.5px;color:var(--muted);margin-top:8px}
+
+/* ---------- footer ---------- */
+.page-foot{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .shell{padding:0 16px 64px}
+  .topbar{padding:0 14px}
+  .topbar{gap:10px}
+  .topbar .brand,.topbar .where{font-size:10.5px;letter-spacing:.03em}
+  .chips{margin-left:0}
+  .box{padding:16px 16px 4px}
+  .sim-head,.sim-foot,.sim-app{padding-left:14px;padding-right:14px}
+  .hero > svg{width:calc(100% - 44px);margin:22px 22px 0}
+  .hero-body{padding:22px 22px 14px}
+  .challenge-brief{padding-left:18px;padding-right:18px}
+  .predict{--pad:16px}
+  .predict > h3::after,.predict > h4::after{display:none}
+  details.option > summary::after{display:none}
+  figure{padding:10px;overflow-x:auto}
+  figure svg{min-width:620px}
+  figcaption{position:sticky;left:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.topbar,.toc,.progress{display:none}details{border:0}details > summary::before{display:none}}
+
+/* ===== multi-page (one Canvas page per Part) ===== */
+.shell.single{display:block;max-width:808px}
+.shell.single main{max-width:760px;margin:0 auto}
+.topbar .where{flex:none;margin-left:auto;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.topbar .where b{color:var(--accent);font-weight:600}
+.page-head{padding:48px 0 4px}
+.page-head .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.page-head .part-tag{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;background:var(--navy);border-radius:6px;padding:3px 9px;margin:0 0 12px}
+.page-head h1{font-size:clamp(32px,5vw,48px);line-height:1.1;letter-spacing:-.02em;font-weight:700;color:var(--navy);margin:0 0 12px}
+.page-head .sub{font-size:18px;color:var(--muted);margin:0}
+.part-body{margin-top:36px}
+h2.sec{font-size:23px;line-height:1.3;letter-spacing:-.01em;font-weight:600;margin:48px 0 12px}
+.part-body > p.bridge{font-size:inherit;color:var(--ink-2);border-left:3px solid var(--accent);padding-left:16px;margin-bottom:24px}
+.module-map{list-style:none;padding:0;margin:18px 0 8px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.module-map li{display:grid;grid-template-columns:70px 1fr;gap:12px;margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.5}
+.module-map li:first-child{border-top:0}
+.module-map li.here{background:var(--accent-soft)}
+.module-map .pl{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+.module-map strong{display:block}
+.module-map span.d{color:var(--muted);font-size:14.5px}
+.up-next{margin:56px 0 0;padding:20px 22px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--navy)}
+.up-next .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.up-next .ttl{font-size:19px;font-weight:600;color:var(--navy);margin:0 0 6px}
+.up-next p{margin:0 0 6px;font-size:16px}
+.up-next .how{font-size:14px;color:var(--muted);margin:8px 0 0}
+@media (max-width:640px){.module-map li{grid-template-columns:1fr;gap:2px}}
+@media (max-width:640px){.topbar .where{font-size:10.5px;letter-spacing:.03em}}
+/* left-align content with the top header (Canvas iframe) */
+.shell.single{margin:0;padding-left:20px;padding-right:20px;max-width:800px}
+.shell.single main{margin:0}
+@media (max-width:640px){.topbar{padding:0 16px}.shell.single{padding-left:16px;padding-right:16px}}
+
+/* ===== Colour scheme: Restrained (one blue accent; red = misconception, green = checkpoint) ===== */
+body{--accent:#1d4f7a;--accent-soft:#edf3f8;--navy:#14283a;--teal:#1d4f7a;--teal-soft:#f1f5f8}
+body .hero-question{color:#bcd7ee!important}
+body .predict{border-color:var(--line-2);box-shadow:none}
+body .predict > h3,body .predict > h4{background:#f6f8fa;border-bottom-color:var(--line);color:var(--ink)}
+body .predict > h3::after,body .predict > h4::after{color:var(--muted)}
+body .predict details.option[open]{border-color:var(--accent);background:#f8fafc}
+body .predict details.option > summary:hover{color:var(--accent)}
+body .predict .aside-note{border-top-color:var(--line)}
+body .intuition{background:#f6f8fa;border-color:var(--line);border-left:4px solid var(--accent)}
+body .intuition h3,body .intuition h4{color:var(--accent)}
+body .misconception{background:#fff;border-color:var(--line);border-left:4px solid var(--red)}
+body .sim{border-color:var(--line-2)}
+body .sim-head{background:#f6f8fa;border-bottom-color:var(--line)}
+body .sim-head h4{color:var(--navy)}
+body .sim-tag{color:var(--accent)}
+body .sim-foot{border-top-color:var(--line)}
+body .btn.primary:hover{background:#163d5f}
+body .checkpoint{background:#fff;border-color:var(--line)}
+body .video{background:#fff;border-color:var(--line);border-left:4px solid var(--muted)}
+body .video h3,body .video h4{color:var(--ink-2)}
+body ol.journey .step{border-color:#c9d8e6}
+
+/* ===== Top header: solid band + two lines ===== */
+:root{--topbar:66px}
+.topbar{height:var(--topbar);background:#14283a;border-bottom:0;backdrop-filter:none;box-shadow:0 2px 10px -4px rgba(10,25,40,.45)}
+.topbar .brand{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;text-transform:none;letter-spacing:0;font-family:var(--font)}
+.topbar .brand .l1{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#9fb4c7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand .l1 b{color:#fff;font-weight:600}
+.topbar .brand .l2{font-size:15.5px;font-weight:600;line-height:1.25;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where{color:#c9d6e2}
+.progress{background:#7fb2dd;bottom:0;height:3px}
+@media (max-width:640px){
+  .topbar .brand .l1{font-size:10px;letter-spacing:.03em}
+  .topbar .brand .l2{font-size:14px}
+  .topbar .where{font-size:10px}
+}
+:root{--topbar:80px}
+.topbar .brand{gap:5px}
+@media (max-width:640px){:root{--topbar:72px}}
+/* header: name on line 1, line 2 same size as line 1 */
+.topbar .brand{flex:1;min-width:0}
+.topbar .brand .l1{display:flex;align-items:baseline;gap:16px;overflow:visible}
+.topbar .brand .l1 .crs{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar .brand .l1 .who{margin-left:auto;flex:none;color:#c9d6e2}
+.topbar .brand .l2{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#fff;line-height:1.4}
+@media (max-width:640px){.topbar .brand .l2{font-size:10px;letter-spacing:.03em}.topbar .brand .l1{gap:10px}}
+.topbar .brand .l2{font-weight:400;color:#9fb4c7}
+.topbar .brand .l2 b{color:#fff;font-weight:600}
+/* image cards (2 x 2) */
+.card-grid.media{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card.has-img{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.card.has-img > img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#e9edf0}
+.card.has-img .card-body{padding:14px 18px 4px}
+.card-cap{font-size:12.5px!important;line-height:1.45;color:var(--muted);margin-top:-4px}
+@media (max-width:560px){.card-grid.media{grid-template-columns:1fr}}
+.card.has-img{box-shadow:4px 5px 12px -4px rgba(20,40,58,.22)}
+/* Predict first: chosen answer keeps its tint, feedback sits on white */
+body .predict details.option[open]{background:#fff}
+body .predict details.option[open] > summary{background:#f8fafc;border-radius:9px 9px 0 0}
+body .predict details.option[open] > .reveal-body{background:#fff;border-radius:0 0 9px 9px}
+/* Predict first: header 20% darker */
+body .predict > h3,body .predict > h4{background:#b6c6d7;border-bottom-color:#a3b5c8;color:#15232e}
+body .predict > h3::after,body .predict > h4::after{color:#2f3c48}
+/* Predict first: header 10% darker (supersedes 20%) */
+body .predict > h3,body .predict > h4{background:#d6dfe8;border-bottom-color:#c5d1dd;color:#15232e}
+body .predict > h3::after,body .predict > h4::after{color:#3a4754}
+/* Top header: soft blue-grey band (blends with Canvas) */
+.topbar{background:#eaf0f5;border-bottom:1px solid #d3dde6;box-shadow:0 2px 8px -6px rgba(20,40,58,.35)}
+.topbar .brand .l1,.topbar .brand .l2{color:#4a5865}
+.topbar .brand .l1 b,.topbar .brand .l2 b{color:#14283a}
+.topbar .brand .l1 .who{color:#4a5865}
+.progress{background:#1d4f7a;bottom:-1px}
+/* Module 0: unit map + box legend */
+h3.stage{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:32px 0 10px;font-size:18px}
+h3.stage > span:first-child{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+h3.stage .rng{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-left:auto}
+.unit-map li{grid-template-columns:96px 1fr}
+.legend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 20px}
+.legend-grid .box{margin:0}
+.legend-grid .box p{font-size:15px;margin-bottom:12px}
+.legend-grid .box h4{font-size:15.5px}
+.legend-grid .predict > h4::after{display:none}
+.legend-grid .predict > h4{margin-bottom:12px}
+.legend-grid .sim .sim-head{border-bottom:0}
+.legend-grid .sim .sim-head p:last-child{margin-top:2px}
+@media (max-width:560px){.legend-grid{grid-template-columns:1fr}.unit-map li{grid-template-columns:1fr}h3.stage .rng{margin-left:0}}
+/* Top header: charcoal #3e3e3e */
+.topbar{background:#3e3e3e;border-bottom:0;box-shadow:0 2px 10px -4px rgba(0,0,0,.45)}
+.topbar .brand .l1,.topbar .brand .l2,.topbar .brand .l1 .who{color:#c8c8c8}
+.topbar .brand .l1 b,.topbar .brand .l2 b{color:#ffffff}
+.progress{background:#9fc3e3;bottom:0}
+/* Top header: softer charcoal */
+.topbar{background:#565656;box-shadow:0 2px 8px -4px rgba(0,0,0,.35)}
+.topbar .brand .l1,.topbar .brand .l2,.topbar .brand .l1 .who{color:#e2e2e2}
+/* "Why does this matter?" box: charcoal to match the header family */
+body .hero{background:#3a3a3a;box-shadow:0 10px 30px -18px rgba(0,0,0,.55)}
+body .hero-body p{color:#e4e4e4}
+body .hero-photo{background:#4a4a4a}
+/* career role cards */
+.card-grid.roles{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card.role{display:flex;flex-direction:column;box-shadow:4px 5px 12px -6px rgba(20,40,58,.18);padding-bottom:10px}
+.card.role .card-title{font-size:16.5px;margin-bottom:6px}
+.card.role p{font-size:15px;margin-bottom:8px}
+.card.role .role-meta{font-size:13.5px;line-height:1.45;color:var(--ink-2);margin:0 0 4px;display:grid;grid-template-columns:62px 1fr;gap:8px}
+.card.role .role-meta:first-of-type{margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.card.role .role-meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+@media (max-width:560px){.card-grid.roles{grid-template-columns:1fr}}
+/* role cards with photos */
+.card.role.has-img{padding:0}
+.card.role.has-img .card-body{display:flex;flex-direction:column;flex:1;padding:14px 18px 10px}
+var{font-style:italic;font-family:inherit}
+.stat .k var,.ctl label var{font-style:italic}
+/* ===== flip cards (careers) ===== */
+.flip-instr{font-size:14.5px;color:var(--muted);margin:-4px 0 10px}
+.flip-card{perspective:1400px;cursor:pointer;border-radius:var(--radius);outline:none}
+.flip-card:focus-visible{outline:3px solid #f2b705;outline-offset:3px}
+.flip-inner{display:grid;height:100%;transition:transform .6s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+.flip-front,.flip-back{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;box-shadow:4px 5px 12px -6px rgba(20,40,58,.2)}
+.flip-front{background:#fff;display:flex;flex-direction:column}
+.flip-front img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#e9edf0}
+.flip-title{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;flex:1}
+.flip-title .card-title{margin:0;font-size:16.5px;font-weight:600;color:var(--navy)}
+.flip-hint{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:15px;color:var(--accent);background:var(--accent-soft)}
+.flip-back{transform:rotateY(180deg);background:#f4f7fa;border-top:4px solid var(--accent);padding:18px 20px 12px;display:flex;flex-direction:column}
+.flip-back .card-title{font-size:16.5px;font-weight:600;color:var(--navy);margin:0 0 8px}
+.flip-back p{font-size:15px;line-height:1.55;margin:0 0 10px}
+.flip-back .role-meta{font-size:13.5px;line-height:1.45;color:var(--ink-2);margin:0 0 4px;display:grid;grid-template-columns:62px 1fr;gap:8px}
+.flip-back .role-meta:first-of-type{margin-top:auto;padding-top:10px;border-top:1px solid var(--line-2)}
+.flip-back .role-meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+@media (hover:hover){.flip-card:hover .flip-inner{transform:rotateY(180deg)}}
+.flip-card:focus-visible .flip-inner,.flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.flip-inner{transition:none}}
+@media print{.flip-inner{transform:none!important}.flip-front,.flip-back{position:static;transform:none;backface-visibility:visible}}
+.flip-back .role-meta.first{margin-top:auto;padding-top:10px;border-top:1px solid var(--line-2)}
+/* "Vibration costs money" cards: subtle float on hover */
+.card-grid.media .card.has-img{transition:transform .25s ease,box-shadow .25s ease}
+@media (hover:hover){.card-grid.media .card.has-img:hover{transform:translateY(-4px);box-shadow:6px 12px 22px -10px rgba(20,40,58,.30)}}
+@media (prefers-reduced-motion:reduce){.card-grid.media .card.has-img{transition:none}}
+/* centrifugal pump illustration on the "questions" box, overhanging bottom-right */
+.box.questions{position:relative;padding-right:170px;margin-bottom:56px}
+.q-pump{position:absolute;right:-60px;bottom:-44px;width:210px;height:auto;pointer-events:none;filter:drop-shadow(4px 6px 8px rgba(20,40,58,.18))}
+@media (max-width:1000px){.q-pump{right:-24px}}
+@media (max-width:640px){.box.questions{padding-right:16px;margin-bottom:28px}.q-pump{position:static;display:block;width:150px;margin:-6px -8px -26px auto}}
+@media print{.q-pump{display:none}}
+/* embedded fixed-size animations (Tumult Hype) */
+.anim-figure{padding:12px}
+.hype-frame{position:relative;width:100%;aspect-ratio:1024/768;overflow:hidden;border-radius:8px;background:#fff}
+.hype-frame iframe{position:absolute;top:0;left:0;width:1024px;height:768px;border:0;transform-origin:0 0}
+
+/* thicker maths (trial) */
+.math-thick .katex{-webkit-text-stroke:.022em currentColor}
+
+/* MathJax 4 trial */
+.eq-display{font-size:1.2rem;padding-left:6px;padding-right:8px}
+
+.photo-fig img{display:block;width:100%;height:auto;border-radius:6px}
+
+/* simulation hidden until opened */
+body details.sim-reveal{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+body details.sim-reveal > summary{padding:16px 20px;display:flex;align-items:center;gap:10px;font-weight:600;color:var(--accent)}
+body details.sim-reveal > summary::before{position:static;margin:0;flex:none;width:0;height:0;border:0;border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent;transform:none;transition:transform .15s}
+body details.sim-reveal[open] > summary::before{transform:rotate(90deg);margin:0}
+body details.sim-reveal > summary:hover{text-decoration:underline}
+body details.sim-reveal .sr-close{display:none}
+body details.sim-reveal[open] .sr-open{display:none}
+body details.sim-reveal[open] .sr-close{display:inline}
+
+/* Module 1: pale-blue simulation title boxes (class added by the build) */
+body .sim-tint .sim-head{background:#e2edf8;border-bottom-color:#c8dcef}
+
+/* softer Predict-first header */
+body .predict > h3,body .predict > h4{background:#fcefdc;border-bottom-color:#f1dbb8}
+
+/* subsection headings: vertical bar */
+h2.sec.subsec{font-size:22px;border-left:7px solid #e0912f;padding:2px 0 2px 18px;margin-top:60px}
+
+/* simulation feedback text: same size as the rest of the simulation box */
+.sim-foot .reveal-body p{font-size:15px}
+
+/* answer choices (Predict first, checkpoints, knowledge check): smaller text */
+body details.option > summary{font-size:15.5px}
+
+/* answer-choice feedback: same size as the choice itself */
+body details.option .reveal-body, body details.option .reveal-body p, body details.option .reveal-body li{font-size:15.5px}
+
+/* small diagrams inside checkpoint questions */
+figure.q-fig{margin:12px 0 14px;padding:10px;max-width:560px}
+figure.q-fig svg{min-width:0}
+
+/* photo figures: subtle shadow */
+figure.photo-fig{box-shadow:4px 5px 12px -4px rgba(20,40,58,.22)}
+
+/* checkpoint: cartoon brain standing on the top-right corner, extra space above */
+body .box.checkpoint{position:relative;margin-top:110px}
+body .box.checkpoint > h3,body .box.checkpoint > h4{padding-right:70px}
+body .box.checkpoint::after{content:"";position:absolute;top:-102px;right:10px;width:100px;height:105px;
+  background:url('data:image/webp;base64,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') center bottom/contain no-repeat;pointer-events:none;filter:drop-shadow(2px 3px 4px rgba(20,40,58,.16))}
+@media (max-width:560px){body .box.checkpoint{margin-top:92px}body .box.checkpoint::after{width:80px;height:84px;top:-82px;right:8px}}
+
+/* worked example box: dark header band so it stands apart from callouts */
+body .box.example{padding:0;overflow:hidden;border:1px solid #c9d6e3;border-left:1px solid #c9d6e3;box-shadow:4px 5px 12px -6px rgba(20,40,58,.2)}
+body .box.example .ex-head{background:var(--accent,#1d4f7a);color:#fff;padding:12px 22px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+body .box.example .ex-tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:3px 8px;border-radius:4px;white-space:nowrap}
+body .box.example .ex-head h4{margin:0;color:#fff;font-size:18px}
+body .box.example .ex-body{padding:16px 22px 10px}
+
+/* step-by-step bar inside a simulation */
+.sim-steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 14px;padding:12px 14px;border:1px dashed #c8dcef;border-radius:10px;background:#f6f9fc}
+.sim-steps-lbl{flex-basis:100%;margin:0 0 2px!important;font-size:14px;font-weight:600;color:var(--ink,#15232e)}
+.sim-steps .btn{font-size:13.5px;padding:6px 12px}
+.sim-steps-msg{flex-basis:100%;margin:6px 0 0!important;padding-top:10px;border-top:1px solid #dbe6f1;font-size:14.5px;line-height:1.5;color:#2c3a46}
+/* hand-calculation tables inside examples */
+.box.example .ex-part{margin:22px 0 6px!important;color:var(--navy,#0f2a3d);font-size:17px}
+.hand-table{margin:12px 0 10px}
+.hand-table table{font-size:14.5px;text-align:center}
+.hand-table caption{caption-side:top;text-align:left;font-size:13.5px;color:#5a6773;padding:0 0 6px}
+.hand-table th,.hand-table td{text-align:center;padding:7px 8px;border:1px solid var(--line,#dde3ea);font-variant-numeric:tabular-nums}
+.hand-table th[scope=row]{background:#f6f8fa;text-align:left;white-space:nowrap}
+.hand-table td.blank{color:#9aa6b2;background:#fffdf7}
+.hand-table table{table-layout:fixed;min-width:520px}
+.hand-table th[scope=row]{width:92px}
+.box.example details.ex-answer{margin-top:22px}
+.box.example details.ex-answer > summary{font-weight:700}
+
+/* worked-example toggles: same size as answer choices */
+body .box.example details > summary, body .box.example details .reveal-body p, body .box.example details .reveal-body li{font-size:15.5px}
+
+/* STANDARD: every reveal toggle (stages, check your working, model answers, prior-knowledge checks) at 15.5px, like answer choices */
+body details:not(.option):not(.sim-reveal) > summary,
+body details:not(.option):not(.sim-reveal) .reveal-body p,
+body details:not(.option):not(.sim-reveal) .reveal-body li{font-size:15.5px}
+/* simulation feedback keeps its agreed 15px */
+body .sim-foot details.reveal > summary, body .sim-foot details.reveal .reveal-body p, body .sim-foot details.reveal .reveal-body li{font-size:15px}
+
+/* RMS trend simulation: figure sits inside the sim box without its own card */
+.trend-app figure.trend-fig{margin:0 0 10px;padding:0;border:0;box-shadow:none;background:none}
+.trend-app .trend-msg{min-height:3.2em}
+@media (max-width:640px){.trend-app figure.trend-fig{overflow:visible}.trend-app figure.trend-fig svg{min-width:0}}
+@media (max-width:640px){figure.fit-fig{overflow:visible}figure.fit-fig svg{min-width:0}}
+figcaption strong.sig-name{font-weight:600;color:#1c2a35}
+/* standard size for every display equation (boxes and dropdowns) */
+body .eq-display, body p.eq-line, body div.eq-line{font-size:17px !important}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <div class="brand"><div class="l1"><span class="crs"><b>MCEN4003 Vibration</b> · Module 1: Principles of Vibration</span><span class="who">Dr Azma Putra Azis</span></div><div class="l2"><b>Part D</b> · Displacement, velocity or acceleration?</div></div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="shell single">
+<main id="content"><div class="page-head"><h1>Displacement, velocity or acceleration?</h1><p class="sub">Three views of the same motion, and how to choose what to measure.</p></div><div class="part-body"><p class="bridge">In Part C, every severity limit was quoted in mm/s RMS, which is a velocity. Yet many sensors measure displacement or acceleration instead. For one harmonic vibration, how are the three related, and which one should you measure?</p><p>In practice, most machine vibration is measured with an <strong>accelerometer</strong> on the bearing housing or casing. The analyser then <strong>integrates</strong> the signal: once to give velocity, and twice to give displacement. So you can choose which quantity to look at after the measurement. For a harmonic vibration, all three describe the same motion, but they weight frequency very differently.</p><div class="box predict"><h3><span aria-hidden="true" class="ico">🤔</span>Predict first</h3><p>A slow cooling-tower fan vibrates at 5 Hz, and a gearbox gear-mesh vibrates at 2,000 Hz. Both read 1 mm/s RMS velocity. Which surface moves further?</p><details class="option"><summary>A. The fan</summary><div class="reveal-body"><p>Test it in the simulation below. How much further?</p></div></details><details class="option"><summary>B. The gearbox</summary><div class="reveal-body"><p>If it repeats 400 times as often at the same speed, can it travel as far each cycle?</p></div></details><details class="option"><summary>C. They move the same distance, because the velocities are equal.</summary><div class="reveal-body"><p>Distance per cycle is speed × time per cycle. Are the cycle times equal?</p></div></details><p class="aside-note">Keep your choice in mind. You will test it next.</p></div><h2 class="sec">The equations, one derivative at a time</h2><details class="reveal"><summary>Displacement: where we start</summary><div class="reveal-body eq-line"><p class="eq-line">$$y(t) = A\sin\omega t, \qquad y_{pk} = A \tag{1.9}$$</p></div></details><details class="reveal"><summary>Velocity: differentiate once. Why does <var>ω</var> appear?</summary><div class="reveal-body"><p class="eq-line">$$v(t) = \frac{dy}{dt} = A\omega\cos\omega t, \qquad v_{pk} = A\omega = \omega\,y_{pk} \tag{1.10}$$</p><p>Covering the same distance <var>A</var> in a shorter time (higher <var>ω</var>) needs a higher speed. Each derivative brings out one factor of <var>ω</var>.</p></div></details><details class="reveal"><summary>Acceleration: differentiate again. Why the minus sign?</summary><div class="reveal-body"><p class="eq-line">$$a(t) = \frac{dv}{dt} = -A\omega^2\sin\omega t, \qquad a_{pk} = A\omega^2 = \omega^2 y_{pk} \tag{1.11}$$</p><p>The minus sign means acceleration always points back toward equilibrium, opposite to displacement. That is the spring's restoring force at work. Displacement and acceleration are 180° out of phase.</p></div></details><div class="box equation"><p class="eq-label">Linking the three amplitudes</p><div class="eq-display eq-match-reveal">$$v_{pk} = \omega\,y_{pk}, \qquad a_{pk} = \omega^2\,y_{pk}, \qquad \omega = 2\pi f \tag{1.12}$$</div><div class="eq-meaning"><h4>What does this equation tell us?</h4><ul><li>At <strong>low frequency</strong>, displacement is large while acceleration is tiny. Use displacement or velocity.</li><li>At <strong>high frequency</strong>, displacement becomes microscopic while acceleration is large. Use acceleration.</li><li><strong>Velocity</strong> sits in the middle and stays relatively flat across the 10–1,000 Hz range where most machines run. This is one reason severity standards use mm/s RMS.</li></ul><p><strong>Engineering significance:</strong> choose the quantity that matches the frequency range and the failure mechanism you care about.</p></div></div><h2 class="sec subsec subsec">Amplitude conventions in industry</h2><p>Each quantity has its own customary way of being reported. Displacement is usually quoted <strong>peak-to-peak</strong>, because it is compared with clearances such as a seal gap or a bearing clearance. Velocity is quoted as <strong>RMS</strong>, because the severity standards in Part C are written that way. Acceleration is quoted in <strong>g</strong>, as RMS or peak depending on the instrument. Mixing these up is a common source of error: the same vibration differs by a factor of √2 between peak and RMS, and 2√2 ≈ 2.83 between peak-to-peak and RMS. So always state the quantity, the unit <em>and</em> the measure, for example “22 µm pk-pk” or “1.0 mm/s RMS”.</p><div class="table-wrap"><table><caption>Vibration units and what they indicate (rotating machinery convention)</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Metric</th><th scope="col">Imperial</th><th scope="col">Rule of thumb: relates to</th><th scope="col">Typical sensor</th></tr></thead><tbody><tr><th scope="row">Displacement</th><td>µm pk-pk</td><td>mils pk-pk (1 µm = 0.0394 mil)</td><td>Stress and clearances</td><td>Accelerometer, integrated twice (casing); proximity probe (shaft in a journal bearing)</td></tr><tr><th scope="row">Velocity</th><td>mm/s RMS</td><td>in/s RMS (IPS)</td><td>Fatigue and overall severity</td><td>Accelerometer, integrated once; or a velocity sensor</td></tr><tr><th scope="row">Acceleration</th><td>g RMS or m/s² RMS</td><td>in/s² RMS</td><td>Force and impacts</td><td>Accelerometer</td></tr></tbody></table><p class="table-note"><var>g</var> = 9.81 m/s². The “relates to” column is a guide for choosing a measurement, not a strict physical law.</p></div><div class="box sim sim-tint"><div class="sim-head"><p class="sim-tag">Interactive simulation</p><h4>Displacement, velocity and acceleration</h4><p><strong>Learning question:</strong> For one harmonic vibration, how do the three amplitude measures trade off as frequency changes?</p></div><div class="sim-app" data-sim="dva"></div><div class="sim-foot"><details class="reveal"><summary>Was your prediction correct? Why did the system behave this way?</summary><div class="reveal-body"><p><em>At the same 1 mm/s RMS, the 5 Hz fan moves 400 times further than the 2,000 Hz gearbox: about 90 µm pk-pk versus about 0.23 µm.</em></p><p>Displacement per cycle is velocity divided by <var>ω</var>. With 400 times the frequency, the gearbox has 1/400 of the time per cycle, so it travels 1/400 of the distance. Its acceleration, however, is 400 times larger. This is why an accelerometer is the natural choice for high-frequency defects. Proximity probes do a different job: they watch the shaft inside a journal bearing (see “Which sensor?” below).</p></div></details></div></div><p>Industry uses ready-made conversions in mixed units. ISO 14694 gives them with frequency <var>f</var> in CPM, <var>D</var> in µm pk-pk, <var>V</var> in mm/s RMS and <var>A</var> in g RMS:</p><div class="box equation"><p class="eq-label">Unit conversion formulas (ISO 14694)</p><div class="eq-display">$$D = \frac{27\,009\,V}{f}, \qquad V = \frac{93\,712\,A}{f}, \qquad D = \frac{2.53\times10^{9}\,A}{f^{2}} \tag{1.13}$$</div><div class="eq-meaning"><h4>What does this equation tell us?</h4><p>These are the same \(v = \omega y\) and \(a = \omega y\cdot\omega\) relations, with every unit conversion folded into the constant. Example 1.2 below shows where 27,009 comes from, so you never need to treat it as magic.</p></div></div><div class="box example"><div class="ex-head"><span class="ex-tag">Example 1.2</span><h4>Where does 27,009 come from? Deriving \(D = 27{,}009\,V\!/\!f\)</h4></div><div class="ex-body">
+<p>The constant 27,009 in Eq. (1.13) looks as if it came from nowhere. It is simply \(v_{pk} = \omega\,y_{pk}\) with every unit conversion folded in. Work through each stage on paper before opening it.</p>
+<div class="ex-stages">
+<details class="reveal"><summary>Stage 1. What physical principle do we start from?</summary><div class="reveal-body"><p>The link between peak velocity and peak displacement for a harmonic vibration, from Eq. (1.12): \(v_{pk} = \omega\,y_{pk}\). This only holds in consistent SI units, so every quantity must first be converted.</p></div></details>
+<details class="reveal"><summary>Stage 2. Convert each quantity to SI peak values</summary><div class="reveal-body"><p>\(v_{pk} = \sqrt2\,V\times10^{-3}\) m/s, because <var>V</var> is RMS in mm/s.</p><p>\(y_{pk} = (D/2)\times10^{-6}\) m, because <var>D</var> is peak-to-peak in µm.</p><p>\(\omega = 2\pi f/60\) rad/s, because <var>f</var> is in CPM.</p></div></details>
+<details class="reveal"><summary>Stage 3. Substitute into the principle</summary><div class="reveal-body eq-line"><p class="eq-line">$$\sqrt2\,V\times10^{-3} = \frac{D}{2}\times10^{-6}\times\frac{2\pi f}{60} \tag{1.14}$$</p></div></details>
+<details class="reveal"><summary>Stage 4. Rearrange for <var>D</var> and evaluate the constant</summary><div class="reveal-body"><p class="eq-line">$$D = \frac{2\sqrt2\times60\times10^{3}}{2\pi}\,\frac{V}{f} = \frac{27\,009\,V}{f} \tag{1.15}$$</p><p><strong>Check your working:</strong> 2√2 × 60 × 10³ = 169,706, and 169,706 ÷ 2π = 27,009.</p></div></details>
+</div>
+<p class="ex-part"><strong>Engineering interpretation</strong></p>
+<p>Every “strange” constant in an engineering formula is just unit conversion. Being able to rebuild it protects you from using it with the wrong units, for example Hz instead of CPM, or peak instead of RMS.</p>
+</div></div><div class="box example"><div class="ex-head"><span class="ex-tag">Example 1.3</span><h4>Interpreting a single velocity reading</h4></div><div class="ex-body"><p class="ex-label">Engineering problem</p><p>A data collector reports that a fan's vibration is dominated by one component at <strong>1,200 CPM</strong> with an amplitude of <strong>1.0 mm/s RMS</strong>. The maintenance planner asks what this means in displacement and acceleration terms.</p><p class="ex-label">Given</p><ul><li>Frequency <var>f</var> = 1,200 CPM (single harmonic component)</li><li>Velocity <var>V</var> = 1.0 mm/s RMS</li></ul><p class="ex-label">Before calculating, predict</p><p>Is the displacement likely to be closer to 1 µm, 20 µm or 1 mm? Write down your guess first.</p><p class="ex-label">Solution (open one step at a time)</p><div class="ex-stages"><details class="reveal"><summary>Step 1: Convert the frequency</summary><div class="reveal-body"><p>\(f = 1200/60 = 20\) Hz, so \(\omega = 2\pi\times20 = 125.7\) rad/s.</p></div></details><details class="reveal"><summary>Step 2: Displacement</summary><div class="reveal-body"><p>\(D = 27\,009\times1.0/1200 = 22.5\) µm pk-pk. A chart reading of about 23 µm agrees.</p><p>First-principles check: \(v_{pk} = 1.414\) mm/s, so \(y_{pk} = 1.414/125.7 = 0.01125\) mm = 11.25 µm, and pk-pk = 22.5 µm ✓.</p></div></details><details class="reveal"><summary>Step 3: Acceleration</summary><div class="reveal-body"><p>\(A = 1.0\times1200/93\,712 = 0.0128\) g RMS.</p><p>In SI units: \(0.0128\times9.81 = 0.126\) m/s² RMS, which is <strong>126 mm/s²</strong>. Check: \(a_{rms} = \omega\,v_{rms} = 125.7\times1.0 = 126\) mm/s² ✓.</p></div></details></div><p class="ex-label">Engineering interpretation</p><details class="reveal"><summary>Open after you finish the calculation</summary><div class="reveal-body"><p>A displacement of 22 µm is about a third of the thickness of a human hair, yet 1 mm/s RMS is a perfectly ordinary, healthy reading for a fan. The acceleration of 0.013 g is tiny. Notice how different the three numbers look although they describe one motion. Always state the quantity <em>and</em> the unit: peak, peak-to-peak or RMS.</p></div></details><p class="ex-label">Engineering decision: what should the engineer do next?</p><details class="reveal"><summary>Think it through, then compare</summary><div class="reveal-body"><p>At 1.0 mm/s RMS, this machine sits in zone A/B for most machine groups. No action is needed beyond continuing to trend it. For a 20 Hz component, velocity is the right quantity to trend. If the planner were worried about rubbing seals, displacement would be the better quantity to discuss.</p></div></details></div></div><div class="box misconception"><h4><span aria-hidden="true" class="ico">⚠</span>Common Misconception: “Small displacement means small vibration”</h4><p>A displacement of 5 µm peak sounds tiny. At 5 kHz, it corresponds to roughly 500 g of peak acceleration, enough to destroy a bearing quickly. “Small” and “large” only make sense together with a frequency and the failure mechanism you care about.</p></div><h2 class="sec subsec">Which sensor? Measuring the casing or the shaft</h2><p>The quantity you want to see does not decide the sensor on its own. What decides it is <em>what</em> you want to see move.</p><p><strong>Casing vibration (absolute).</strong> An accelerometer is stud-mounted on the bearing housing and measures how the housing moves in space. This is the standard sensor for portable data collection and for most online monitoring. The analyser integrates the acceleration once to give velocity, the mm/s RMS overall value from Part C, and twice to give displacement.</p><p><strong>Shaft vibration (relative).</strong> In machines with fluid-film (journal) bearings, such as steam turbines, compressors and large pumps, the shaft floats on a film of oil. The oil film absorbs much of the shaft’s motion, so the casing moves far less than the rotor does. Non-contact <strong>proximity probes</strong> (eddy-current probes) are mounted through the bearing housing and measure the gap to the shaft. This gives the shaft’s displacement <em>relative to the bearing</em>. Two probes, 90° apart, track the path the shaft centre traces out.</p><figure class="fit-fig"><svg aria-labelledby="sens-t sens-d" font-family="'IBM Plex Sans', system-ui, Arial, sans-serif" role="img" viewbox="0 0 900 330" xmlns="http://www.w3.org/2000/svg"><title id="sens-t">Accelerometer on a bearing housing versus proximity probes on a shaft</title><desc id="sens-d">Left: a rolling-element bearing in its housing, cut away to show the balls and the shaft. An accelerometer is stud-mounted on top of the housing and measures how the housing itself moves. Right: a fluid-film journal bearing, with the shaft floating slightly off-centre in a film of oil. Two proximity probes pass through the housing at 45 degrees either side of vertical, 90 degrees apart, with their tips close to the shaft. They measure the gap to the shaft, so they give the shaft's motion relative to the bearing.</desc><rect fill="#dbe9f1" height="150" rx="10" stroke="#1c2a35" stroke-width="1.5" width="170" x="135" y="115"></rect><path d="M120,265 L320,265 L320,280 L120,280 Z" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.2"></path><circle cx="220" cy="190" fill="#c9d6de" r="58" stroke="#1c2a35" stroke-width="1.4"></circle><circle cx="220" cy="190" fill="#f4f8fb" r="51" stroke="#1c2a35" stroke-width="1"></circle><g><animatetransform attributename="transform" dur="4.4s" from="0 220 190" repeatcount="indefinite" to="360 220 190" type="rotate"></animatetransform><circle cx="263.0" cy="190.0" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="252.9" cy="217.6" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="227.5" cy="232.3" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="198.5" cy="227.2" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="179.6" cy="204.7" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="179.6" cy="175.3" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="198.5" cy="152.8" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="227.5" cy="147.7" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle><circle cx="252.9" cy="162.4" fill="#9aa5ae" r="7.5" stroke="#1c2a35" stroke-width="1"></circle></g><circle cx="220" cy="190" fill="#c9d6de" r="35" stroke="#1c2a35" stroke-width="1"></circle><circle cx="220" cy="190" fill="#7d8b96" r="29" stroke="#1c2a35" stroke-width="1.2"></circle><g><animatetransform attributename="transform" dur="1.8s" from="0 220 190" repeatcount="indefinite" to="360 220 190" type="rotate"></animatetransform><line stroke="#e0912f" stroke-linecap="round" stroke-width="3" x1="220" x2="220" y1="176" y2="164"></line><rect fill="#3d4a54" height="6" width="8" x="216" y="161"></rect></g><text fill="#fff" font-size="11" font-weight="600" text-anchor="middle" x="220" y="194">shaft</text><rect fill="#5a6773" height="5" rx="1" stroke="#1c2a35" stroke-width="1" width="24" x="208" y="110"></rect><rect fill="#1d4f7a" height="20" rx="1.5" stroke="#1c2a35" stroke-width="1" width="18" x="211" y="90"></rect><rect fill="#0f2a3d" height="3" rx="1" width="14" x="213" y="87"></rect><rect fill="#b9c0c6" height="7" rx="1" stroke="#1c2a35" stroke-width="0.8" width="7" x="229" y="94"></rect><path d="M236,97.5 C270,98 275,70 310,68" fill="none" stroke="#1c2a35" stroke-width="1.5"></path><text fill="#1d4f7a" font-size="12" font-weight="600" text-anchor="end" x="202" y="98">accelerometer</text><path d="M328,160 L328,220" stroke="#b4561c" stroke-width="2"></path><path d="M322,168 L328,158 L334,168 M322,212 L328,222 L334,212" fill="none" stroke="#b4561c" stroke-width="2"></path><text fill="#b4561c" font-size="11" font-weight="400" text-anchor="start" x="340" y="186">housing</text><text fill="#b4561c" font-size="11" font-weight="400" text-anchor="start" x="340" y="201">moves</text><text fill="#5a6773" font-size="11" font-weight="400" text-anchor="start" x="120" y="302">rolling-element bearing in its housing</text><text fill="#1c2a35" font-size="15" font-weight="700" text-anchor="middle" x="220" y="28">Casing vibration (absolute)</text><text fill="#5a6773" font-size="12" font-weight="400" text-anchor="middle" x="220" y="47">How the bearing housing moves in space</text><rect fill="#dbe9f1" height="150" rx="10" stroke="#1c2a35" stroke-width="1.5" width="170" x="585" y="115"></rect><path d="M570,265 L770,265 L770,280 L570,280 Z" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.2"></path><circle cx="670" cy="190" fill="#c9d6de" r="56" stroke="#1c2a35" stroke-width="1.4"></circle><circle cx="670" cy="190" fill="#f6dfb3" r="48" stroke="#1c2a35" stroke-width="1"></circle><g><animatemotion dur="1.8s" path="M5.5,2 A4.5,3 0 1 1 -3.5,2 A4.5,3 0 1 1 5.5,2" repeatcount="indefinite"></animatemotion><circle cx="670" cy="190" fill="#7d8b96" r="40" stroke="#1c2a35" stroke-width="1.2"></circle><g><animatetransform attributename="transform" dur="1.8s" from="0 670 190" repeatcount="indefinite" to="360 670 190" type="rotate"></animatetransform><line stroke="#e0912f" stroke-linecap="round" stroke-width="3" x1="670" x2="670" y1="172" y2="153"></line><rect fill="#3d4a54" height="6" width="8" x="666" y="150"></rect></g><text fill="#fff" font-size="11" font-weight="600" text-anchor="middle" x="670" y="194">shaft</text></g><g transform="translate(634.6,154.6) rotate(-135)"><rect fill="#1d4f7a" height="10" rx="2" stroke="#1c2a35" stroke-width="1" width="78" x="0" y="-5"></rect><rect fill="#b9c0c6" height="8" rx="1.5" stroke="#1c2a35" stroke-width="0.8" width="5" x="-3" y="-4"></rect><line stroke="#4a7ba3" stroke-width="1" x1="42" x2="39" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="47" x2="44" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="52" x2="49" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="57" x2="54" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="62" x2="59" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="67" x2="64" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="72" x2="69" y1="-5" y2="5"></line></g><path d="M579.5,99.5 q-9.9,-19.9 -21.2,-29.6" fill="none" stroke="#1c2a35" stroke-width="1.4"></path><text fill="#1d4f7a" font-size="12" font-weight="600" text-anchor="end" x="568.5613998199874" y="120.56139981998739">proximity</text><text fill="#1d4f7a" font-size="12" font-weight="600" text-anchor="end" x="568.5613998199874" y="135.5613998199874">probe</text><g transform="translate(705.4,154.6) rotate(-45)"><rect fill="#1d4f7a" height="10" rx="2" stroke="#1c2a35" stroke-width="1" width="78" x="0" y="-5"></rect><rect fill="#b9c0c6" height="8" rx="1.5" stroke="#1c2a35" stroke-width="0.8" width="5" x="-3" y="-4"></rect><line stroke="#4a7ba3" stroke-width="1" x1="42" x2="39" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="47" x2="44" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="52" x2="49" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="57" x2="54" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="62" x2="59" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="67" x2="64" y1="-5" y2="5"></line><line stroke="#4a7ba3" stroke-width="1" x1="72" x2="69" y1="-5" y2="5"></line></g><path d="M760.5,99.5 q9.9,-19.9 21.2,-29.6" fill="none" stroke="#1c2a35" stroke-width="1.4"></path><text fill="#1d4f7a" font-size="12" font-weight="600" text-anchor="start" x="771.4386001800126" y="120.5613998199874">proximity</text><text fill="#1d4f7a" font-size="12" font-weight="600" text-anchor="start" x="771.4386001800126" y="135.5613998199874">probe</text><path d="M766,230 L710,210" stroke="#5a6773" stroke-width="1"></path><text fill="#8a5a12" font-size="12" font-weight="600" text-anchor="start" x="770" y="234">oil film</text><text fill="#5a6773" font-size="11" font-weight="400" text-anchor="start" x="570" y="302">fluid-film (journal) bearing</text><text fill="#1c2a35" font-size="15" font-weight="700" text-anchor="middle" x="670" y="28">Shaft vibration (relative)</text><text fill="#5a6773" font-size="12" font-weight="400" text-anchor="middle" x="670" y="47">How the shaft moves inside its bearing</text><line stroke="#d5dde3" stroke-width="1" x1="450" x2="450" y1="20" y2="320"></line></svg><figcaption>Two families of vibration sensor. <strong>Left:</strong> an accelerometer on a rolling-element bearing housing measures absolute casing motion. <strong>Right:</strong> two proximity probes in a journal bearing measure the shaft’s motion relative to the bearing. The shaft whirls once per revolution inside its bearing; the oil-film clearance and this orbit are exaggerated for clarity.</figcaption></figure><div class="box misconception"><h4><span aria-hidden="true" class="ico">⚠</span>Common Misconception: “To see displacement, you need a displacement sensor”</h4><p>Most displacement readings taken on a casing come from an accelerometer whose signal the analyser has integrated twice. Integration has a limit, though. Each step divides by <var>ω</var>, so very low frequencies, including low-frequency noise, are strongly amplified. Analysers apply a high-pass filter to stop this, and below a few hertz the integrated displacement becomes unreliable.</p><p>For a slow machine, such as the cooling-tower fan above running at a few hertz, engineers therefore use a low-frequency (high-sensitivity) accelerometer or a velocity sensor. A proximity probe is chosen for a different reason: it sees the <em>shaft</em>, not the casing.</p></div><div class="box checkpoint"><h4><span aria-hidden="true" class="ico">✔</span>CHECKPOINT — Can you explain this?</h4><p class="lead-note">Answer in your head or on paper first. Then open the feedback.</p><div class="question"><p><strong>Q1.</strong> At the same velocity of 5 mm/s RMS, how does the displacement at 10 Hz compare with that at 1,000 Hz?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. It is the same.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> Displacement = velocity/<var>ω</var>. A hundred times the frequency means a hundredth of the displacement.</p></div></details><details class="option"><summary>B. It is 100 times larger at 10 Hz.</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> <var>y</var> = <var>v</var>/<var>ω</var>, so displacement scales as 1/<var>f</var>. In the opposite direction, acceleration (<var>a</var> = <var>ω</var><var>v</var>) is 100 times larger at 1,000 Hz.</p></div></details><details class="option"><summary>C. It is 10,000 times larger at 10 Hz.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> That would be the ratio for <em>constant acceleration</em>, where <var>y</var> = <var>a</var>/<var>ω</var>² scales as 1/<var>f</var>². Here velocity is held constant.</p></div></details></div><div class="question"><p><strong>Q2.</strong> You need to detect early bearing defects that show up at around 5 kHz. Which measurement do you choose?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. A proximity probe measuring displacement</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> A proximity probe watches the shaft inside a journal bearing, not the bearing housing, where rolling-element bearing defects show up. And at 5 kHz the displacement is tiny, so it would be lost in the noise.</p></div></details><details class="option"><summary>B. An accelerometer measuring acceleration in g</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> Acceleration grows with <var>f</var>², so high-frequency impacts produce strong acceleration signals. This is standard practice for bearing monitoring.</p></div></details><details class="option"><summary>C. Overall velocity RMS only</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> Velocity is good for general severity, but it de-emphasises high frequencies. The RMS averaging also hides impacts, as you saw in Part C.</p></div></details></div></div></div><aside aria-label="Up next" class="up-next"><p class="lbl">Up next · Part E</p><p class="ttl">When vibrations add up: superposition and beating</p><p>So far, every vibration has been a single sine wave. A real machine produces many at once. What happens when they add together?</p><p class="how">Continue with the next page in this Canvas module.</p></aside></main>
+<footer class="page-foot">MCEN4003 Mechanical Vibration · Curtin University · Module 1, Part D</footer>
+</div>
+<script>
+/* MCEN4003 page script: equations + reading progress */
+(function(){
+  // equations: MathJax 4 with the sans-serif Fira maths font, for the whole page
+  if(document.getElementById('content')){
+    window.MathJax={loader:{paths:{mathjax:'https://cdn.jsdelivr.net/npm/mathjax@4.1.3','mathjax-fira':'https://cdn.jsdelivr.net/npm/@mathjax/mathjax-fira-font@4.1.3'}},
+      tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},
+      output:{displayOverflow:'scale'}, startup:{elements:['#content']}, options:{menuOptions:{settings:{enrich:false}}}};
+    var mj=document.createElement('script'); mj.async=true; mj.src='https://cdn.jsdelivr.net/npm/@mathjax/mathjax-fira-font@4.1.3/tex-mml-chtml-mathjax-fira.js'; document.head.appendChild(mj);
+  }
+  var bar=document.querySelector('.progress');
+  function prog(){ if(!bar) return; var h=document.documentElement; var max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+  window.addEventListener('scroll',prog,{passive:true}); window.addEventListener('load',prog); prog();
+  // fixed-size embedded animations (e.g. Tumult Hype, 1024x768): scale to the column width
+  function fitFrames(){ document.querySelectorAll('.hype-frame').forEach(function(f){
+    var w=+f.dataset.w||1024, i=f.querySelector('iframe'); if(!i) return;
+    i.style.transform='scale('+(f.clientWidth/w)+')'; }); }
+  window.addEventListener('resize',fitFrames); window.addEventListener('load',fitFrames); fitFrames();
+  // flip cards: tap / Enter / Space toggles (hover handled in CSS)
+  document.querySelectorAll('.flip-card').forEach(function(c){
+    function t(){ c.classList.toggle('is-flipped'); }
+    c.addEventListener('click',function(e){ if(window.matchMedia('(hover: none)').matches || e.detail===0) t(); });
+  });
+})();
+
+</script>
+<script>
+/* MCEN4003 Chapter 1: inline interactive simulations (no iframes, no libraries) */
+(function () {
+  'use strict';
+  var C = { ink: '#15232e', muted: '#5a6773', grid: '#e8ecf0', axis: '#a3aeb8', accent: '#0b5c80', orange: '#b4561c',
+    red: '#a4262c', green: '#1d6b47', teal: '#0b6e77', navy: '#0f2a3d', fill: '#dbe9f1', fill2: '#c9d6de', ghost: '#b8c2cb', band: 'rgba(164,38,44,0.10)' };
+  var FONT = '"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TAU = Math.PI * 2;
+
+  /* ---------- tiny DOM helpers ---------- */
+  function h(tag, props, kids) {
+    var e = document.createElement(tag);
+    if (props) for (var k in props) {
+      if (k === 'class') e.className = props[k];
+      else if (k === 'text') e.textContent = props[k];
+      else if (k === 'html') e.innerHTML = props[k];
+      else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), props[k]);
+      else e.setAttribute(k, props[k]);
+    }
+    (kids || []).forEach(function (c) { if (c) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return e;
+  }
+  var uid = 0;
+  function slider(o) {
+    var id = 'ctl' + (++uid);
+    var out = h('output', { 'for': id, 'class': 'ctl-val' });
+    var inp = h('input', { type: 'range', id: id, min: o.min, max: o.max, step: o.step, value: o.value });
+    function show() { out.textContent = o.fmt ? o.fmt(+inp.value) : inp.value; }
+    inp.addEventListener('input', function () { show(); if (o.onInput) o.onInput(+inp.value); });
+    show();
+    var wrap = h('div', { 'class': 'ctl' }, [h('div', { 'class': 'ctl-top' }, [h('label', { 'for': id, html: o.label }), out]), inp]);
+    wrap.set = function (v) { inp.value = v; show(); if (o.onInput) o.onInput(+inp.value); };
+    wrap.input = inp;
+    return wrap;
+  }
+  function select(o) {
+    var id = 'ctl' + (++uid);
+    var sel = h('select', { id: id });
+    o.options.forEach(function (op) { var e = h('option', { value: op[0], text: op[1] }); if (op[0] === o.value) e.selected = true; sel.appendChild(e); });
+    sel.addEventListener('change', function () { o.onChange(sel.value); });
+    return h('div', { 'class': 'ctl' }, [h('div', { 'class': 'ctl-top' }, [h('label', { 'for': id, html: o.label })]), sel]);
+  }
+  function button(text, fn, cls) { return h('button', { type: 'button', 'class': 'btn' + (cls ? ' ' + cls : ''), text: text, onclick: fn }); }
+
+  /* ---------- canvas helpers ---------- */
+  function Canvas(parent, hf, label) {
+    var c = h('canvas', { role: 'img', 'aria-label': label });
+    parent.appendChild(c);
+    var o = { c: c, ctx: c.getContext('2d'), w: 300, h: 200 };
+    o.resize = function () {
+      var w = Math.max(260, parent.clientWidth || 600);
+      var hh = typeof hf === 'function' ? hf(w) : hf;
+      var d = window.devicePixelRatio || 1;
+      c.width = Math.round(w * d); c.height = Math.round(hh * d); c.style.height = hh + 'px';
+      o.ctx.setTransform(d, 0, 0, d, 0, 0); o.w = w; o.h = hh;
+    };
+    o.resize();
+    return o;
+  }
+  function txt(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = (o.weight || '500') + ' ' + (o.size || 12) + 'px ' + FONT;
+    ctx.fillStyle = o.color || C.muted; ctx.textAlign = o.align || 'left'; ctx.textBaseline = o.base || 'alphabetic';
+    ctx.fillText(s, x, y);
+  }
+  function ln(ctx, x1, y1, x2, y2, color, width, dash) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width || 1; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+  }
+  function curve(ctx, n, fx, fy, color, width, dash) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width || 2; ctx.setLineDash(dash || []); ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (var i = 0; i <= n; i++) { var x = fx(i), y = fy(i); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+    ctx.stroke(); ctx.restore();
+  }
+  function dot(ctx, x, y, r, color, hollow) {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU);
+    if (hollow) { ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = color; ctx.stroke(); }
+    else { ctx.fillStyle = color; ctx.fill(); }
+  }
+  function spring(ctx, x, y1, y2, halfW, coils) {
+    var n = coils * 2, lead = 6, L = y2 - y1 - 2 * lead;
+    ctx.save(); ctx.strokeStyle = C.ink; ctx.lineWidth = 1.6; ctx.lineJoin = 'round'; ctx.beginPath();
+    ctx.moveTo(x, y1); ctx.lineTo(x, y1 + lead);
+    for (var i = 0; i < n; i++) ctx.lineTo(x + (i % 2 ? -halfW : halfW), y1 + lead + L * (i + 0.5) / n);
+    ctx.lineTo(x, y2 - lead); ctx.lineTo(x, y2); ctx.stroke(); ctx.restore();
+  }
+  function damper(ctx, x, y1, y2) {
+    var mid = (y1 + y2) / 2;
+    ctx.save(); ctx.strokeStyle = C.ink; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, mid - 4); ctx.moveTo(x - 9, mid - 4); ctx.lineTo(x + 9, mid - 4); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x - 12, mid - 14); ctx.lineTo(x - 12, mid + 8); ctx.lineTo(x + 12, mid + 8); ctx.lineTo(x + 12, mid - 14);
+    ctx.moveTo(x, mid + 8); ctx.lineTo(x, y2); ctx.stroke(); ctx.restore();
+  }
+  function hatch(ctx, x1, x2, y, down) {
+    ln(ctx, x1, y, x2, y, C.ink, 2);
+    for (var x = x1 + 4; x < x2; x += 8) ln(ctx, x, y, x - 6, y + (down ? 7 : -7), C.ink, 1);
+  }
+  function fmtN(v, d) { return v.toLocaleString('en-AU', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function sig3(v) {
+    if (!isFinite(v)) return '—';
+    var a = Math.abs(v); if (a === 0) return '0';
+    var d = a >= 100 ? 0 : a >= 10 ? 1 : a >= 1 ? 2 : Math.min(6, 2 - Math.floor(Math.log10(a)));
+    return fmtN(v, d);
+  }
+
+  /* ---------- registry and animation loop ---------- */
+  var sims = [];
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      sims.forEach(function (s) {
+        if (s.root === e.target) { s.visible = e.isIntersecting; if (s.visible) { s.canvases.forEach(function (c) { c.resize(); }); s.dirty = true; } }
+      });
+    });
+  }, { rootMargin: '150px' }) : null;
+
+  function mk(root, state) {
+    var s = { root: root, t: 0, playing: !reduce, dirty: true, canvases: [], visible: !io };
+    for (var k in state) s[k] = state[k];
+    var stage = h('div', { 'class': 'sim-stage' }), ctr = h('div', { 'class': 'sim-controls' }),
+      btns = h('div', { 'class': 'sim-buttons' }), outs = h('div', { 'class': 'readouts' });
+    s.msg = h('p', { 'class': 'sim-msg', 'aria-live': 'polite' });
+    root.appendChild(stage); root.appendChild(ctr); root.appendChild(btns); root.appendChild(outs); root.appendChild(s.msg);
+    s.canvas = function (hf, label) { var c = Canvas(stage, hf, label); s.canvases.push(c); return c; };
+    s.controls = function (arr) { arr.forEach(function (e) { ctr.appendChild(e); }); };
+    s.buttons = function (arr) { arr.forEach(function (e) { btns.appendChild(e); }); };
+    s.stat = function (k) {
+      var v = h('div', { 'class': 'v' }); outs.appendChild(h('div', { 'class': 'stat' }, [h('div', { 'class': 'k', html: k }), v]));
+      return { set: function (x) { if (v.textContent !== x) v.textContent = x; } };
+    };
+    s.say = function (x) { if (s.msg.textContent !== x) s.msg.textContent = x; };
+    s.changed = function () { s.dirty = true; if (s.update) s.update(); };
+    s.playButton = function (playText, pauseText) {
+      var b = button('', function () {
+        if (!s.playing && s.atEnd && s.atEnd()) { s.t = 0; }
+        s.playing = !s.playing; s.dirty = true; sync();
+      }, 'primary');
+      function sync() { b.textContent = s.playing ? (pauseText || 'Pause') : (playText || 'Play'); b.setAttribute('aria-pressed', s.playing ? 'true' : 'false'); }
+      s.syncPlay = sync; sync(); return b;
+    };
+    sims.push(s); if (io) io.observe(root);
+    return s;
+  }
+  var last = performance.now();
+  function loop(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    sims.forEach(function (s) {
+      if (!s.visible) return;
+      if (s.playing) { s.t += dt * (s.speed || 1); if (s.step) s.step(dt); s.draw(); }
+      else if (s.dirty) { s.draw(); s.dirty = false; }
+    });
+    requestAnimationFrame(loop);
+  }
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt); rt = setTimeout(function () { sims.forEach(function (s) { s.canvases.forEach(function (c) { c.resize(); }); s.dirty = true; }); }, 120);
+  });
+
+  var SIMS = {};
+
+  /* =====================================================================
+     1. Phasor: from rotation to vibration
+     ===================================================================== */
+  SIMS.phasor = function (root) {
+    var s = mk(root, { A: 0.8, f: 0.5, phi: 0 });
+    var cv = s.canvas(function (w) { return w < 520 ? 230 : 280; },
+      'A point on a circle rotating at constant speed. Its height, traced against time, draws a sine wave whose size is set by A, speed by f and starting point by phi.');
+    s.controls([
+      slider({ label: 'Amplitude <var>A</var>', min: 0.2, max: 1, step: 0.05, value: 0.8, fmt: function (v) { return v.toFixed(2); }, onInput: function (v) { s.A = v; s.changed(); } }),
+      slider({ label: 'Frequency <var>f</var>', min: 0.2, max: 1.5, step: 0.05, value: 0.5, fmt: function (v) { return v.toFixed(2) + ' Hz'; }, onInput: function (v) { s.f = v; s.changed(); } }),
+      slider({ label: 'Phase <var>φ</var>', min: -180, max: 180, step: 15, value: 0, fmt: function (v) { return v + '°'; }, onInput: function (v) { s.phi = v * Math.PI / 180; s.changed(); } })
+    ]);
+    s.buttons([s.playButton(), button('Reset time', function () { s.t = 0; s.dirty = true; })]);
+    var rT = s.stat('Period <var>T</var> = 1/<var>f</var>'), rW = s.stat('<var>ω</var> = 2π<var>f</var>'), rY = s.stat('Height <var>y</var>(<var>t</var>) now');
+    s.update = function () { rT.set(sig3(1 / s.f) + ' s'); rW.set(sig3(TAU * s.f) + ' rad/s'); };
+    s.update();
+    s.draw = function () {
+      var ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var R0 = Math.min(H * 0.36, w * 0.15), cx = R0 + 22, cy = H / 2 - 6, R = R0 * s.A;
+      var ang = TAU * s.f * s.t + s.phi, px = cx + R * Math.cos(ang), py = cy - R * Math.sin(ang);
+      var x0 = cx + R0 + 34, x1 = w - 14, span = 4;
+      // circle
+      ctx.save(); ctx.setLineDash([3, 4]); ctx.strokeStyle = C.axis; ctx.beginPath(); ctx.arc(cx, cy, R0, 0, TAU); ctx.stroke(); ctx.restore();
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.strokeStyle = C.accent; ctx.lineWidth = 1.5; ctx.stroke();
+      ln(ctx, cx - R0 - 8, cy, cx + R0 + 8, cy, C.grid, 1); ln(ctx, cx, cy - R0 - 8, cx, cy + R0 + 8, C.grid, 1);
+      ln(ctx, cx, cy, px, py, C.navy, 2); dot(ctx, cx, cy, 3, C.navy);
+      // plot frame
+      ln(ctx, x0, cy, x1, cy, C.axis, 1);
+      ln(ctx, x0, cy - R0, x1, cy - R0, C.grid, 1, [4, 4]); ln(ctx, x0, cy + R0, x1, cy + R0, C.grid, 1, [4, 4]);
+      ln(ctx, x0, cy - R0 - 10, x0, cy + R0 + 10, C.axis, 1);
+      var n = 400;
+      curve(ctx, n, function (i) { return x0 + (x1 - x0) * i / n; },
+        function (i) { var tau = span * i / n; return cy - R * Math.sin(TAU * s.f * (s.t - tau) + s.phi); }, C.accent, 2.4);
+      ln(ctx, px, py, x0, py, C.orange, 1.2, [4, 3]);
+      dot(ctx, px, py, 6, C.orange); dot(ctx, x0, py, 5, C.orange);
+      // period bracket
+      var Tpx = (x1 - x0) / span / s.f;
+      if (Tpx < (x1 - x0) - 10) {
+        var by = cy + R0 + 26;
+        ln(ctx, x0 + 10, by, x0 + 10 + Tpx, by, C.navy, 1.4); ln(ctx, x0 + 10, by - 5, x0 + 10, by + 5, C.navy, 1.4); ln(ctx, x0 + 10 + Tpx, by - 5, x0 + 10 + Tpx, by + 5, C.navy, 1.4);
+        txt(ctx, 'one period T', x0 + 10 + Tpx / 2, by - 7, { align: 'center', color: C.navy, weight: '600' });
+      }
+      txt(ctx, 'y', x0 - 6, cy - R0 - 14, { align: 'right', size: 13, weight: '600', color: C.ink });
+      txt(ctx, 'now', x0 + 4, 16, { color: C.orange, weight: '600' });
+      txt(ctx, 'earlier  →', x1, 16, { align: 'right' });
+      txt(ctx, 'ωt + φ', cx + R0 * 0.4, cy + R0 + 26, { align: 'center' });
+      rY.set(sig3(s.A * Math.sin(ang)));
+    };
+  };
+
+  /* =====================================================================
+     2. Phase on a motor: bounce vs rock
+     ===================================================================== */
+  SIMS.phase = function (root) {
+    var s = mk(root, { dphi: 0, b: 1 });
+    var cv = s.canvas(function (w) { return w < 520 ? 200 : 220; }, 'A motor on two spring mounts. Foot A and foot B move up and down at the same frequency; the phase difference decides whether the motor bounces or rocks.');
+    var cw = s.canvas(140, 'Time waveforms of foot A and foot B over two cycles, with a moving time cursor.');
+    s.controls([
+      slider({ label: 'Phase difference Δ<var>φ</var> (B relative to A)', min: 0, max: 180, step: 15, value: 0, fmt: function (v) { return v + '°'; }, onInput: function (v) { s.dphi = v; s.changed(); } }),
+      slider({ label: 'Amplitude at foot B (A = 1)', min: 0, max: 1, step: 0.1, value: 1, fmt: function (v) { return v.toFixed(1); }, onInput: function (v) { s.b = v; s.changed(); } })
+    ]);
+    s.buttons([s.playButton()]);
+    var rM = s.stat('Motion'), rP = s.stat('Stationary point (pivot)');
+    s.update = function () {
+      var d = s.dphi, b = s.b, motion, piv;
+      if (d === 0 && b === 1) motion = 'Pure bounce';
+      else if (d === 180 && b === 1) motion = 'Pure rocking';
+      else if (d === 0 || d === 180) motion = 'Bounce + rock';
+      else motion = 'Mixed motion';
+      if (d === 0 || d === 180) {
+        var bb = d === 0 ? b : -b;
+        if (Math.abs(1 - bb) < 1e-9) piv = 'None: both feet move together';
+        else { var sp = 1 / (1 - bb); piv = sp >= 0 && sp <= 1 ? (sp === 1 ? 'At foot B' : fmtN(sp * 100, 0) + '% of the way from A to B') : 'Outside the base, beyond foot B'; }
+      } else piv = 'None: no point stays still';
+      rM.set(motion); rP.set(piv);
+      s.say(d === 0 && b === 1 ? 'Δφ = 0°: the feet move together, so the motor translates up and down.' :
+        d === 180 && b === 1 ? 'Δφ = 180°: the feet move in opposite directions, so the motor rocks about its centre.' :
+        b === 0 ? 'Foot B does not move, so it acts as the pivot.' :
+        (d === 0 || d === 180) ? 'Unequal amplitudes move the pivot off-centre.' : 'Between 0° and 180°, bounce and rock combine and no point on the base stays still.');
+    };
+    s.update();
+    s.draw = function () {
+      var ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var om = TAU * 0.8, amp = Math.min(22, H * 0.1), gy = H - 26, py0 = gy - 84;
+      var xA = w * 0.27, xB = w * 0.73, ph = s.dphi * Math.PI / 180;
+      var yA = amp * Math.sin(om * s.t), yB = amp * s.b * Math.sin(om * s.t - ph);
+      var fA = py0 - yA, fB = py0 - yB;
+      ctx.fillStyle = '#eef1f3'; ctx.fillRect(xA - 70, gy, xB - xA + 140, 18); ctx.strokeStyle = C.axis; ctx.strokeRect(xA - 70 + .5, gy + .5, xB - xA + 140, 18);
+      ln(ctx, xA - 80, py0, xB + 80, py0, C.axis, 1, [4, 4]);
+      spring(ctx, xA, fA + 4, gy, 8, 5); spring(ctx, xB, fB + 4, gy, 8, 5);
+      var mx = (xA + xB) / 2, my = (fA + fB) / 2, th = Math.atan2(fB - fA, xB - xA), L = (xB - xA) / Math.cos(th);
+      ctx.save(); ctx.translate(mx, my); ctx.rotate(th);
+      ctx.fillStyle = C.fill2; ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5;
+      ctx.fillRect(-L / 2 - 40, -4, L + 80, 8); ctx.strokeRect(-L / 2 - 40, -4, L + 80, 8);
+      var bw = L * 0.62; ctx.fillStyle = C.fill; ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(-bw / 2, -62, bw, 58, 9); else ctx.rect(-bw / 2, -62, bw, 58);
+      ctx.fill(); ctx.stroke();
+      for (var i = 1; i < 8; i++) ln(ctx, -bw / 2 + bw * i / 8, -56, -bw / 2 + bw * i / 8, -10, '#9fb3c0', 1);
+      ctx.fillStyle = '#9fb3c0'; ctx.fillRect(bw / 2, -38, 16, 10);
+      ctx.restore();
+      dot(ctx, xA, fA, 5, C.accent); dot(ctx, xB, fB, 5, C.orange);
+      txt(ctx, 'A', xA - 26, fA + 22, { weight: '700', color: C.accent, size: 14 });
+      txt(ctx, 'B', xB + 16, fB + 22, { weight: '700', color: C.orange, size: 14 });
+      // pivot marker
+      if ((s.dphi === 0 || s.dphi === 180) && !(s.dphi === 0 && s.b === 1)) {
+        var bb = s.dphi === 0 ? s.b : -s.b, sp = 1 / (1 - bb);
+        if (sp >= -0.15 && sp <= 1.15) {
+          var x = xA + (xB - xA) * sp;
+          ctx.fillStyle = C.red; ctx.beginPath(); ctx.moveTo(x, py0 + 6); ctx.lineTo(x - 7, py0 + 18); ctx.lineTo(x + 7, py0 + 18); ctx.closePath(); ctx.fill();
+          txt(ctx, 'pivot', x, py0 + 32, { align: 'center', color: C.red, weight: '600' });
+        }
+      }
+      // waveforms
+      var c2 = cw.ctx, W = cw.w, H2 = cw.h; c2.clearRect(0, 0, W, H2);
+      var l = 44, r = W - 12, cy = H2 / 2 - 6, a2 = H2 * 0.32, win = 2.5, n = 300;
+      ln(c2, l, cy, r, cy, C.axis, 1);
+      curve(c2, n, function (i) { return l + (r - l) * i / n; }, function (i) { return cy - a2 * Math.sin(om * win * i / n); }, C.accent, 2.2);
+      curve(c2, n, function (i) { return l + (r - l) * i / n; }, function (i) { return cy - a2 * s.b * Math.sin(om * win * i / n - ph); }, C.orange, 2.2, [7, 4]);
+      var tc = s.t % win, xc = l + (r - l) * tc / win;
+      ln(c2, xc, 8, xc, H2 - 22, C.navy, 1, [2, 3]);
+      dot(c2, xc, cy - a2 * Math.sin(om * tc), 4.5, C.accent); dot(c2, xc, cy - a2 * s.b * Math.sin(om * tc - ph), 4.5, C.orange);
+      txt(c2, 'Foot A (solid)', l, H2 - 6, { color: C.accent, weight: '600' });
+      txt(c2, 'Foot B (dashed)', l + 120, H2 - 6, { color: C.orange, weight: '600' });
+      txt(c2, 'time →', r, H2 - 6, { align: 'right' });
+      txt(c2, 'y', l - 10, cy - a2 - 4, { align: 'right', weight: '600', color: C.ink, size: 13 });
+    };
+  };
+
+  /* =====================================================================
+     1b. Centrifugal fan on spring mounts: amplitude, frequency, phase
+     ===================================================================== */
+  SIMS.fan = function (root) {
+    var SLOW = 25, WIN = 120;   // animation 25x slower than real time; trace window in ms
+    var s = mk(root, { A: 0.6, f: 25, dphi: 0 });
+    var cv = s.canvas(function (w) { return w < 520 ? 250 : 270; }, 'A centrifugal fan on a pedestal, standing on a left and a right spring mount. The impeller turns once per revolution. The two mounts move up and down with the chosen amplitude, frequency and phase difference, so the fan bounces, rocks, or does both. Motion is exaggerated and slowed down.');
+    var cw = s.canvas(150, 'Vertical displacement of the left mount (solid) and the right mount (dashed) against time over a 120 millisecond window, with a moving time cursor.');
+    s.controls([
+      slider({ label: 'Amplitude <var>A</var> (peak, each mount)', min: 0.1, max: 1, step: 0.05, value: 0.6, fmt: function (v) { return fmtN(v, 2) + ' mm'; }, onInput: function (v) { s.A = v; s.changed(); } }),
+      slider({ label: 'Frequency <var>f</var> (shaft speed)', min: 10, max: 50, step: 1, value: 25, fmt: function (v) { return v + ' Hz = ' + fmtN(v * 60, 0) + ' rpm'; }, onInput: function (v) { s.f = v; s.changed(); } }),
+      slider({ label: 'Phase difference Δ<var>φ</var> (right relative to left)', min: 0, max: 180, step: 15, value: 0, fmt: function (v) { return v + '°'; }, onInput: function (v) { s.dphi = v; s.changed(); } })
+    ]);
+    s.buttons([s.playButton()]);
+    var rA = s.stat('Peak / peak-to-peak (each mount)'), rT = s.stat('Period <var>T</var> = 1/<var>f</var>'), rP = s.stat('Right mount lags left by'), rM = s.stat('Motion of the fan');
+    s.update = function () {
+      var d = s.dphi;
+      rA.set(fmtN(s.A, 2) + ' mm / ' + fmtN(2 * s.A, 2) + ' mm');
+      rT.set(fmtN(1000 / s.f, 1) + ' ms');
+      rP.set(d === 0 ? '0 ms (together)' : fmtN(d / 360 / s.f * 1000, 1) + ' ms');
+      rM.set(d === 0 ? 'Pure bounce' : d === 180 ? 'Pure rocking' : d < 90 ? 'Mostly bounce, some rocking' : d === 90 ? 'Equal bounce and rocking' : 'Mostly rocking, some bounce');
+      s.say(d === 0 ? 'Δφ = 0°: both mounts move up and down together, so the whole fan bounces.' :
+        d === 180 ? 'Δφ = 180°: when the left mount is up, the right mount is down, so the fan rocks about its centre.' :
+        'Δφ = ' + d + '°: the right mount reaches its peak ' + fmtN(d / 360 / s.f * 1000, 1) + ' ms after the left. The fan bounces and rocks at the same time, and no point on the base stays still.');
+    };
+    s.update();
+    s.draw = function () {
+      var ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var tr = s.t / SLOW, om = TAU * s.f, dp = s.dphi * Math.PI / 180, th = om * tr;
+      var px = 18 * s.A, yL = px * Math.sin(th), yR = px * Math.sin(th - dp);
+      var CX = w * 0.5, gy = H - 22, sh = 36, R = Math.min(62, w * 0.15), ri = R * 0.72, M = 85;
+      var bL = gy - sh - yL, bR = gy - sh - yR;
+      // ground
+      ctx.fillStyle = '#eef1f3'; ctx.fillRect(CX - 150, gy, 300, 12); ln(ctx, CX - 160, gy, CX + 160, gy, C.ink, 2);
+      for (var hx = CX - 156; hx < CX + 160; hx += 9) ln(ctx, hx, gy, hx - 7, gy + 8, C.ink, 1);
+      var rx0 = Math.max(6, CX - 150);
+      ln(ctx, rx0, gy - sh, CX - 118, gy - sh, C.axis, 1, [3, 3]);
+      txt(ctx, 'rest', rx0, gy - sh - 4, { size: 10 });
+      spring(ctx, CX - M, bL, gy, 8, 5); spring(ctx, CX + M, bR, gy, 8, 5);
+      // everything on the base plate moves as one rigid body
+      ctx.save(); ctx.translate(CX, (bL + bR) / 2); ctx.rotate(Math.atan2(bR - bL, 2 * M));
+      ctx.fillStyle = C.fill2; ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5;
+      ctx.fillRect(-115, -10, 230, 10); ctx.strokeRect(-115, -10, 230, 10);
+      ctx.fillStyle = '#e6ecf0'; ctx.beginPath(); ctx.moveTo(-52, -10); ctx.lineTo(-34, -40); ctx.lineTo(34, -40); ctx.lineTo(52, -10); ctx.closePath(); ctx.fill(); ctx.stroke();
+      var hy = -40 - R + 4;
+      ctx.fillStyle = C.fill; ctx.beginPath();
+      ctx.moveTo(R * 0.15, hy - R - 6); ctx.lineTo(R + 44, hy - R - 6); ctx.lineTo(R + 44, hy - R * 0.25); ctx.lineTo(R * 0.98, hy - R * 0.25);
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(0, hy, R, 0, TAU); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, hy, ri + 4, 0, TAU); ctx.fill(); ctx.strokeStyle = C.axis; ctx.lineWidth = 1; ctx.stroke();
+      for (var i = 0; i < 10; i++) {
+        var a = -(th + i * TAU / 10);
+        ctx.save(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2.2; ctx.beginPath();
+        ctx.moveTo(ri * 0.32 * Math.cos(a), hy + ri * 0.32 * Math.sin(a));
+        ctx.quadraticCurveTo(ri * 0.7 * Math.cos(a + 0.18), hy + ri * 0.7 * Math.sin(a + 0.18), ri * Math.cos(a + 0.45), hy + ri * Math.sin(a + 0.45));
+        ctx.stroke(); ctx.restore();
+      }
+      ctx.fillStyle = C.fill2; ctx.beginPath(); ctx.arc(0, hy, ri * 0.3, 0, TAU); ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.stroke();
+      dot(ctx, 0, hy, 3, C.ink);
+      dot(ctx, ri * 0.62 * Math.cos(-th), hy + ri * 0.62 * Math.sin(-th), 6, C.red);
+      txt(ctx, 'outlet', R + 22, hy - R - 12, { align: 'center', size: 11 });
+      ctx.restore();
+      // mount markers
+      dot(ctx, CX - M, bL, 5, C.accent); dot(ctx, CX + M, bR, 5, C.orange);
+      txt(ctx, 'L', CX - M - 28, bL + 22, { weight: '700', color: C.accent, size: 13 });
+      txt(ctx, 'R', CX + M + 18, bR + 22, { weight: '700', color: C.orange, size: 13 });
+      var lx = Math.max(16, CX - R - 90), ly = 40;
+      dot(ctx, lx, ly - 4, 5, C.red); txt(ctx, 'heavy spot', lx + 10, ly, { color: C.red, weight: '600', size: 11 });
+      txt(ctx, 'Motion exaggerated and shown ' + SLOW + '× slower', 10, 16, { size: 11 });
+      // waveforms
+      var c2 = cw.ctx, W = cw.w, H2 = cw.h; c2.clearRect(0, 0, W, H2);
+      var l = 50, r = W - 14, wy = H2 / 2 - 8, a2 = (H2 / 2 - 24), n = 400;
+      function X(ms) { return l + (r - l) * ms / WIN; }
+      function Y(v) { return wy - a2 * v; }
+      ln(c2, l, wy, r, wy, C.axis, 1); ln(c2, l, 8, l, H2 - 26, C.axis, 1);
+      [-1, -0.5, 0.5, 1].forEach(function (v) { ln(c2, l, Y(v), r, Y(v), C.grid, 1); txt(c2, (v > 0 ? '+' : '') + v, l - 6, Y(v) + 4, { align: 'right', size: 10 }); });
+      txt(c2, 'mm', l - 6, wy + 4, { align: 'right', size: 10 });
+      curve(c2, n, function (i) { return X(WIN * i / n); }, function (i) { return Y(s.A * Math.sin(om * WIN / 1000 * i / n)); }, C.accent, 2.4);
+      curve(c2, n, function (i) { return X(WIN * i / n); }, function (i) { return Y(s.A * Math.sin(om * WIN / 1000 * i / n - dp)); }, C.orange, 2.4, [7, 4]);
+      var tc = (tr * 1000) % WIN, xc = X(tc);
+      ln(c2, xc, 8, xc, H2 - 26, C.navy, 1, [2, 3]);
+      dot(c2, xc, Y(s.A * Math.sin(om * tc / 1000)), 5, C.accent); dot(c2, xc, Y(s.A * Math.sin(om * tc / 1000 - dp)), 5, C.orange);
+      var T = 1000 / s.f;
+      if (T <= WIN) {
+        var yb = Y(-1) + 12; ln(c2, X(0), yb, X(T), yb, C.ink, 1.2);
+        ln(c2, X(0), yb - 4, X(0), yb + 4, C.ink, 1.2); ln(c2, X(T), yb - 4, X(T), yb + 4, C.ink, 1.2);
+        txt(c2, 'T', X(T / 2), yb - 4, { align: 'center', weight: '700', color: C.ink, size: 12 });
+      }
+      for (var ms = 0; ms <= WIN; ms += 20) txt(c2, ms, X(ms), H2 - 10, { align: 'center', size: 10 });
+      txt(c2, 'time (ms)', r, H2 - 22, { align: 'right', size: 10 });
+      txt(c2, 'L (solid)', r - 70, 18, { align: 'right', size: 11, weight: '600', color: C.accent });
+      txt(c2, 'R (dashed)', r, 18, { align: 'right', size: 11, weight: '600', color: C.orange });
+    };
+  };
+
+  /* =====================================================================
+     2b. Cantilever mode shapes: phase between two points
+     ===================================================================== */
+  SIMS.beams = function (root) {
+    var BL = [1.875104, 4.694091], SG = [0.734096, 1.018467];
+    function shape(m, x) { var b = BL[m] * x; return Math.cosh(b) - Math.cos(b) - SG[m] * (Math.sinh(b) - Math.sin(b)); }
+    var tip = [shape(0, 1), shape(1, 1)];
+    var NODE2 = (function () { var a = 0.7, c = 0.85; for (var i = 0; i < 60; i++) { var mid = (a + c) / 2; if (shape(1, a) * shape(1, mid) <= 0) c = mid; else a = mid; } return (a + c) / 2; })();
+    function onNode() { return s.mode === 1 && s.x1 === NODE2; }
+    function phi(m, x) { return (m === 1 && x === NODE2) ? 0 : shape(m, x) / tip[m]; }
+    var s = mk(root, { mode: 0, x1: 0.5, raw: 0.5 });
+    function place() { s.x1 = (s.mode === 1 && Math.abs(s.raw - NODE2) < 0.02) ? NODE2 : s.raw; }
+    var cv = s.canvas(function (w) { return w < 520 ? 210 : 230; }, 'A cantilever beam clamped to a wall on the left, vibrating in its selected mode shape. Point 1 and point 2 (the tip) are marked; in mode 2 the node, where the beam does not move, is marked.');
+    var cw = s.canvas(140, 'Time waveforms of point 1 and point 2 over two cycles, with a moving time cursor.');
+    var pos = slider({ label: 'Position of point 1, <var>x</var><sub>1</sub>/<var>L</var>', min: 0.1, max: 0.95, step: 0.01, value: 0.5,
+      fmt: function (v) { return (s.mode === 1 && Math.abs(v - NODE2) < 0.02) ? fmtN(NODE2, 2) + ' (node)' : v.toFixed(2); },
+      onInput: function (v) { s.raw = v; place(); s.changed(); } });
+    s.controls([
+      select({ label: 'Mode shape', value: '0', options: [['0', 'Mode 1 (first bending mode)'], ['1', 'Mode 2 (second bending mode)']], onChange: function (v) { s.mode = +v; place(); pos.set(s.raw); s.changed(); } }),
+      pos
+    ]);
+    s.buttons([s.playButton()]);
+    var rP = s.stat('Phase of point 1 relative to point 2'), rR = s.stat('Amplitude ratio, point 1 / point 2'), rN = s.stat('Node');
+    s.update = function () {
+      var a1 = phi(s.mode, s.x1), out = a1 < 0;
+      rP.set(onNode() ? 'None: point 1 is on the node and does not move' : out ? '180° (out of phase)' : '0° (in phase)');
+      rR.set(fmtN(Math.abs(a1), 2));
+      rN.set(s.mode === 0 ? 'None (only the clamp is fixed)' : 'At ' + fmtN(NODE2, 2) + 'L');
+      s.say(s.mode === 0 ? 'Mode 1: the whole beam moves to the same side together, so point 1 is always in phase with the tip, wherever you put it.' :
+        onNode() ? 'Point 1 is exactly on the node: its amplitude is zero, so it has no phase at all. An accelerometer placed here would not see mode 2.' :
+        out ? 'Mode 2: a node lies between the two points, so point 1 moves opposite to the tip (180° out of phase).' :
+        'Mode 2: point 1 is now beyond the node, on the same side as the tip, so the two points are back in phase.');
+    };
+    s.update();
+    s.draw = function () {
+      var ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var om = TAU * 0.6, wx = Math.max(44, w * 0.08), x0 = wx + 6, x1 = w - 46, cy = H * 0.46, amp = Math.min(62, H * 0.27);
+      var q = Math.sin(om * s.t), m = s.mode, n = 120;
+      function X(u) { return x0 + (x1 - x0) * u; }
+      // wall
+      ctx.fillStyle = '#eef1f3'; ctx.fillRect(wx - 26, cy - 70, 26, 140); ln(ctx, wx, cy - 70, wx, cy + 70, C.ink, 2);
+      for (var yy = cy - 66; yy < cy + 70; yy += 9) ln(ctx, wx, yy, wx - 8, yy + 8, C.ink, 1);
+      ctx.fillStyle = C.ink; ctx.fillRect(wx, cy - 7, 6, 14);
+      // rest line and envelope
+      ln(ctx, x0, cy, x1 + 14, cy, C.axis, 1, [4, 4]);
+      curve(ctx, n, function (i) { return X(i / n); }, function (i) { return cy - amp * phi(m, i / n); }, C.ghost, 1.2, [3, 4]);
+      curve(ctx, n, function (i) { return X(i / n); }, function (i) { return cy + amp * phi(m, i / n); }, C.ghost, 1.2, [3, 4]);
+      // beam
+      curve(ctx, n, function (i) { return X(i / n); }, function (i) { return cy - amp * q * phi(m, i / n); }, C.ink, 9);
+      curve(ctx, n, function (i) { return X(i / n); }, function (i) { return cy - amp * q * phi(m, i / n); }, C.fill2, 5.5);
+      // node
+      if (m === 1) {
+        var xn = X(NODE2);
+        ctx.fillStyle = C.red; ctx.beginPath(); ctx.moveTo(xn, cy + 9); ctx.lineTo(xn - 7, cy + 21); ctx.lineTo(xn + 7, cy + 21); ctx.closePath(); ctx.fill();
+        txt(ctx, 'node', xn, cy + 36, { align: 'center', color: C.red, weight: '600' });
+      }
+      // points
+      var y1 = cy - amp * q * phi(m, s.x1), y2 = cy - amp * q;
+      dot(ctx, X(s.x1), y1, 6, C.accent); dot(ctx, X(1), y2, 6, C.orange);
+      txt(ctx, '1', X(s.x1), y1 - 12, { align: 'center', weight: '700', color: C.accent, size: 14 });
+      txt(ctx, '2', X(1) + 14, y2 + 5, { weight: '700', color: C.orange, size: 14 });
+      txt(ctx, m === 0 ? 'Mode 1' : 'Mode 2', x0, 18, { weight: '700', color: C.ink, size: 13 });
+      if (w < 560) { txt(ctx, 'Dotted: the extreme positions. Both modes are slowed', x0 - 30, H - 22, { size: 10.5 }); txt(ctx, 'right down; mode 2 really vibrates about 6.3× faster.', x0 - 30, H - 8, { size: 10.5 }); }
+      else txt(ctx, 'Dotted: the extreme positions. Both modes are slowed right down; mode 2 really vibrates about 6.3× faster.', x0, H - 8, { size: 11 });
+      // waveforms
+      var c2 = cw.ctx, W = cw.w, H2 = cw.h; c2.clearRect(0, 0, W, H2);
+      var l = 44, r = W - 12, wy = H2 / 2 - 6, a2 = H2 * 0.32, win = 2 / 0.6 * 1.25, k = phi(m, s.x1), N = 300;
+      ln(c2, l, wy, r, wy, C.axis, 1);
+      curve(c2, N, function (i) { return l + (r - l) * i / N; }, function (i) { return wy - a2 * k * Math.sin(om * win * i / N); }, C.accent, 2.2);
+      curve(c2, N, function (i) { return l + (r - l) * i / N; }, function (i) { return wy - a2 * Math.sin(om * win * i / N); }, C.orange, 2.2, [7, 4]);
+      var tc = s.t % win, xc = l + (r - l) * tc / win;
+      ln(c2, xc, 8, xc, H2 - 22, C.navy, 1, [2, 3]);
+      dot(c2, xc, wy - a2 * k * Math.sin(om * tc), 4.5, C.accent); dot(c2, xc, wy - a2 * Math.sin(om * tc), 4.5, C.orange);
+      txt(c2, 'Point 1 (solid)', l, H2 - 6, { color: C.accent, weight: '600' });
+      txt(c2, 'Point 2, tip (dashed)', l + 120, H2 - 6, { color: C.orange, weight: '600' });
+      if (W >= 440) txt(c2, 'time →', r, H2 - 6, { align: 'right' });
+      txt(c2, 'y', l - 10, wy - a2 - 4, { align: 'right', weight: '600', color: C.ink, size: 13 });
+    };
+  };
+
+  /* =====================================================================
+     3. Peak vs RMS, built up over the record
+     ===================================================================== */
+  SIMS.rms = function (root) {
+    var N = 1600, sig = 'sine', S = 1, seed = 11, y = new Float64Array(N), cumSq = new Float64Array(N), cumPk = new Float64Array(N);
+    function rng(sd) { return function () { sd = (sd * 16807) % 2147483647; return (sd - 1) / 2147483646; }; }
+    function randomRecord(sd) {
+      var r = rng(sd), comps = [], out = new Float64Array(N), i, j;
+      for (j = 0; j < 60; j++) comps.push([3 + r() * 80, r() * TAU, 0.4 + r()]);
+      for (i = 0; i < N; i++) { var t = i / N, v = 0; for (j = 0; j < comps.length; j++) v += comps[j][2] * Math.sin(TAU * comps[j][0] * t + comps[j][1]); out[i] = v; }
+      return out;
+    }
+    function build() {
+      var i;
+      if (sig === 'sine') for (i = 0; i < N; i++) y[i] = Math.sin(TAU * 8 * i / N);
+      else if (sig === 'random') {
+        var r = randomRecord(seed), pk = 0; for (i = 0; i < N; i++) pk = Math.max(pk, Math.abs(r[i]));
+        for (i = 0; i < N; i++) y[i] = r[i] / pk;
+      } else {
+        var hits = [0.08, 0.33, 0.58, 0.83];
+        for (i = 0; i < N; i++) {
+          var t = i / N, v = 0.038 * Math.sin(TAU * 25 * t);
+          for (var j = 0; j < hits.length; j++) { var d = t - hits[j]; if (d >= 0 && d < 0.12) v += 0.1 * S * Math.exp(-d / 0.012) * Math.sin(TAU * 120 * d); }
+          y[i] = v;
+        }
+      }
+      var cs = 0, cp = 0;
+      for (i = 0; i < N; i++) { cs += y[i] * y[i]; cumSq[i] = cs; cp = Math.max(cp, Math.abs(y[i])); cumPk[i] = cp; }
+    }
+    var s = mk(root, { speed: 0.25 });
+    var cv = s.canvas(function (w) { return w < 520 ? 220 : 245; }, 'Vibration record with horizontal lines for the peak, the RMS and peak divided by root two. A cursor sweeps through the record as the RMS is accumulated.');
+    var cq = s.canvas(180, 'The squared signal y squared, with its running mean-square value. The RMS is the square root of this mean.');
+    var stren;
+    s.controls([
+      select({ label: 'Signal type', value: 'sine', options: [['sine', 'Pure sine wave'], ['random', 'Random vibration'], ['impulsive', 'Impulsive (bearing-type impacts)']],
+        onChange: function (v) { sig = v; stren.input.disabled = v !== 'impulsive'; stren.classList.toggle('is-disabled', v !== 'impulsive'); build(); setStage(1); } }),   // new signal: restart the analyser steps at step 1 with y² empty
+      (stren = slider({ label: 'Impact strength (impulsive only)', min: 1, max: 10, step: 1, value: 1, fmt: function (v) { return '×' + v; }, onInput: function (v) { S = v; build(); s.changed(); } }))
+    ]);
+    stren.input.disabled = true; stren.classList.add('is-disabled');
+    var pb = s.playButton('Play build-up', 'Pause');
+    pb.addEventListener('click', function () { if (stage === -1) { stage = 0; s.t = 0; s.playing = false; } }, true);   // the button's own handler then starts playback
+    s.buttons([pb, button('Show full record', function () { if (stage === -1) stage = 0; s.t = 1 / s.speed; s.playing = false; s.syncPlay(); s.changed(); }),
+      button('New random record', function () { seed = (seed * 7 + 13) % 9973 + 1; build(); s.t = 0; s.changed(); })]);
+    var rPk = s.stat('Peak'), rR = s.stat('RMS'), rS = s.stat('Peak ÷ √2'), rC = s.stat('Crest factor = peak/RMS');
+    // step-by-step: what an analyser does inside to compute RMS
+    var stage = -1, STEPS = ['1 · Signal', '2 · Square it', '3 · Integrate', '4 · Divide by T', '5 · Square root'];
+    var stepBtns = STEPS.map(function (lbl, n) { return button(lbl, function () { setStage(n + 1); }); });
+    var stepMsg = h('p', { 'class': 'sim-steps-msg', 'aria-live': 'polite', text: 'Press step 1 to follow the calculation from the raw signal to the RMS.' });
+    var bar = h('div', { 'class': 'sim-steps' }, [h('p', { 'class': 'sim-steps-lbl', text: 'How an analyser calculates RMS, step by step:' })].concat(stepBtns, [stepMsg]));
+    root.insertBefore(bar, root.querySelector('.readouts'));
+    function setStage(n) {
+      stage = n;
+      if (n === 3) { s.t = 0; s.playing = !reduce; } else { s.t = 1 / s.speed; s.playing = false; }
+      s.syncPlay(); stepBtns.forEach(function (b, i) { b.classList.toggle('primary', i + 1 === n); b.setAttribute('aria-pressed', i + 1 === n ? 'true' : 'false'); });
+      stepMsg.textContent = STEP_MSG[n];
+      s.changed();
+    }
+    var STEP_MSG = ['',
+      'Step 1. The analyser records the signal y(t) over a time T. Positive and negative parts would cancel if we simply averaged them.',
+      'Step 2. Square every sample: y²(t). Negative values become positive, and large values count much more than small ones.',
+      'Step 3. Integrate y² over the record: the shaded area grows as the analyser adds up every squared sample.',
+      'Step 4. Divide the area by the record length T. This spreads the same area into a flat rectangle: its height is the mean square.',
+      'Step 5. Take the square root of the mean square to get back to the units of y. That is the RMS.'];
+    s.atEnd = function () { return s.t * s.speed >= 1; };
+    s.step = function () { if (s.atEnd()) { s.t = 1 / s.speed; s.playing = false; s.syncPlay(); s.dirty = true; } };
+    s.update = function () {
+      s.say(sig === 'sine' ? 'A sine wave spends much of its time near its peak, so RMS = peak/√2 exactly.' :
+        sig === 'random' ? 'A random signal reaches its peak only occasionally, so its RMS sits well below peak/√2.' :
+          'Try strength ×1 then ×10: the peak grows about tenfold, the RMS far less. Impacts hide inside a modest RMS.');
+    };
+    build(); s.update();
+    s.playing = false; s.t = 1 / s.speed; s.syncPlay();
+    root.appendChild(root.querySelector('.sim-buttons'));   // play / full record / new record go below the message
+    s.draw = function () {
+      var k = Math.max(1, Math.min(N, Math.floor(s.t * s.speed * N))), idx = k - 1;
+      var pk = cumPk[idx], rms = Math.sqrt(cumSq[idx] / k);
+      var ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var l = 46, r = w - 118, cy = H / 2, sc = (H / 2 - 30) / 1.15, xk = l + (r - l) * idx / (N - 1);
+      ln(ctx, l, cy, r, cy, C.axis, 1); ln(ctx, l, 10, l, H - 10, C.axis, 1);
+      var step = Math.max(1, Math.floor(N / (r - l) / 1.5));
+      ctx.save(); ctx.strokeStyle = C.ghost; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (var i = 0; i < N; i += step) { var x = l + (r - l) * i / (N - 1); if (i === 0) ctx.moveTo(x, cy - y[i] * sc); else ctx.lineTo(x, cy - y[i] * sc); } ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.strokeStyle = C.accent; ctx.lineWidth = 1.5; ctx.beginPath();
+      for (i = 0; i <= idx; i += step) { x = l + (r - l) * i / (N - 1); if (i === 0) ctx.moveTo(x, cy - y[i] * sc); else ctx.lineTo(x, cy - y[i] * sc); } ctx.stroke(); ctx.restore();
+      function hl(v, color, dash, label, dy) {
+        ln(ctx, l, cy - v * sc, r, cy - v * sc, color, 1.8, dash); ln(ctx, l, cy + v * sc, r, cy + v * sc, color, 1.2, dash);
+        txt(ctx, label, r + 8, cy - v * sc + 4 + (dy || 0), { color: color, weight: '600' });
+      }
+      var lab = stage === 0 || stage === 5 ? [[pk, C.ink, [], 'peak'], [rms, C.red, [7, 4], 'RMS']] : [[pk, C.ink, [], 'peak']];
+      lab.sort(function (a, b) { return b[0] - a[0]; });
+      var lastY = -1e9;
+      lab.forEach(function (o) { var yy = cy - o[0] * sc, dy = 0; if (yy - lastY < 15) dy = lastY + 15 - yy; lastY = yy + dy; hl(o[0], o[1], o[2], o[3], dy); });
+      ln(ctx, xk, 8, xk, H - 8, C.navy, 1, [2, 3]);
+      txt(ctx, 'y(t)', l - 8, 20, { align: 'right', color: C.ink, weight: '600' });
+      // squared panel
+      var c2 = cq.ctx, W = cq.w, H2 = cq.h; c2.clearRect(0, 0, W, H2);
+      var b0 = H2 - 46, top = 26, ymax = 1.2 * 1.2, s2 = (b0 - top) / ymax;
+      ln(c2, l, b0, r, b0, C.axis, 1); ln(c2, l, top, l, b0, C.axis, 1);
+      var msq = cumSq[idx] / k, area = cumSq[idx] / N;
+      txt(c2, 'y²(t)', l - 8, top + 8, { align: 'right', color: C.ink, weight: '600' });
+      if (stage === -1) {
+        txt(c2, 'Empty for now. Use the step-by-step buttons below to build y²(t).', l + 12, (top + b0) / 2, { size: 12.5 });
+      } else if (stage === 1) {
+        txt(c2, 'Step 2 squares the signal and draws it here.', l + 12, (top + b0) / 2, { size: 12.5 });
+      } else if (stage === 2) {
+        c2.save(); c2.strokeStyle = C.accent; c2.lineWidth = 1.2; c2.beginPath();
+        for (i = 0; i < N; i += step) { x = l + (r - l) * i / (N - 1); var yy2 = b0 - Math.min(ymax, y[i] * y[i]) * s2; if (i === 0) c2.moveTo(x, yy2); else c2.lineTo(x, yy2); }
+        c2.stroke(); c2.restore();
+        txt(c2, 'Every value is now positive.', l, H2 - 16, { size: 11.5 });
+      } else {
+        if (stage === 4) {   // equal-area rectangle
+          c2.save(); c2.fillStyle = 'rgba(164,38,44,0.12)'; c2.fillRect(l, b0 - msq * s2, r - l, msq * s2); c2.restore();
+        }
+        c2.save(); c2.fillStyle = 'rgba(11,92,128,' + (stage === 4 ? '0.10' : '0.18') + ')'; c2.strokeStyle = C.accent; c2.lineWidth = 1; c2.beginPath(); c2.moveTo(l, b0);
+        for (i = 0; i <= idx; i += step) { x = l + (r - l) * i / (N - 1); c2.lineTo(x, b0 - Math.min(ymax, y[i] * y[i]) * s2); }
+        c2.lineTo(xk, b0); c2.closePath(); c2.fill(); c2.stroke(); c2.restore();
+        if (stage === 3) {
+          txt(c2, 'Area so far = ∫y² dt = ' + sig3(area) + '  (record length T = 1 s)', l, H2 - 16, { size: 11.5 });
+        } else {
+          ln(c2, l, b0 - msq * s2, r, b0 - msq * s2, C.red, 1.8, [7, 4]);
+          txt(c2, 'mean square', r + 8, b0 - msq * s2 + 4, { color: C.red, weight: '600' });
+          txt(c2, stage === 4 ? 'Area ÷ T = ' + sig3(area) + ' ÷ 1 s = mean square ' + sig3(msq) + ' (same area, spread flat)' :
+            stage === 5 ? 'RMS = √(mean square) = √' + sig3(msq) + ' = ' + sig3(rms) : 'Shaded area ÷ time = mean square.  RMS = √(mean square)', l, H2 - 16, { size: 11.5 });
+        }
+      }
+      rPk.set(sig3(pk)); rR.set(stage === 0 || stage === 5 ? sig3(rms) : '— (step 5)'); rS.set(sig3(pk / Math.SQRT2)); rC.set(stage === 0 || stage === 5 ? sig3(pk / rms) : '—');
+    };
+  };
+
+  /* =====================================================================
+     4. Displacement, velocity, acceleration vs frequency
+     ===================================================================== */
+  SIMS.dva = function (root) {
+    var FMIN = 1, FMAX = 5000, LR = Math.log10(FMAX / FMIN);
+    function f2v(f) { return Math.round(1000 * Math.log10(f / FMIN) / LR); }
+    function v2f(v) { return FMIN * Math.pow(10, LR * v / 1000); }
+    var s = mk(root, { f: 5, V: 1 }); s.playing = false;
+    var cv = s.canvas(function (w) { return w < 520 ? 260 : 300; }, 'Log-log chart against frequency of displacement in micrometres peak-to-peak, velocity in mm/s RMS and acceleration in m/s squared RMS, all describing the same motion at a fixed velocity.');
+    var fs;
+    s.controls([
+      (fs = slider({ label: 'Frequency <var>f</var>', min: 0, max: 1000, step: 1, value: f2v(5), fmt: function (v) { return sig3(v2f(v)) + ' Hz'; }, onInput: function (v) { s.f = v2f(v); s.changed(); } })),
+      slider({ label: 'Velocity <var>V</var> (RMS)', min: 0.5, max: 10, step: 0.5, value: 1, fmt: function (v) { return v.toFixed(1) + ' mm/s'; }, onInput: function (v) { s.V = v; s.changed(); } })
+    ]);
+    s.buttons([button('Cooling-tower fan · 5 Hz', function () { fs.set(f2v(5)); }), button('Pump 1× · 24.7 Hz', function () { fs.set(f2v(24.7)); }),
+      button('Gear mesh · 2,000 Hz', function () { fs.set(f2v(2000)); })]);
+    var rD = s.stat('Displacement'), rV = s.stat('Velocity'), rA = s.stat('Acceleration'), rG = s.stat('Acceleration (g)');
+    function D(f, V) { return 2 * Math.SQRT2 * V / (TAU * f) * 1000; }
+    function A(f, V) { return TAU * f * V / 1000; }
+    s.update = function () {
+      var d = D(s.f, s.V), a = A(s.f, s.V);
+      rD.set(sig3(d) + ' µm pk-pk'); rV.set(s.V.toFixed(1) + ' mm/s RMS'); rA.set(sig3(a) + ' m/s² RMS'); rG.set(sig3(a / 9.81) + ' g RMS');
+      s.say(s.f < 20 ? 'Low frequency: large displacement, tiny acceleration. A low-frequency accelerometer or a velocity sensor is needed to see this clearly on the casing.' :
+        s.f > 1000 ? 'High frequency: displacement is microscopic but acceleration is large. Use an accelerometer.' :
+          'Mid range: velocity is the natural quantity, which is why severity standards use mm/s RMS.');
+    };
+    s.update();
+    s.draw = function () {
+      var ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var l = 52, r = w - 16, t = 14, b = H - 34, YMIN = -3, YMAX = 5;
+      function X(f) { return l + (r - l) * Math.log10(f / FMIN) / LR; }
+      function Y(v) { return b - (b - t) * (Math.log10(Math.max(v, 1e-9)) - YMIN) / (YMAX - YMIN); }
+      var dec, i;
+      for (dec = 0; dec <= 3; dec++) for (i = 1; i < 10; i++) { var f = Math.pow(10, dec) * i; if (f > FMAX) break; ln(ctx, X(f), t, X(f), b, i === 1 ? '#dfe5ea' : '#f1f3f5', 1); }
+      for (dec = YMIN; dec <= YMAX; dec++) { ln(ctx, l, Y(Math.pow(10, dec)), r, Y(Math.pow(10, dec)), '#e3e8ec', 1); txt(ctx, dec === 0 ? '1' : '10' + sup(dec), l - 6, Y(Math.pow(10, dec)) + 4, { align: 'right', size: 11 }); }
+      [1, 10, 100, 1000].forEach(function (f) { txt(ctx, f >= 1000 ? '1 kHz' : f + ' Hz', X(f), b + 16, { align: 'center', size: 11 }); });
+      txt(ctx, 'frequency (log scale)', r, b + 30, { align: 'right', size: 11 });
+      ctx.strokeStyle = C.axis; ctx.strokeRect(l + .5, t + .5, r - l, b - t);
+      var n = 200;
+      function plotFn(fn, color, dash) { curve(ctx, n, function (k) { return X(FMIN * Math.pow(10, LR * k / n)); }, function (k) { return Y(fn(FMIN * Math.pow(10, LR * k / n))); }, color, 2.4, dash); }
+      ctx.save(); ctx.beginPath(); ctx.rect(l, t, r - l, b - t); ctx.clip();
+      plotFn(function (f) { return D(f, s.V); }, C.accent);
+      plotFn(function () { return s.V; }, C.green, [8, 5]);
+      plotFn(function (f) { return A(f, s.V); }, C.orange, [2, 4]);
+      ctx.restore();
+      txt(ctx, 'D  (µm pk-pk, solid)', X(1.3), Y(D(1.3, s.V)) - 8, { color: C.accent, weight: '600' });
+      txt(ctx, 'V  (mm/s RMS, dashed)', X(1.3), Y(s.V) - 8, { color: C.green, weight: '600' });
+      txt(ctx, 'A  (m/s² RMS, dotted)', X(4000), Y(A(4000, s.V)) - 10, { color: C.orange, weight: '600', align: 'right' });
+      var xf = X(s.f);
+      ln(ctx, xf, t, xf, b, C.navy, 1.2, [3, 3]);
+      dot(ctx, xf, Y(D(s.f, s.V)), 5.5, C.accent); dot(ctx, xf, Y(s.V), 5.5, C.green); dot(ctx, xf, Y(A(s.f, s.V)), 5.5, C.orange);
+    };
+    function sup(n) { var m = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵' }; return String(n).split('').map(function (c) { return m[c]; }).join(''); }
+  };
+
+  /* =====================================================================
+     5. Beating
+     ===================================================================== */
+  SIMS.beat = function (root) {
+    var s = mk(root, { fA: 24.5, fB: 25.0, A: 1, B: 1 });
+    var cv = s.canvas(function (w) { return w < 520 ? 170 : 190; }, 'Combined vibration of two machines over four seconds with its slowly varying envelope and a moving time cursor.');
+    var cs = s.canvas(150, 'Frequency spectrum of the combined vibration: one line at each machine speed and no line at the beat frequency.');
+    s.controls([
+      slider({ label: 'Speed of pump A', min: 22, max: 28, step: 0.1, value: 24.5, fmt: function (v) { return v.toFixed(1) + ' Hz'; }, onInput: function (v) { s.fA = v; s.changed(); } }),
+      slider({ label: 'Speed of pump B', min: 22, max: 28, step: 0.1, value: 25.0, fmt: function (v) { return v.toFixed(1) + ' Hz'; }, onInput: function (v) { s.fB = v; s.changed(); } }),
+      slider({ label: 'Amplitude, pump A', min: 0, max: 1, step: 0.1, value: 1, fmt: function (v) { return v.toFixed(1) + ' mm/s'; }, onInput: function (v) { s.A = v; s.changed(); } }),
+      slider({ label: 'Amplitude, pump B', min: 0, max: 1, step: 0.1, value: 1, fmt: function (v) { return v.toFixed(1) + ' mm/s'; }, onInput: function (v) { s.B = v; s.changed(); } })
+    ]);
+    s.buttons([s.playButton()]);
+    var rF = s.stat('Beat frequency |<var>f</var><sub>A</sub> − <var>f</var><sub>B</sub>|'), rT = s.stat('Beat period'), rMax = s.stat('Maximum level <var>A</var> + <var>B</var>'), rMin = s.stat('Minimum level |<var>A</var> − <var>B</var>|'), rNow = s.stat('Level now'), rRpm = s.stat('Speeds in rpm');
+    s.update = function () {
+      var df = Math.abs(s.fA - s.fB);
+      rF.set(df < 0.05 ? '0 Hz' : sig3(df) + ' Hz'); rT.set(df < 0.05 ? 'no beating' : sig3(1 / df) + ' s');
+      rMax.set(sig3(s.A + s.B) + ' mm/s'); rRpm.set(fmtN(s.fA * 60, 0) + ' / ' + fmtN(s.fB * 60, 0)); rMin.set(sig3(Math.abs(s.A - s.B)) + ' mm/s');
+      s.say(df < 0.05 ? 'Equal speeds: the waves stay in step, so the level is steady (no beating).' :
+        'The level swells and fades every ' + sig3(1 / df) + ' s as the two waves drift in and out of step.');
+    };
+    s.update();
+    s.draw = function () {
+      var win = 4, ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var l = 40, r = w - 12, cy = H / 2 - 6, sc = (H / 2 - 22) / 2, n = Math.min(2400, Math.round((r - l) * 3));
+      var wA = TAU * s.fA, wB = TAU * s.fB, dw = wA - wB;
+      ln(ctx, l, cy, r, cy, C.axis, 1);
+      curve(ctx, n, function (i) { return l + (r - l) * i / n; }, function (i) { var t = win * i / n; return cy - sc * (s.A * Math.cos(wA * t) + s.B * Math.cos(wB * t)); }, C.accent, 1);
+      function env(t) { return Math.sqrt(Math.max(0, s.A * s.A + s.B * s.B + 2 * s.A * s.B * Math.cos(dw * t))); }
+      curve(ctx, 300, function (i) { return l + (r - l) * i / 300; }, function (i) { return cy - sc * env(win * i / 300); }, C.red, 1.8, [6, 4]);
+      curve(ctx, 300, function (i) { return l + (r - l) * i / 300; }, function (i) { return cy + sc * env(win * i / 300); }, C.red, 1.8, [6, 4]);
+      var tc = s.t % win, xc = l + (r - l) * tc / win;
+      ln(ctx, xc, 6, xc, H - 18, C.navy, 1.2, [2, 3]); dot(ctx, xc, cy - sc * env(tc), 4.5, C.red);
+      [0, 1, 2, 3, 4].forEach(function (k) { txt(ctx, k + ' s', l + (r - l) * k / win, H - 4, { align: k === 0 ? 'left' : k === 4 ? 'right' : 'center', size: 11 }); });
+      txt(ctx, 'envelope (dashed)', r, 14, { align: 'right', color: C.red, weight: '600' });
+      rNow.set(sig3(env(tc)) + ' mm/s');
+      // spectrum
+      var c2 = cs.ctx, W = cs.w, H2 = cs.h; c2.clearRect(0, 0, W, H2);
+      var L2 = 40, R2 = W - 14, b = H2 - 30, tp = 22, fmax = 30, ss = (b - tp);
+      function X(f) { return L2 + (R2 - L2) * f / fmax; }
+      ln(c2, L2, b, R2, b, C.axis, 1);
+      for (var f = 0; f <= 30; f += 5) { ln(c2, X(f), b, X(f), b + 4, C.axis, 1); txt(c2, f + '', X(f), b + 16, { align: 'center', size: 11 }); }
+      txt(c2, 'frequency (Hz)', R2, b + 28, { align: 'right', size: 11 });
+      var df = Math.abs(s.fA - s.fB);
+      function bar(fq, a, color, label, dx) { if (a <= 0) return; c2.fillStyle = color; c2.fillRect(X(fq) - 2.5, b - a * ss, 5, a * ss); txt(c2, label, X(fq) + dx, b - a * ss - 6, { align: dx < 0 ? 'right' : 'left', color: color, weight: '600' }); }
+      var aLeft = s.fA <= s.fB;
+      bar(s.fA, s.A, C.accent, 'A ' + s.fA.toFixed(1) + ' Hz', aLeft ? -4 : 4);
+      bar(s.fB, s.B, C.orange, 'B ' + s.fB.toFixed(1) + ' Hz', aLeft ? 4 : -4);
+      if (df >= 0.05) {
+        ln(c2, X(df), tp + 10, X(df), b, C.red, 1.2, [3, 3]);
+        txt(c2, 'beat frequency ' + sig3(df) + ' Hz: no line here', X(df) + 6, tp + 18, { color: C.red, weight: '600' });
+      }
+    };
+  };
+
+  /* =====================================================================
+     6. Free vibration of a mass-spring-damper
+     ===================================================================== */
+  SIMS.free = function (root) {
+    var TMAX = 6;
+    var s = mk(root, { m: 2, k: 400, c: 4, ghost: null, ghostLabel: '' });
+    var cv = s.canvas(function (w) { return w < 520 ? 250 : 280; }, 'A mass on a spring and damper released from a displaced position, beside a plot of its displacement against time. A grey trace keeps an earlier run for comparison.');
+    s.controls([
+      slider({ label: 'Mass <var>m</var>', min: 0.5, max: 8, step: 0.5, value: 2, fmt: function (v) { return v.toFixed(1) + ' kg'; }, onInput: function (v) { s.m = v; restart(); } }),
+      slider({ label: 'Stiffness <var>k</var>', min: 50, max: 1000, step: 25, value: 400, fmt: function (v) { return fmtN(v, 0) + ' N/m'; }, onInput: function (v) { s.k = v; restart(); } }),
+      slider({ label: 'Damping <var>c</var>', min: 0, max: 200, step: 1, value: 4, fmt: function (v) { return fmtN(v, 0) + ' N·s/m'; }, onInput: function (v) { s.c = v; restart(); } })
+    ]);
+    s.buttons([button('Release mass', function () { s.t = 0; s.playing = true; s.syncPlay(); s.dirty = true; }, 'primary'), s.playButton('Resume', 'Pause'),
+      button('Keep this run for comparison', function () { s.ghost = sample(); s.ghostLabel = 'kept: m = ' + s.m + ' kg, k = ' + s.k + ' N/m, c = ' + s.c; s.dirty = true; }),
+      button('Clear kept run', function () { s.ghost = null; s.dirty = true; })]);
+    var rFn = s.stat('Natural frequency <var>f</var><sub>n</sub>'), rZ = s.stat('Damping ratio <var>ζ</var>'), rFd = s.stat('Damped frequency'), rTd = s.stat('Damped period'), rReg = s.stat('Regime');
+    function params() { var wn = Math.sqrt(s.k / s.m), z = s.c / (2 * Math.sqrt(s.k * s.m)); return { wn: wn, z: z }; }
+    function x(t, p) {
+      var wn = p.wn, z = p.z;
+      if (z < 0.999) { var wd = wn * Math.sqrt(1 - z * z); return Math.exp(-z * wn * t) * (Math.cos(wd * t) + z * wn / wd * Math.sin(wd * t)); }
+      if (z <= 1.001) return (1 + wn * t) * Math.exp(-wn * t);
+      var q = Math.sqrt(z * z - 1), s1 = -wn * (z - q), s2 = -wn * (z + q);
+      return (-s2 * Math.exp(s1 * t) + s1 * Math.exp(s2 * t)) / (s1 - s2);
+    }
+    function sample() { var p = params(), a = []; for (var i = 0; i <= 600; i++) a.push(x(TMAX * i / 600, p)); return a; }
+    function restart() { s.t = 0; s.playing = !reduce; if (s.syncPlay) s.syncPlay(); s.changed(); }
+    s.atEnd = function () { return s.t >= TMAX; };
+    s.step = function () { if (s.t >= TMAX) { s.t = TMAX; s.playing = false; s.syncPlay(); s.dirty = true; } };
+    s.update = function () {
+      var p = params(), fn = p.wn / TAU;
+      rFn.set(sig3(fn) + ' Hz'); rZ.set(sig3(p.z));
+      if (p.z < 0.999) { var fd = fn * Math.sqrt(1 - p.z * p.z); rFd.set(sig3(fd) + ' Hz'); rTd.set(sig3(1 / fd) + ' s'); }
+      else { rFd.set('—'); rTd.set('no oscillation'); }
+      rReg.set(p.z < 0.999 ? 'Underdamped' : p.z <= 1.001 ? 'Critically damped' : 'Overdamped');
+      s.say('Critical damping for these values: c_c = 2√(km) = ' + fmtN(2 * Math.sqrt(s.k * s.m), 0) + ' N·s/m.');
+    };
+    s.update();
+    s.draw = function () {
+      var p = params(), ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var sw = Math.min(170, w * 0.3), cx = sw / 2, cy = H / 2 + 14, amp = H * 0.24;
+      var xt = Math.min(s.t, TMAX), xv = x(xt, p), my = cy - xv * amp;
+      hatch(ctx, cx - 50, cx + 50, 14, false);
+      spring(ctx, cx - 18, 14, my - 22, 9, 6); damper(ctx, cx + 22, 14, my - 22);
+      ln(ctx, 8, cy, sw - 4, cy, C.axis, 1, [4, 4]); txt(ctx, 'x = 0', 8, cy - 6, { size: 11 });
+      ctx.fillStyle = C.fill; ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.fillRect(cx - 34, my - 22, 68, 44); ctx.strokeRect(cx - 34, my - 22, 68, 44);
+      txt(ctx, 'm', cx, my + 5, { align: 'center', size: 16, weight: '700', color: C.ink });
+      txt(ctx, 'k', cx - 34, 50, { align: 'right', size: 13, weight: '600', color: C.ink }); txt(ctx, 'c', cx + 40, 50, { size: 13, weight: '600', color: C.ink });
+      // plot
+      var l = sw + 34, r = w - 12, n = 600;
+      ln(ctx, l, cy, r, cy, C.axis, 1); ln(ctx, l, cy - amp - 12, l, cy + amp + 12, C.axis, 1);
+      for (var k = 0; k <= TMAX; k++) { var gx = l + (r - l) * k / TMAX; ln(ctx, gx, cy - 3, gx, cy + 3, C.axis, 1); txt(ctx, k + ' s', gx, cy + amp + 28, { align: 'center', size: 11 }); }
+      if (s.ghost) { var g = s.ghost; curve(ctx, n, function (i) { return l + (r - l) * i / n; }, function (i) { return cy - g[i] * amp; }, C.ghost, 2.2); txt(ctx, s.ghostLabel, r, 14, { align: 'right', size: 11, color: '#7d8a96' }); }
+      if (p.z < 0.999) {
+        curve(ctx, 200, function (i) { return l + (r - l) * i / 200; }, function (i) { return cy - amp * Math.exp(-p.z * p.wn * TMAX * i / 200); }, C.red, 1.2, [5, 4]);
+        curve(ctx, 200, function (i) { return l + (r - l) * i / 200; }, function (i) { return cy + amp * Math.exp(-p.z * p.wn * TMAX * i / 200); }, C.red, 1.2, [5, 4]);
+      }
+      var m = Math.max(1, Math.round(n * xt / TMAX));
+      curve(ctx, m, function (i) { return l + (r - l) * (xt * i / m) / TMAX; }, function (i) { return cy - x(xt * i / m, p) * amp; }, C.accent, 2.4);
+      var px = l + (r - l) * xt / TMAX; ln(ctx, sw - 4, my, px, my, C.orange, 1, [3, 3]); dot(ctx, px, my, 4.5, C.orange);
+      txt(ctx, 'x(t)', l - 8, cy - amp - 2, { align: 'right', weight: '600', color: C.ink, size: 13 });
+      if (p.z < 0.999) txt(ctx, 'envelope e^(−ζωₙt)', r, cy - amp - 14 + (s.ghost ? 18 : 0), { align: 'right', color: C.red, size: 11, weight: '600' });
+    };
+  };
+
+  /* =====================================================================
+     7. Cantilever bracket natural frequency
+     ===================================================================== */
+  SIMS.beam = function (root) {
+    var MAT = { steel: { E: 200e9, rho: 7850, name: 'Steel' }, al: { E: 69e9, rho: 2700, name: 'Aluminium' } }, FRUN = 24.7;
+    var s = mk(root, { L: 0.5, b: 50, hh: 10, M: 5, mat: 'steel' });
+    var cv = s.canvas(function (w) { return w < 520 ? 170 : 190; }, 'A cantilever bracket clamped to a wall with a mass at its tip, bending up and down in its first mode. The animation is slowed down.');
+    var cf = s.canvas(96, 'Frequency scale showing the bracket natural frequency, with and without the beam effective mass, against the 24.7 hertz running speed and its plus or minus 20 percent band.');
+    s.controls([
+      slider({ label: 'Length <var>L</var>', min: 0.2, max: 1, step: 0.05, value: 0.5, fmt: function (v) { return v.toFixed(2) + ' m'; }, onInput: function (v) { s.L = v; s.changed(); } }),
+      slider({ label: 'Thickness <var>h</var>', min: 5, max: 40, step: 1, value: 10, fmt: function (v) { return v + ' mm'; }, onInput: function (v) { s.hh = v; s.changed(); } }),
+      slider({ label: 'Width <var>b</var>', min: 20, max: 200, step: 5, value: 50, fmt: function (v) { return v + ' mm'; }, onInput: function (v) { s.b = v; s.changed(); } }),
+      slider({ label: 'Tip mass <var>M</var>', min: 0, max: 50, step: 0.5, value: 5, fmt: function (v) { return v.toFixed(1) + ' kg'; }, onInput: function (v) { s.M = v; s.changed(); } }),
+      select({ label: 'Material', value: 'steel', options: [['steel', 'Steel (E = 200 GPa)'], ['al', 'Aluminium (E = 69 GPa)']], onChange: function (v) { s.mat = v; s.changed(); } })
+    ]);
+    s.buttons([s.playButton(), button('Double h', function () { setH(s.hh * 2); }), button('Double L', function () { setL(s.L * 2); }), button('Reset', function () { reset(); })]);
+    var ctrls = root.querySelectorAll('.sim-controls .ctl');
+    function setH(v) { ctrls[1].set(Math.min(40, v)); } function setL(v) { ctrls[0].set(Math.min(1, v)); }
+    function reset() { ctrls[0].set(0.5); ctrls[1].set(10); ctrls[2].set(50); ctrls[3].set(5); }
+    var rK = s.stat('Stiffness <var>k</var> = 3<var>E</var><var>I</var>/<var>L</var>³'), rMb = s.stat('Beam mass'), rMe = s.stat('Moving mass <var>M</var> + (33/140)<var>m</var><sub>b</sub>'), rF = s.stat('<var>f</var><sub>n</sub> (with beam mass)'), rF0 = s.stat('<var>f</var><sub>n</sub> (ignoring beam mass)');
+    function calc() {
+      var mt = MAT[s.mat], b = s.b / 1000, hh = s.hh / 1000, I = b * hh * hh * hh / 12, k = 3 * mt.E * I / Math.pow(s.L, 3), mb = mt.rho * b * hh * s.L,
+        me = s.M + 33 / 140 * mb;
+      return { k: k, mb: mb, me: me, fn: Math.sqrt(k / me) / TAU, fn0: s.M > 0 ? Math.sqrt(k / s.M) / TAU : Infinity };
+    }
+    s.update = function () {
+      var q = calc();
+      rK.set(sig3(q.k / 1000) + ' kN/m'); rMb.set(sig3(q.mb) + ' kg'); rMe.set(sig3(q.me) + ' kg'); rF.set(sig3(q.fn) + ' Hz');
+      rF0.set(isFinite(q.fn0) ? sig3(q.fn0) + ' Hz (' + (q.fn0 >= q.fn ? '+' : '') + fmtN((q.fn0 / q.fn - 1) * 100, 0) + '%)' : 'undefined (no tip mass)');
+      var ratio = q.fn / FRUN;
+      s.say(Math.abs(ratio - 1) < 0.2 ? '⚠ fₙ is within 20% of the 24.7 Hz running speed: resonance risk.' :
+        '✓ fₙ is ' + fmtN(Math.abs(ratio - 1) * 100, 0) + '% ' + (ratio > 1 ? 'above' : 'below') + ' the 24.7 Hz running speed.');
+    };
+    s.update();
+    s.draw = function () {
+      var q = calc(), ctx = cv.ctx, w = cv.w, H = cv.h; ctx.clearRect(0, 0, w, H);
+      var wx = 34, y0 = H / 2 - 4, Lpx = (w - wx - 80) * s.L, th = 3 + s.hh * 0.45;
+      ctx.fillStyle = '#eef1f3'; ctx.fillRect(wx - 20, 14, 20, H - 28);
+      ln(ctx, wx, 14, wx, H - 14, C.ink, 2.2);
+      for (var yy = 18; yy < H - 14; yy += 9) ln(ctx, wx, yy, wx - 8, yy + 8, C.ink, 1);
+      var fvis = Math.max(0.3, Math.min(2, q.fn * 0.06)), amp = Math.min(26, H * 0.15) * Math.sin(TAU * fvis * s.t), n = 40;
+      ln(ctx, wx, y0, wx + Lpx + 10, y0, C.axis, 1, [4, 4]);
+      ctx.save(); ctx.strokeStyle = s.mat === 'steel' ? '#7d8f9c' : '#b9c4cc'; ctx.lineWidth = th; ctx.lineCap = 'butt'; ctx.beginPath();
+      for (var i = 0; i <= n; i++) { var xi = i / n, yv = amp * (3 * xi * xi - xi * xi * xi) / 2; if (i === 0) ctx.moveTo(wx, y0 - yv); else ctx.lineTo(wx + Lpx * xi, y0 - yv); }
+      ctx.stroke(); ctx.restore();
+      if (s.M > 0) { var bs = 12 + 9 * Math.cbrt(s.M); ctx.fillStyle = C.fill; ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.fillRect(wx + Lpx - bs / 2, y0 - amp - th / 2 - bs, bs, bs); ctx.strokeRect(wx + Lpx - bs / 2, y0 - amp - th / 2 - bs, bs, bs); txt(ctx, 'M', wx + Lpx, y0 - amp - th / 2 - bs / 2 + 4, { align: 'center', weight: '700', color: C.ink }); }
+      txt(ctx, MAT[s.mat].name + ' bracket · L = ' + s.L.toFixed(2) + ' m · h = ' + s.hh + ' mm', wx + 8, H - 8, { size: 11 });
+      txt(ctx, 'animation slowed', w - 10, 16, { align: 'right', size: 11 });
+      // frequency scale (log 1–300 Hz)
+      var c2 = cf.ctx, W = cf.w, H2 = cf.h; c2.clearRect(0, 0, W, H2);
+      var l = 20, r = W - 20, by = 50, F0 = 1, F1 = 300;
+      function X(f) { return l + (r - l) * Math.log10(Math.min(F1, Math.max(F0, f)) / F0) / Math.log10(F1 / F0); }
+      c2.fillStyle = C.band; c2.fillRect(X(FRUN * 0.8), by - 22, X(FRUN * 1.2) - X(FRUN * 0.8), 34);
+      ln(c2, l, by, r, by, C.axis, 1.5);
+      [1, 3, 10, 30, 100, 300].forEach(function (f) { ln(c2, X(f), by - 4, X(f), by + 4, C.axis, 1); txt(c2, f + ' Hz', X(f), by + 18, { align: 'center', size: 11 }); });
+      ln(c2, X(FRUN), by - 24, X(FRUN), by + 12, C.red, 2);
+      txt(c2, 'running speed 24.7 Hz (±20% shaded)', X(FRUN), H2 - 6, { align: 'center', size: 11, color: C.red, weight: '600' });
+      function marker(f, label, hollow, above) {
+        if (!isFinite(f)) return; var x = X(f);
+        c2.beginPath(); c2.moveTo(x, by - 3); c2.lineTo(x - 7, by - 15); c2.lineTo(x + 7, by - 15); c2.closePath();
+        if (hollow) { c2.fillStyle = '#fff'; c2.fill(); c2.strokeStyle = C.teal; c2.lineWidth = 1.6; c2.stroke(); } else { c2.fillStyle = C.teal; c2.fill(); }
+        txt(c2, label, x, by - 20 - (above ? 14 : 0), { align: 'center', size: 11.5, color: C.teal, weight: '600' });
+      }
+      marker(q.fn0, 'ignoring beam mass', true, Math.abs(Math.log10(q.fn0 / q.fn)) < 0.25);
+      marker(q.fn, 'fₙ = ' + sig3(q.fn) + ' Hz', false, false);
+    };
+  };
+
+  /* =====================================================================
+     Scotch yoke: rotation -> pure sine wave (mechanism + synced trace)
+     ===================================================================== */
+  /* ---------- RMS trend: analyser reading revealed month by month (automatic) ---------- */
+  SIMS.trend = function (root) {
+    var svg = root.querySelector('svg'); if (!svg) return;
+    var items = svg.querySelectorAll('.tp, .tnote'), cur = svg.querySelector('.tcur');
+    var vals = [], dots = svg.querySelectorAll('circle.tp');
+    for (var i = 0; i < dots.length; i++) vals.push(parseFloat(dots[i].getAttribute('data-v')));
+    var aM = svg.querySelector('.an-month'), aV = svg.querySelector('.an-val'), aZ = svg.querySelector('.an-zone');
+    var N = vals.length, m = 1, timer = null, STEP = 1100, HOLD = 4500;
+    function zone(v) { return v < 1.4 ? 'A' : v < 2.8 ? 'B' : v < 4.5 ? 'C' : 'D'; }
+    var ZC = { A: '#1d6b47', B: '#1d6b47', C: '#a4262c', D: '#a4262c' };
+    var MSG = {
+      10: 'Still zone B, but the jump from 1.9 to 2.6 mm/s breaks a nine-month flat trend. That change is the first warning sign.',
+      11: 'The reading has crossed the B/C limit of 2.8 mm/s: zone C, restricted operation. Time to investigate: take a spectrum and find the cause.',
+      12: 'Close to the C/D limit of 4.5 mm/s, where damage may occur. A repair should already be planned.'
+    };
+    var msg = h('p', { 'class': 'sim-msg trend-msg', 'aria-live': 'polite' });
+    root.appendChild(msg);
+    function go(k) {
+      m = k;
+      for (var i = 0; i < items.length; i++) items[i].style.visibility = (+items[i].getAttribute('data-m') <= m) ? 'visible' : 'hidden';
+      var v = vals[m - 1], z = zone(v), d = dots[m - 1];
+      if (cur) { cur.setAttribute('cx', d.getAttribute('cx')); cur.setAttribute('cy', d.getAttribute('cy')); }
+      aM.textContent = 'Month ' + m; aV.textContent = v.toFixed(1); aZ.textContent = 'Zone ' + z; aZ.setAttribute('fill', ZC[z]);
+      msg.innerHTML = '<strong>Month ' + m + ': ' + v.toFixed(1) + ' mm/s RMS, zone ' + z + '.</strong> ' +
+        (MSG[m] || (m < 4 ? 'A healthy machine: note the reading and compare it with next month.' : 'Flat trend: the machine is stable. Nothing to do but keep measuring.'));
+    }
+    function tick() { if (m >= N) go(1); else go(m + 1); timer = setTimeout(tick, m >= N ? HOLD : STEP); }
+    function start() { if (!timer) timer = setTimeout(tick, m >= N ? HOLD : STEP); }
+    function stop() { clearTimeout(timer); timer = null; }
+    if (reduce) { go(N); return; }
+    go(1);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) start(); else stop(); }); }, { threshold: 0.3 }).observe(root);
+    else start();
+  };
+
+  SIMS.scotch = function (root) {
+    var s = mk(root, { A: 0.8, f: 0.4, phi: 0, showV: true });
+    var cv = s.canvas(function (w) { return w < 520 ? 330 : 380; },
+      'A scotch yoke: a crank pin on a rotating disc slides in a horizontal slot, pushing a yoke, rod and mass straight up and down. Beside it, the mass height is traced against time and forms a sine wave.');
+    s.controls([
+      slider({ label: 'Crank radius <var>A</var>', min: 0.3, max: 1, step: 0.05, value: 0.8, fmt: function (v) { return v.toFixed(2); }, onInput: function (v) { s.A = v; s.changed(); } }),
+      slider({ label: 'Frequency <var>f</var>', min: 0.1, max: 1.2, step: 0.05, value: 0.4, fmt: function (v) { return v.toFixed(2) + ' Hz'; }, onInput: function (v) { s.f = v; s.changed(); } }),
+      slider({ label: 'Phase <var>φ</var>', min: -180, max: 180, step: 15, value: 0, fmt: function (v) { return v + '°'; }, onInput: function (v) { s.phi = v * Math.PI / 180; s.changed(); } })
+    ]);
+    var vBtn = button('Hide velocity arrow', function () { s.showV = !s.showV; vBtn.textContent = s.showV ? 'Hide velocity arrow' : 'Show velocity arrow'; s.dirty = true; });
+    s.buttons([s.playButton(), button('Reset time', function () { s.t = 0; s.dirty = true; }), vBtn]);
+    var rT = s.stat('Period <var>T</var> = 1/<var>f</var>'), rW = s.stat('<var>ω</var> = 2π<var>f</var>'), rY = s.stat('Height <var>y</var>(<var>t</var>) now'), rV = s.stat('Speed of the mass now');
+    s.update = function () { rT.set(sig3(1 / s.f) + ' s'); rW.set(sig3(TAU * s.f) + ' rad/s'); };
+    s.update();
+
+    function rr(ctx, x, y, w, h, r) { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h); }
+
+    s.draw = function () {
+      var ctx = cv.ctx, W = cv.w, H = cv.h; ctx.clearRect(0, 0, W, H);
+      var narrow = W < 520, mechW = narrow ? Math.max(150, W * 0.46) : Math.max(170, Math.min(250, W * 0.36));
+      var Rmax = Math.min(H * 0.13, mechW * 0.3), R = Rmax * s.A;
+      var yh = 14, bh = 34, bw = 64;                       // yoke slot height, mass block size
+      var cx = mechW / 2 + 4, cy = H - Rmax - 34;           // crank centre
+      var Lr = 2 * Rmax + bh / 2 + yh / 2 + 34;              // rod length (yoke centre to mass centre)
+      var ang = TAU * s.f * s.t + s.phi;
+      var px = cx + R * Math.cos(ang), py = cy - R * Math.sin(ang);   // crank pin
+      var yokeY = py, massY = py - Lr;
+      var vel = R * TAU * s.f * Math.cos(ang);              // upward speed in px/s (sign: +up)
+      var guideY = cy - Rmax - yh / 2 - 14;                  // fixed guide between yoke and mass ranges
+
+      // ---- bearing pedestal behind the crank (fixed), on the ground below the yoke's lowest position
+      var gy = cy + Rmax + yh / 2 + 16;
+      ctx.fillStyle = '#e3e8ec'; ctx.beginPath(); ctx.moveTo(cx - 9, gy); ctx.lineTo(cx - 5, cy); ctx.lineTo(cx + 5, cy); ctx.lineTo(cx + 9, gy); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = '#a9b4bd'; ctx.lineWidth = 1; ctx.stroke();
+      hatch(ctx, cx - 50, cx + 50, gy, true);
+
+      // ---- crank disc (pin circle path dashed)
+      ctx.save(); ctx.setLineDash([3, 4]); ctx.strokeStyle = C.axis; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke(); ctx.restore();
+      ctx.beginPath(); ctx.arc(cx, cy, R + 12, 0, TAU); ctx.fillStyle = 'rgba(219,233,241,.55)'; ctx.fill();
+      ctx.lineWidth = 1.4; ctx.strokeStyle = '#7f9cb0'; ctx.stroke();
+
+      // ---- fixed guide (two bushings) for the rod
+      var gw = 16, gh = 22;
+      [cx - 6 - gw, cx + 6].forEach(function (gx) {
+        ctx.fillStyle = '#d9dee3'; ctx.fillRect(gx, guideY - gh / 2, gw, gh);
+        ctx.strokeStyle = C.ink; ctx.lineWidth = 1.2; ctx.strokeRect(gx + .5, guideY - gh / 2 + .5, gw - 1, gh - 1);
+        for (var k = 0; k < 4; k++) ln(ctx, gx + 2, guideY - gh / 2 + 5 + k * 5, gx + gw - 2, guideY - gh / 2 + 1 + k * 5, '#9aa6b1', 1);
+      });
+
+      // ---- rod (yoke to mass)
+      ctx.fillStyle = '#9fb0bd'; ctx.fillRect(cx - 4, massY + bh / 2, 8, yokeY - yh / 2 - (massY + bh / 2));
+      ctx.strokeStyle = C.ink; ctx.lineWidth = 1; ctx.strokeRect(cx - 4 + .5, massY + bh / 2, 7, yokeY - yh / 2 - (massY + bh / 2));
+
+      // ---- yoke: horizontal slotted frame
+      var sw = 2 * Rmax + 34;
+      rr(ctx, cx - sw / 2, yokeY - yh / 2 - 6, sw, yh + 12, 7); ctx.fillStyle = C.fill; ctx.fill();
+      ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.stroke();
+      rr(ctx, cx - sw / 2 + 8, yokeY - yh / 2, sw - 16, yh, yh / 2); ctx.fillStyle = '#ffffff'; ctx.fill();
+      ctx.lineWidth = 1.2; ctx.stroke();
+
+      // ---- crank arm and pin
+      ln(ctx, cx, cy, px, py, C.navy, 5); dot(ctx, cx, cy, 5, C.navy); dot(ctx, cx, cy, 2, '#fff');
+      dot(ctx, px, py, 6.5, C.orange); dot(ctx, px, py, 2.4, '#fff');
+
+      // ---- mass block
+      rr(ctx, cx - bw / 2, massY - bh / 2, bw, bh, 6); ctx.fillStyle = '#c9d6de'; ctx.fill();
+      ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.font = 'italic 600 15px ' + FONT; ctx.fillStyle = C.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('m', cx, massY + 1); ctx.textBaseline = 'alphabetic';
+
+      // ---- velocity arrow on the mass
+      if (s.showV) {
+        var Lv = 40 * Math.cos(ang), ax = cx - bw / 2 - 16;
+        if (Math.abs(Lv) > 2) {
+          var y0 = massY, y1 = massY - Lv, dir = Lv > 0 ? -1 : 1;
+          ln(ctx, ax, y0, ax, y1, C.green, 3);
+          ctx.fillStyle = C.green; ctx.beginPath(); ctx.moveTo(ax, y1 + dir * -1); ctx.lineTo(ax - 6, y1 - dir * 9); ctx.lineTo(ax + 6, y1 - dir * 9); ctx.closePath(); ctx.fill();
+        } else { dot(ctx, ax, massY, 3.5, C.green); }
+        txt(ctx, 'v', ax - 10, massY - 4, { align: 'right', size: 13, color: C.green, weight: '600' });
+      }
+
+      // ---- labels
+      txt(ctx, 'yoke', cx + sw / 2 + 6, yokeY - 2, { size: 11 });
+      txt(ctx, 'crank pin', cx + sw / 2 + 6, yokeY + 12, { size: 11, color: C.orange, weight: '600' });
+      txt(ctx, 'guide', cx + gw + 12, guideY + 4, { size: 11 });
+
+      // ---- trace of the mass height against time
+      var x0 = mechW + 34, x1 = W - 14, span = 4, mid = cy - Lr, n = 400;
+      ln(ctx, x0, mid, x1, mid, C.axis, 1);
+      ln(ctx, x0, mid - Rmax, x1, mid - Rmax, C.grid, 1, [4, 4]); ln(ctx, x0, mid + Rmax, x1, mid + Rmax, C.grid, 1, [4, 4]);
+      ln(ctx, x0, mid - Rmax - 18, x0, mid + Rmax + 18, C.axis, 1);
+      curve(ctx, n, function (i) { return x0 + (x1 - x0) * i / n; },
+        function (i) { var tau = span * i / n; return mid - R * Math.sin(TAU * s.f * (s.t - tau) + s.phi); }, C.accent, 2.4);
+      ln(ctx, cx + bw / 2, massY, x0, massY, C.orange, 1.2, [4, 3]);
+      dot(ctx, x0, massY, 5, C.orange);
+      txt(ctx, 'y', x0 - 6, mid - Rmax - 22, { align: 'right', size: 13, weight: '600', color: C.ink });
+      txt(ctx, 'now', x0 + 4, 16, { color: C.orange, weight: '600' });
+      if (!narrow) txt(ctx, 'earlier  →', x1, 16, { align: 'right' });
+      var Tpx = (x1 - x0) / span / s.f;
+      if (Tpx < (x1 - x0) - 10) {
+        var by = mid + Rmax + 32;
+        ln(ctx, x0 + 10, by, x0 + 10 + Tpx, by, C.navy, 1.4); ln(ctx, x0 + 10, by - 5, x0 + 10, by + 5, C.navy, 1.4); ln(ctx, x0 + 10 + Tpx, by - 5, x0 + 10 + Tpx, by + 5, C.navy, 1.4);
+        txt(ctx, 'one period T', x0 + 10 + Tpx / 2, by - 7, { align: 'center', color: C.navy, weight: '600' });
+      }
+      txt(ctx, narrow ? 'height vs time' : 'mass height traced against time', x0 + (x1 - x0) / 2, H - 10, { align: 'center', size: 11 });
+
+      rY.set(sig3(s.A * Math.sin(ang)));
+      var vn = s.A * TAU * s.f * Math.cos(ang);
+      rV.set(Math.abs(vn) < 0.02 ? '≈ 0 (turning point)' : sig3(Math.abs(vn)) + (vn > 0 ? ' ↑' : ' ↓'));
+    };
+  };
+
+  function init() {
+    var nodes = document.querySelectorAll('[data-sim]');
+    for (var i = 0; i < nodes.length; i++) { var name = nodes[i].getAttribute('data-sim'); if (SIMS[name]) SIMS[name](nodes[i]); }
+    requestAnimationFrame(loop);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { sims.forEach(function (s) { s.dirty = true; }); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+</script>
+</body>
+</html>
