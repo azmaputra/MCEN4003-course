@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part G: Engineering challenge and knowledge check · Module 1 · MCEN4003</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   MCEN4003 Mechanical Vibration — shared chapter stylesheet
+   Reuse this <style> block unchanged for every chapter.
+   ========================================================================== */
+:root{
+  --ink:#15232e; --ink-2:#34434f; --muted:#5a6773; --line:#e2e7ec; --line-2:#cfd7de;
+  --bg:#ffffff; --surface:#f5f7f9; --navy:#0f2a3d; --accent:#0b5c80; --accent-soft:#eaf3f8;
+  --teal:#0b6e77; --teal-soft:#e8f4f5;
+  --green:#1d6b47; --green-soft:#eef7f2;
+  --red:#a4262c; --red-soft:#fcf1f1;
+  --amber:#7f5a05; --amber-soft:#fdf7e8;
+  --violet:#5b3f8c; --violet-soft:#f5f1fa;
+  --radius:12px;
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --topbar:56px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:17px;line-height:1.7;font-feature-settings:"kern","liga";-webkit-font-smoothing:antialiased}
+p{margin:0 0 1rem}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--navy)}
+ul,ol{margin:0 0 1.1rem;padding-left:1.35rem}
+li{margin:0 0 .4rem}
+li::marker{color:var(--accent)}
+sub,sup{line-height:0}
+:focus-visible{outline:3px solid #f2b705;outline-offset:2px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--navy);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+
+/* ---------- top bar & progress ---------- */
+.topbar{position:sticky;top:0;z-index:50;height:var(--topbar);display:flex;align-items:center;gap:16px;
+  padding:0 20px;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar .brand{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand b{color:var(--navy);font-weight:600}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-left:auto;padding:4px 0}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-size:13px;font-weight:500;color:var(--ink-2);text-decoration:none;padding:5px 11px;border-radius:999px;border:1px solid var(--line)}
+.chips a:hover{border-color:var(--accent);color:var(--accent)}
+.chips a.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--accent);transition:width .1s linear}
+
+/* ---------- page layout ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+.toc{display:none}
+main{min-width:0;max-width:760px;margin:0 auto}
+@media (min-width:1140px){
+  .shell{display:grid;grid-template-columns:220px minmax(0,760px);gap:64px;justify-content:center}
+  main{margin:0}
+  .toc{display:block;position:sticky;top:calc(var(--topbar) + 32px);align-self:start;padding-top:48px}
+  .chips{display:none}
+}
+.toc p{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toc ol{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+.toc li{margin:0}
+.toc a{display:block;padding:6px 0 6px 14px;margin-left:-2px;border-left:2px solid transparent;font-size:14px;line-height:1.4;color:var(--muted);text-decoration:none}
+.toc a span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8793a0}
+.toc a:hover{color:var(--ink)}
+.toc a.active{border-left-color:var(--accent);color:var(--navy);font-weight:600}
+.toc a.active span{color:var(--accent)}
+
+/* ---------- chapter header ---------- */
+.chapter-head{padding:48px 0 8px}
+.chapter-head .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.chapter-head h1{font-size:clamp(36px,5.6vw,56px);line-height:1.06;letter-spacing:-.02em;font-weight:700;color:var(--navy);margin:0 0 12px}
+.chapter-head .sub{font-size:18px;color:var(--muted);max-width:620px;margin:0}
+
+/* ---------- sections & headings ---------- */
+section.part{padding-top:56px;margin-top:56px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--topbar) + 8px)}
+section.part:first-of-type{border-top:0;margin-top:24px;padding-top:16px}
+.kicker{display:block;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-size:clamp(25px,3.2vw,31px);line-height:1.2;letter-spacing:-.015em;font-weight:700;color:var(--navy);margin:0 0 20px}
+h3{font-size:21px;line-height:1.3;letter-spacing:-.01em;font-weight:600;color:var(--navy);margin:44px 0 12px}
+h4{font-size:17px;line-height:1.4;font-weight:600;color:var(--navy);margin:0 0 10px}
+.box h3,.box h4{font-size:16.5px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.ico{font-size:1.05em;line-height:1}
+
+/* ---------- generic box ---------- */
+.box{margin:28px 0;padding:20px 22px 6px;border-radius:var(--radius);border:1px solid var(--line);background:#fff}
+.box > :last-child{margin-bottom:14px}
+
+/* hero */
+.hero-photo{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#2a3d4c}
+.hero{margin:0 0 28px;background:var(--navy);color:#e9eef2;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(15,42,61,.6)}
+.hero > svg{display:block;width:calc(100% - 88px);height:auto;margin:36px 44px 0;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+.hero-body{padding:28px 44px 22px}
+.hero-body p{font-size:17.5px;color:#dce5ec}
+.hero-body strong{color:#fff}
+.hero-question{font-size:21px!important;line-height:1.4;font-weight:600;color:#f4d58d!important;margin-top:4px}
+
+/* predict */
+.predict{--pad:22px;padding:0 var(--pad) 6px;overflow:hidden;background:#fff;border:1px solid #d6daf0;
+  box-shadow:0 1px 2px rgba(42,52,140,.05),0 8px 24px -18px rgba(42,52,140,.35)}
+.predict > h3,.predict > h4{margin:0 calc(var(--pad) * -1) 16px;padding:13px var(--pad);background:#f1f2fb;border-bottom:1px solid #d6daf0;
+  color:#353f94;font-size:15px;letter-spacing:.01em}
+.predict > h3::after,.predict > h4::after{content:"Commit to an answer before you scroll on";margin-left:auto;font-family:var(--mono);
+  font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#6b72b3}
+.predict > p:first-of-type{font-weight:500;color:var(--ink)}
+.predict details.option > summary:hover{color:#353f94}
+.predict details.option[open]{border-color:#7e86cf;background:#f8f8fd}
+.predict .aside-note{border-top:1px dashed #d6daf0;padding-top:10px;margin-top:12px}
+.aside-note{font-size:14.5px;color:var(--muted)}
+
+/* cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 28px}
+.card{padding:16px 18px 4px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 1px 2px rgba(15,42,61,.04)}
+.card .card-title{font-weight:600;color:var(--navy);margin-bottom:6px}
+.card p{font-size:15.5px}
+
+/* callouts */
+.intuition{background:var(--amber-soft);border-color:#ecdcae;border-left:4px solid var(--amber)}
+.intuition h3,.intuition h4{color:var(--amber)}
+.misconception{background:var(--red-soft);border-color:#efcfd1;border-left:4px solid var(--red)}
+.misconception h3,.misconception h4{color:var(--red)}
+.note{background:var(--surface);border-left:4px solid var(--muted)}
+.note h3,.note h4{color:var(--ink-2)}
+.questions{border:1px solid var(--line-2);background:var(--surface)}
+.questions ul{margin-top:6px}
+.explain{background:var(--accent-soft);border-color:#cfe2ec;border-left:4px solid var(--accent)}
+
+/* journey */
+.journey-label{font-weight:600;color:var(--navy);margin:24px 0 6px}
+ol.journey{list-style:none;padding:0;margin:8px 0 20px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+ol.journey li{margin:0;display:flex;align-items:center;gap:6px}
+ol.journey .step{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;padding:6px 12px;border-radius:999px;border:1px solid #bcd3df;background:var(--accent-soft);color:var(--accent)}
+ol.journey .arrow{color:#9aa8b4}
+
+/* equations */
+.equation{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:0 0 var(--radius) var(--radius)}
+.eq-label{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+.eq-display{font-size:1.12rem;overflow-x:auto;overflow-y:hidden;padding:4px 0 8px;text-align:center}
+.eq-meaning{border-top:1px solid var(--line-2);padding-top:14px;margin-top:6px}
+.eq-meaning h4{font-size:15px;color:var(--accent);margin-bottom:8px}
+.eq-meaning p,.eq-meaning li{font-size:16px}
+.katex{font-size:1.05em}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0;margin:.6em 0}
+
+/* simulation */
+.sim{padding:0;overflow:hidden;border-color:#c3dfe2}
+.sim-head{background:var(--teal-soft);padding:16px 22px;border-bottom:1px solid #c3dfe2}
+.sim-head h4{color:var(--teal);margin-bottom:6px}
+.sim-head p{margin:0;font-size:15.5px}
+.sim-tag{font-family:var(--mono);font-size:11.5px!important;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:4px!important}
+.sim iframe{display:block;width:100%;border:0;background:#fff}
+.sim-foot{padding:14px 22px 6px;border-top:1px solid #c3dfe2;font-size:15px}
+
+/* inline simulation UI */
+.sim-app{padding:18px 22px 6px}
+.sim-stage canvas{display:block;width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;margin:0 0 10px}
+.sim-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px;margin:16px 0 10px}
+.ctl label{font-size:14px;font-weight:500;color:var(--ink-2)}
+.ctl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:2px}
+.ctl-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--teal);white-space:nowrap}
+.ctl input[type=range]{width:100%;accent-color:var(--teal);height:26px;margin:0;cursor:pointer}
+.ctl select{width:100%;font:inherit;font-size:15px;padding:7px 10px;border:1px solid var(--line-2);border-radius:8px;background:#fff;color:var(--ink);margin-top:4px}
+.ctl.is-disabled{opacity:.45}
+.sim-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.btn{font:inherit;font-size:14px;font-weight:500;line-height:1.2;padding:8px 14px;border-radius:8px;border:1px solid var(--line-2);background:#fff;color:var(--ink);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.btn:hover{border-color:var(--teal);color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff;min-width:96px}
+.btn.primary:hover{background:#095b63;color:#fff}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:0 0 10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.stat .k{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.35}
+.stat .v{font-size:16px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.35;margin-top:2px}
+.sim-msg{font-size:15px;line-height:1.5;margin:0 0 14px;padding:9px 12px;border-radius:8px;background:var(--teal-soft);color:var(--ink-2)}
+.sim-msg:empty{display:none}
+
+/* checkpoint */
+.checkpoint{background:var(--green-soft);border-color:#c8e3d4;border-top:3px solid var(--green)}
+.checkpoint > h3,.checkpoint > h4{color:var(--green)}
+.lead-note{font-size:14.5px;color:var(--muted)}
+.question{margin:0 0 22px}
+.question > p:first-child{margin-bottom:10px}
+.hint{font-size:13.5px;color:var(--muted);margin:-4px 0 8px}
+
+/* video */
+.video{background:var(--violet-soft);border-color:#ddd2ec}
+.video h3,.video h4{color:var(--violet)}
+
+/* worked example */
+.example{border-left:4px solid var(--navy);box-shadow:0 1px 3px rgba(15,42,61,.06)}
+.ex-label{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:18px 0 6px!important}
+.example h4{font-size:18px}
+
+/* challenge brief */
+.challenge-brief{margin:0 0 28px;padding:24px 26px 10px;background:var(--navy);color:#dce5ec;border-radius:16px}
+.challenge-brief strong{color:#fff}
+.brief-title{font-size:19px;font-weight:600;color:#f4d58d}
+.challenge-brief li::marker{color:#f4d58d}
+
+/* next */
+.next{background:linear-gradient(180deg,#fdf7e8,#fffdf7);border-color:#ecdcae}
+.next-question{font-size:19px;line-height:1.45;font-weight:600;color:var(--navy)}
+
+/* ---------- disclosure (details) ---------- */
+details{margin:0 0 8px;border:1px solid var(--line-2);border-radius:10px;background:#fff;transition:border-color .15s,background .15s}
+details > summary{list-style:none;cursor:pointer;padding:11px 14px 11px 40px;position:relative;line-height:1.5}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:"";position:absolute;left:16px;top:50%;width:7px;height:7px;margin-top:-5px;
+  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg);transition:transform .15s}
+details[open] > summary::before{transform:rotate(45deg);margin-top:-6px}
+details > summary:hover{color:var(--accent)}
+details[open]{border-color:var(--accent)}
+.reveal > summary{font-weight:600}
+.reveal-body{padding:4px 18px 4px;border-top:1px solid var(--line)}
+.reveal-body > :last-child{margin-bottom:12px}
+.reveal-body p{font-size:16.5px}
+/* answer options */
+details.option > summary{padding-left:14px}
+details.option > summary::before{display:none}
+details.option > summary::after{content:"Show feedback";float:right;margin-left:12px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8793a0;line-height:24px}
+details.option[open] > summary::after{content:"Hide"}
+details.option[open]{background:#fafcfd}
+.verdict-ok{color:var(--green)}
+.verdict-no{color:var(--red)}
+
+/* ---------- figures & tables ---------- */
+figure{margin:28px 0;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+figure svg{display:block;width:100%;height:auto;margin:0 auto}
+figcaption{margin-top:12px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.table-wrap{margin:24px 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+caption{text-align:left;font-weight:600;color:var(--navy);padding:0 0 10px;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+thead th{background:var(--surface);border-bottom:2px solid var(--accent);font-weight:600;color:var(--navy)}
+tbody th{font-weight:600}
+.table-note{font-size:13.5px;color:var(--muted);margin-top:8px}
+
+/* ---------- footer ---------- */
+.page-foot{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .shell{padding:0 16px 64px}
+  .topbar{padding:0 14px}
+  .topbar{gap:10px}
+  .topbar .brand,.topbar .where{font-size:10.5px;letter-spacing:.03em}
+  .chips{margin-left:0}
+  .box{padding:16px 16px 4px}
+  .sim-head,.sim-foot,.sim-app{padding-left:14px;padding-right:14px}
+  .hero > svg{width:calc(100% - 44px);margin:22px 22px 0}
+  .hero-body{padding:22px 22px 14px}
+  .challenge-brief{padding-left:18px;padding-right:18px}
+  .predict{--pad:16px}
+  .predict > h3::after,.predict > h4::after{display:none}
+  details.option > summary::after{display:none}
+  figure{padding:10px;overflow-x:auto}
+  figure svg{min-width:620px}
+  figcaption{position:sticky;left:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.topbar,.toc,.progress{display:none}details{border:0}details > summary::before{display:none}}
+
+/* ===== multi-page (one Canvas page per Part) ===== */
+.shell.single{display:block;max-width:808px}
+.shell.single main{max-width:760px;margin:0 auto}
+.topbar .where{flex:none;margin-left:auto;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.topbar .where b{color:var(--accent);font-weight:600}
+.page-head{padding:48px 0 4px}
+.page-head .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.page-head .part-tag{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;background:var(--navy);border-radius:6px;padding:3px 9px;margin:0 0 12px}
+.page-head h1{font-size:clamp(32px,5vw,48px);line-height:1.1;letter-spacing:-.02em;font-weight:700;color:var(--navy);margin:0 0 12px}
+.page-head .sub{font-size:18px;color:var(--muted);margin:0}
+.part-body{margin-top:36px}
+h2.sec{font-size:23px;line-height:1.3;letter-spacing:-.01em;font-weight:600;margin:48px 0 12px}
+.part-body > p.bridge{font-size:inherit;color:var(--ink-2);border-left:3px solid var(--accent);padding-left:16px;margin-bottom:24px}
+.module-map{list-style:none;padding:0;margin:18px 0 8px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.module-map li{display:grid;grid-template-columns:70px 1fr;gap:12px;margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.5}
+.module-map li:first-child{border-top:0}
+.module-map li.here{background:var(--accent-soft)}
+.module-map .pl{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+.module-map strong{display:block}
+.module-map span.d{color:var(--muted);font-size:14.5px}
+.up-next{margin:56px 0 0;padding:20px 22px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--navy)}
+.up-next .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.up-next .ttl{font-size:19px;font-weight:600;color:var(--navy);margin:0 0 6px}
+.up-next p{margin:0 0 6px;font-size:16px}
+.up-next .how{font-size:14px;color:var(--muted);margin:8px 0 0}
+@media (max-width:640px){.module-map li{grid-template-columns:1fr;gap:2px}}
+@media (max-width:640px){.topbar .where{font-size:10.5px;letter-spacing:.03em}}
+/* left-align content with the top header (Canvas iframe) */
+.shell.single{margin:0;padding-left:20px;padding-right:20px;max-width:800px}
+.shell.single main{margin:0}
+@media (max-width:640px){.topbar{padding:0 16px}.shell.single{padding-left:16px;padding-right:16px}}
+
+/* ===== Colour scheme: Restrained (one blue accent; red = misconception, green = checkpoint) ===== */
+body{--accent:#1d4f7a;--accent-soft:#edf3f8;--navy:#14283a;--teal:#1d4f7a;--teal-soft:#f1f5f8}
+body .hero-question{color:#bcd7ee!important}
+body .predict{border-color:var(--line-2);box-shadow:none}
+body .predict > h3,body .predict > h4{background:#f6f8fa;border-bottom-color:var(--line);color:var(--ink)}
+body .predict > h3::after,body .predict > h4::after{color:var(--muted)}
+body .predict details.option[open]{border-color:var(--accent);background:#f8fafc}
+body .predict details.option > summary:hover{color:var(--accent)}
+body .predict .aside-note{border-top-color:var(--line)}
+body .intuition{background:#f6f8fa;border-color:var(--line);border-left:4px solid var(--accent)}
+body .intuition h3,body .intuition h4{color:var(--accent)}
+body .misconception{background:#fff;border-color:var(--line);border-left:4px solid var(--red)}
+body .sim{border-color:var(--line-2)}
+body .sim-head{background:#f6f8fa;border-bottom-color:var(--line)}
+body .sim-head h4{color:var(--navy)}
+body .sim-tag{color:var(--accent)}
+body .sim-foot{border-top-color:var(--line)}
+body .btn.primary:hover{background:#163d5f}
+body .checkpoint{background:#fff;border-color:var(--line)}
+body .video{background:#fff;border-color:var(--line);border-left:4px solid var(--muted)}
+body .video h3,body .video h4{color:var(--ink-2)}
+body ol.journey .step{border-color:#c9d8e6}
+
+/* ===== Top header: solid band + two lines ===== */
+:root{--topbar:66px}
+.topbar{height:var(--topbar);background:#14283a;border-bottom:0;backdrop-filter:none;box-shadow:0 2px 10px -4px rgba(10,25,40,.45)}
+.topbar .brand{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;text-transform:none;letter-spacing:0;font-family:var(--font)}
+.topbar .brand .l1{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#9fb4c7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand .l1 b{color:#fff;font-weight:600}
+.topbar .brand .l2{font-size:15.5px;font-weight:600;line-height:1.25;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where{color:#c9d6e2}
+.progress{background:#7fb2dd;bottom:0;height:3px}
+@media (max-width:640px){
+  .topbar .brand .l1{font-size:10px;letter-spacing:.03em}
+  .topbar .brand .l2{font-size:14px}
+  .topbar .where{font-size:10px}
+}
+:root{--topbar:80px}
+.topbar .brand{gap:5px}
+@media (max-width:640px){:root{--topbar:72px}}
+/* header: name on line 1, line 2 same size as line 1 */
+.topbar .brand{flex:1;min-width:0}
+.topbar .brand .l1{display:flex;align-items:baseline;gap:16px;overflow:visible}
+.topbar .brand .l1 .crs{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar .brand .l1 .who{margin-left:auto;flex:none;color:#c9d6e2}
+.topbar .brand .l2{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#fff;line-height:1.4}
+@media (max-width:640px){.topbar .brand .l2{font-size:10px;letter-spacing:.03em}.topbar .brand .l1{gap:10px}}
+.topbar .brand .l2{font-weight:400;color:#9fb4c7}
+.topbar .brand .l2 b{color:#fff;font-weight:600}
+/* image cards (2 x 2) */
+.card-grid.media{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card.has-img{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.card.has-img > img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#e9edf0}
+.card.has-img .card-body{padding:14px 18px 4px}
+.card-cap{font-size:12.5px!important;line-height:1.45;color:var(--muted);margin-top:-4px}
+@media (max-width:560px){.card-grid.media{grid-template-columns:1fr}}
+.card.has-img{box-shadow:4px 5px 12px -4px rgba(20,40,58,.22)}
+/* Predict first: chosen answer keeps its tint, feedback sits on white */
+body .predict details.option[open]{background:#fff}
+body .predict details.option[open] > summary{background:#f8fafc;border-radius:9px 9px 0 0}
+body .predict details.option[open] > .reveal-body{background:#fff;border-radius:0 0 9px 9px}
+/* Predict first: header 20% darker */
+body .predict > h3,body .predict > h4{background:#b6c6d7;border-bottom-color:#a3b5c8;color:#15232e}
+body .predict > h3::after,body .predict > h4::after{color:#2f3c48}
+/* Predict first: header 10% darker (supersedes 20%) */
+body .predict > h3,body .predict > h4{background:#d6dfe8;border-bottom-color:#c5d1dd;color:#15232e}
+body .predict > h3::after,body .predict > h4::after{color:#3a4754}
+/* Top header: soft blue-grey band (blends with Canvas) */
+.topbar{background:#eaf0f5;border-bottom:1px solid #d3dde6;box-shadow:0 2px 8px -6px rgba(20,40,58,.35)}
+.topbar .brand .l1,.topbar .brand .l2{color:#4a5865}
+.topbar .brand .l1 b,.topbar .brand .l2 b{color:#14283a}
+.topbar .brand .l1 .who{color:#4a5865}
+.progress{background:#1d4f7a;bottom:-1px}
+/* Module 0: unit map + box legend */
+h3.stage{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:32px 0 10px;font-size:18px}
+h3.stage > span:first-child{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+h3.stage .rng{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-left:auto}
+.unit-map li{grid-template-columns:96px 1fr}
+.legend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 20px}
+.legend-grid .box{margin:0}
+.legend-grid .box p{font-size:15px;margin-bottom:12px}
+.legend-grid .box h4{font-size:15.5px}
+.legend-grid .predict > h4::after{display:none}
+.legend-grid .predict > h4{margin-bottom:12px}
+.legend-grid .sim .sim-head{border-bottom:0}
+.legend-grid .sim .sim-head p:last-child{margin-top:2px}
+@media (max-width:560px){.legend-grid{grid-template-columns:1fr}.unit-map li{grid-template-columns:1fr}h3.stage .rng{margin-left:0}}
+/* Top header: charcoal #3e3e3e */
+.topbar{background:#3e3e3e;border-bottom:0;box-shadow:0 2px 10px -4px rgba(0,0,0,.45)}
+.topbar .brand .l1,.topbar .brand .l2,.topbar .brand .l1 .who{color:#c8c8c8}
+.topbar .brand .l1 b,.topbar .brand .l2 b{color:#ffffff}
+.progress{background:#9fc3e3;bottom:0}
+/* Top header: softer charcoal */
+.topbar{background:#565656;box-shadow:0 2px 8px -4px rgba(0,0,0,.35)}
+.topbar .brand .l1,.topbar .brand .l2,.topbar .brand .l1 .who{color:#e2e2e2}
+/* "Why does this matter?" box: charcoal to match the header family */
+body .hero{background:#3a3a3a;box-shadow:0 10px 30px -18px rgba(0,0,0,.55)}
+body .hero-body p{color:#e4e4e4}
+body .hero-photo{background:#4a4a4a}
+/* career role cards */
+.card-grid.roles{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card.role{display:flex;flex-direction:column;box-shadow:4px 5px 12px -6px rgba(20,40,58,.18);padding-bottom:10px}
+.card.role .card-title{font-size:16.5px;margin-bottom:6px}
+.card.role p{font-size:15px;margin-bottom:8px}
+.card.role .role-meta{font-size:13.5px;line-height:1.45;color:var(--ink-2);margin:0 0 4px;display:grid;grid-template-columns:62px 1fr;gap:8px}
+.card.role .role-meta:first-of-type{margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.card.role .role-meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+@media (max-width:560px){.card-grid.roles{grid-template-columns:1fr}}
+/* role cards with photos */
+.card.role.has-img{padding:0}
+.card.role.has-img .card-body{display:flex;flex-direction:column;flex:1;padding:14px 18px 10px}
+var{font-style:italic;font-family:inherit}
+.stat .k var,.ctl label var{font-style:italic}
+/* ===== flip cards (careers) ===== */
+.flip-instr{font-size:14.5px;color:var(--muted);margin:-4px 0 10px}
+.flip-card{perspective:1400px;cursor:pointer;border-radius:var(--radius);outline:none}
+.flip-card:focus-visible{outline:3px solid #f2b705;outline-offset:3px}
+.flip-inner{display:grid;height:100%;transition:transform .6s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+.flip-front,.flip-back{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;box-shadow:4px 5px 12px -6px rgba(20,40,58,.2)}
+.flip-front{background:#fff;display:flex;flex-direction:column}
+.flip-front img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#e9edf0}
+.flip-title{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;flex:1}
+.flip-title .card-title{margin:0;font-size:16.5px;font-weight:600;color:var(--navy)}
+.flip-hint{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:15px;color:var(--accent);background:var(--accent-soft)}
+.flip-back{transform:rotateY(180deg);background:#f4f7fa;border-top:4px solid var(--accent);padding:18px 20px 12px;display:flex;flex-direction:column}
+.flip-back .card-title{font-size:16.5px;font-weight:600;color:var(--navy);margin:0 0 8px}
+.flip-back p{font-size:15px;line-height:1.55;margin:0 0 10px}
+.flip-back .role-meta{font-size:13.5px;line-height:1.45;color:var(--ink-2);margin:0 0 4px;display:grid;grid-template-columns:62px 1fr;gap:8px}
+.flip-back .role-meta:first-of-type{margin-top:auto;padding-top:10px;border-top:1px solid var(--line-2)}
+.flip-back .role-meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+@media (hover:hover){.flip-card:hover .flip-inner{transform:rotateY(180deg)}}
+.flip-card:focus-visible .flip-inner,.flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.flip-inner{transition:none}}
+@media print{.flip-inner{transform:none!important}.flip-front,.flip-back{position:static;transform:none;backface-visibility:visible}}
+.flip-back .role-meta.first{margin-top:auto;padding-top:10px;border-top:1px solid var(--line-2)}
+/* "Vibration costs money" cards: subtle float on hover */
+.card-grid.media .card.has-img{transition:transform .25s ease,box-shadow .25s ease}
+@media (hover:hover){.card-grid.media .card.has-img:hover{transform:translateY(-4px);box-shadow:6px 12px 22px -10px rgba(20,40,58,.30)}}
+@media (prefers-reduced-motion:reduce){.card-grid.media .card.has-img{transition:none}}
+/* centrifugal pump illustration on the "questions" box, overhanging bottom-right */
+.box.questions{position:relative;padding-right:170px;margin-bottom:56px}
+.q-pump{position:absolute;right:-60px;bottom:-44px;width:210px;height:auto;pointer-events:none;filter:drop-shadow(4px 6px 8px rgba(20,40,58,.18))}
+@media (max-width:1000px){.q-pump{right:-24px}}
+@media (max-width:640px){.box.questions{padding-right:16px;margin-bottom:28px}.q-pump{position:static;display:block;width:150px;margin:-6px -8px -26px auto}}
+@media print{.q-pump{display:none}}
+/* embedded fixed-size animations (Tumult Hype) */
+.anim-figure{padding:12px}
+.hype-frame{position:relative;width:100%;aspect-ratio:1024/768;overflow:hidden;border-radius:8px;background:#fff}
+.hype-frame iframe{position:absolute;top:0;left:0;width:1024px;height:768px;border:0;transform-origin:0 0}
+
+/* thicker maths (trial) */
+.math-thick .katex{-webkit-text-stroke:.022em currentColor}
+
+/* MathJax 4 trial */
+.eq-display{font-size:1.2rem;padding-left:6px;padding-right:8px}
+
+.photo-fig img{display:block;width:100%;height:auto;border-radius:6px}
+
+/* simulation hidden until opened */
+body details.sim-reveal{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+body details.sim-reveal > summary{padding:16px 20px;display:flex;align-items:center;gap:10px;font-weight:600;color:var(--accent)}
+body details.sim-reveal > summary::before{position:static;margin:0;flex:none;width:0;height:0;border:0;border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent;transform:none;transition:transform .15s}
+body details.sim-reveal[open] > summary::before{transform:rotate(90deg);margin:0}
+body details.sim-reveal > summary:hover{text-decoration:underline}
+body details.sim-reveal .sr-close{display:none}
+body details.sim-reveal[open] .sr-open{display:none}
+body details.sim-reveal[open] .sr-close{display:inline}
+
+/* Module 1: pale-blue simulation title boxes (class added by the build) */
+body .sim-tint .sim-head{background:#e2edf8;border-bottom-color:#c8dcef}
+
+/* softer Predict-first header */
+body .predict > h3,body .predict > h4{background:#fcefdc;border-bottom-color:#f1dbb8}
+
+/* subsection headings: vertical bar */
+h2.sec.subsec{font-size:22px;border-left:7px solid #e0912f;padding:2px 0 2px 18px;margin-top:60px}
+
+/* simulation feedback text: same size as the rest of the simulation box */
+.sim-foot .reveal-body p{font-size:15px}
+
+/* answer choices (Predict first, checkpoints, knowledge check): smaller text */
+body details.option > summary{font-size:15.5px}
+
+/* answer-choice feedback: same size as the choice itself */
+body details.option .reveal-body, body details.option .reveal-body p, body details.option .reveal-body li{font-size:15.5px}
+
+/* small diagrams inside checkpoint questions */
+figure.q-fig{margin:12px 0 14px;padding:10px;max-width:560px}
+figure.q-fig svg{min-width:0}
+
+/* photo figures: subtle shadow */
+figure.photo-fig{box-shadow:4px 5px 12px -4px rgba(20,40,58,.22)}
+
+/* checkpoint: cartoon brain standing on the top-right corner, extra space above */
+body .box.checkpoint{position:relative;margin-top:110px}
+body .box.checkpoint > h3,body .box.checkpoint > h4{padding-right:70px}
+body .box.checkpoint::after{content:"";position:absolute;top:-102px;right:10px;width:100px;height:105px;
+  background:url('data:image/webp;base64,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') center bottom/contain no-repeat;pointer-events:none;filter:drop-shadow(2px 3px 4px rgba(20,40,58,.16))}
+@media (max-width:560px){body .box.checkpoint{margin-top:92px}body .box.checkpoint::after{width:80px;height:84px;top:-82px;right:8px}}
+
+/* worked example box: dark header band so it stands apart from callouts */
+body .box.example{padding:0;overflow:hidden;border:1px solid #c9d6e3;border-left:1px solid #c9d6e3;box-shadow:4px 5px 12px -6px rgba(20,40,58,.2)}
+body .box.example .ex-head{background:var(--accent,#1d4f7a);color:#fff;padding:12px 22px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+body .box.example .ex-tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:3px 8px;border-radius:4px;white-space:nowrap}
+body .box.example .ex-head h4{margin:0;color:#fff;font-size:18px}
+body .box.example .ex-body{padding:16px 22px 10px}
+
+/* step-by-step bar inside a simulation */
+.sim-steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 14px;padding:12px 14px;border:1px dashed #c8dcef;border-radius:10px;background:#f6f9fc}
+.sim-steps-lbl{flex-basis:100%;margin:0 0 2px!important;font-size:14px;font-weight:600;color:var(--ink,#15232e)}
+.sim-steps .btn{font-size:13.5px;padding:6px 12px}
+.sim-steps-msg{flex-basis:100%;margin:6px 0 0!important;padding-top:10px;border-top:1px solid #dbe6f1;font-size:14.5px;line-height:1.5;color:#2c3a46}
+/* hand-calculation tables inside examples */
+.box.example .ex-part{margin:22px 0 6px!important;color:var(--navy,#0f2a3d);font-size:17px}
+.hand-table{margin:12px 0 10px}
+.hand-table table{font-size:14.5px;text-align:center}
+.hand-table caption{caption-side:top;text-align:left;font-size:13.5px;color:#5a6773;padding:0 0 6px}
+.hand-table th,.hand-table td{text-align:center;padding:7px 8px;border:1px solid var(--line,#dde3ea);font-variant-numeric:tabular-nums}
+.hand-table th[scope=row]{background:#f6f8fa;text-align:left;white-space:nowrap}
+.hand-table td.blank{color:#9aa6b2;background:#fffdf7}
+.hand-table table{table-layout:fixed;min-width:520px}
+.hand-table th[scope=row]{width:92px}
+.box.example details.ex-answer{margin-top:22px}
+.box.example details.ex-answer > summary{font-weight:700}
+
+/* worked-example toggles: same size as answer choices */
+body .box.example details > summary, body .box.example details .reveal-body p, body .box.example details .reveal-body li{font-size:15.5px}
+
+/* STANDARD: every reveal toggle (stages, check your working, model answers, prior-knowledge checks) at 15.5px, like answer choices */
+body details:not(.option):not(.sim-reveal) > summary,
+body details:not(.option):not(.sim-reveal) .reveal-body p,
+body details:not(.option):not(.sim-reveal) .reveal-body li{font-size:15.5px}
+/* simulation feedback keeps its agreed 15px */
+body .sim-foot details.reveal > summary, body .sim-foot details.reveal .reveal-body p, body .sim-foot details.reveal .reveal-body li{font-size:15px}
+
+/* RMS trend simulation: figure sits inside the sim box without its own card */
+.trend-app figure.trend-fig{margin:0 0 10px;padding:0;border:0;box-shadow:none;background:none}
+.trend-app .trend-msg{min-height:3.2em}
+@media (max-width:640px){.trend-app figure.trend-fig{overflow:visible}.trend-app figure.trend-fig svg{min-width:0}}
+@media (max-width:640px){figure.fit-fig{overflow:visible}figure.fit-fig svg{min-width:0}}
+figcaption strong.sig-name{font-weight:600;color:#1c2a35}
+/* standard size for every display equation (boxes and dropdowns) */
+body .eq-display, body p.eq-line, body div.eq-line{font-size:17px !important}
+.video-fig video{display:block;width:100%;height:auto;border-radius:6px;background:#fff}
+
+</style>
+<style>
+.ans-wrap{margin:8px 0 10px}
+.ans-lbl{display:block;font-size:14px;font-weight:600;color:var(--ink);margin:0 0 4px}
+.ans-box{display:block;width:100%;min-height:96px;resize:vertical;font:inherit;font-size:15.5px;line-height:1.55;color:var(--ink);background:#fff;border:1px solid #c9d4dd;border-radius:8px;padding:10px 12px}
+.ans-box:focus{outline:3px solid var(--accent-soft);border-color:var(--accent)}
+.ans-count{font-size:13.5px;color:var(--muted);margin:4px 0 0}
+.ans-count.ok{color:var(--green)}
+details.locked>summary{opacity:.55;cursor:not-allowed}
+details.locked>summary::after{content:" 🔒"}
+</style></head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <div class="brand"><div class="l1"><span class="crs"><b>MCEN4003 Vibration</b> · Module 1: Principles of Vibration</span><span class="who">Dr Azma Putra Azis</span></div><div class="l2"><b>Part G</b> · Engineering challenge and knowledge check</div></div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="shell single">
+<main id="content"><div class="page-head"><h1>Engineering challenge and knowledge check</h1><p class="sub">Diagnose the Pilbara pump, then check your understanding of the whole module.</p></div><div class="part-body"><section aria-labelledby="challenge-h" class="part" id="challenge"><h2 id="challenge-h"><span class="kicker">Apply</span>Engineering challenge</h2><div class="challenge-brief"><p class="brief-title">Back to the Pilbara pump</p><p>The cooling-water pump from Part A has a 55 kW motor at 1,480 rpm, mounted on a steel skid bolted to a concrete plinth (ISO Group 2, rigid foundation). You are given the following data.</p><figure class="fit-fig" style="margin:14px 0;padding:18px 16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="56 20 764 316" role="img" aria-labelledby="skid-t skid-d" font-family="'IBM Plex Sans', system-ui, Arial, sans-serif" style="display:block;width:100%;height:auto"><defs><linearGradient id="pumpG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6aae88"/><stop offset="0.45" stop-color="#3f7f5f"/><stop offset="1" stop-color="#2c5d45"/></linearGradient><linearGradient id="pipeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6ebef"/><stop offset="0.5" stop-color="#c3cdd4"/><stop offset="1" stop-color="#97a4ae"/></linearGradient></defs><title id="skid-t">The Pilbara cooling-water pump on its skid, with the measurement points</title><desc id="skid-d">Side view. An end-suction centrifugal cooling-water pump, with its suction pipe and flange on the left, a volute casing with the discharge nozzle pointing up, and a ribbed bearing frame with an oil sight glass, is driven through a coupling under a guard by a 55 kW electric motor running at 1,480 rpm on the right. Both sit on a steel channel skid, which is held down by bolts through a grout layer onto a concrete plinth. Measurement points: an accelerometer on top of the motor outboard bearing, measuring vertically for the trend; sensors on the front and rear corners of the skid, used for the phase measurement; and a bump-test point on the skid, struck with a hammer while the pump is off.</desc><rect x="130" y="232" width="580" height="58" fill="#e4e1dc" stroke="#1c2a35" stroke-width="1.3"/><circle cx="272.2" cy="263.9" r="1.2" fill="#b9b2a8"/><circle cx="478.6" cy="267.5" r="0.9" fill="#b9b2a8"/><circle cx="145.4" cy="276.8" r="1.1" fill="#b9b2a8"/><circle cx="270.2" cy="283.8" r="1.3" fill="#b9b2a8"/><circle cx="609.8" cy="261.0" r="1.4" fill="#b9b2a8"/><circle cx="222.9" cy="267.9" r="1.7" fill="#b9b2a8"/><circle cx="433.1" cy="272.6" r="1.5" fill="#b9b2a8"/><circle cx="174.1" cy="273.4" r="1.4" fill="#b9b2a8"/><circle cx="307.9" cy="241.4" r="1.7" fill="#b9b2a8"/><circle cx="404.6" cy="271.6" r="1.7" fill="#b9b2a8"/><circle cx="540.8" cy="280.5" r="1.2" fill="#b9b2a8"/><circle cx="589.7" cy="259.6" r="1.7" fill="#b9b2a8"/><circle cx="633.7" cy="244.3" r="0.9" fill="#b9b2a8"/><circle cx="260.4" cy="282.5" r="1.2" fill="#b9b2a8"/><circle cx="491.4" cy="253.2" r="1.3" fill="#b9b2a8"/><circle cx="355.6" cy="255.4" r="1.4" fill="#b9b2a8"/><circle cx="467.5" cy="279.8" r="1.5" fill="#b9b2a8"/><circle cx="661.9" cy="277.7" r="1.8" fill="#b9b2a8"/><circle cx="516.6" cy="247.2" r="1.7" fill="#b9b2a8"/><circle cx="682.1" cy="279.8" r="1.4" fill="#b9b2a8"/><circle cx="540.6" cy="249.3" r="1.6" fill="#b9b2a8"/><circle cx="461.5" cy="252.5" r="0.9" fill="#b9b2a8"/><circle cx="619.6" cy="283.6" r="0.9" fill="#b9b2a8"/><circle cx="589.5" cy="258.1" r="1.0" fill="#b9b2a8"/><circle cx="303.8" cy="273.8" r="1.7" fill="#b9b2a8"/><circle cx="162.9" cy="267.0" r="0.8" fill="#b9b2a8"/><circle cx="543.2" cy="254.6" r="1.7" fill="#b9b2a8"/><circle cx="691.1" cy="262.2" r="1.8" fill="#b9b2a8"/><circle cx="312.7" cy="243.4" r="1.4" fill="#b9b2a8"/><circle cx="155.7" cy="248.7" r="1.2" fill="#b9b2a8"/><circle cx="482.3" cy="246.9" r="0.8" fill="#b9b2a8"/><circle cx="627.4" cy="253.8" r="1.8" fill="#b9b2a8"/><circle cx="643.7" cy="256.6" r="1.3" fill="#b9b2a8"/><circle cx="431.3" cy="268.3" r="1.4" fill="#b9b2a8"/><circle cx="453.4" cy="267.3" r="1.7" fill="#b9b2a8"/><circle cx="424.0" cy="259.0" r="1.5" fill="#b9b2a8"/><circle cx="272.0" cy="253.2" r="1.8" fill="#b9b2a8"/><circle cx="431.9" cy="264.1" r="0.8" fill="#b9b2a8"/><circle cx="372.2" cy="265.5" r="0.8" fill="#b9b2a8"/><circle cx="485.3" cy="267.8" r="0.9" fill="#b9b2a8"/><circle cx="491.8" cy="260.5" r="1.5" fill="#b9b2a8"/><circle cx="336.9" cy="271.1" r="1.5" fill="#b9b2a8"/><circle cx="150.5" cy="242.7" r="1.5" fill="#b9b2a8"/><circle cx="681.3" cy="251.0" r="1.3" fill="#b9b2a8"/><circle cx="472.3" cy="254.1" r="1.2" fill="#b9b2a8"/><circle cx="314.3" cy="256.2" r="1.4" fill="#b9b2a8"/><circle cx="307.4" cy="256.6" r="1.6" fill="#b9b2a8"/><circle cx="153.2" cy="265.0" r="1.5" fill="#b9b2a8"/><circle cx="312.8" cy="249.8" r="1.6" fill="#b9b2a8"/><circle cx="272.6" cy="248.2" r="1.2" fill="#b9b2a8"/><circle cx="531.7" cy="244.5" r="1.1" fill="#b9b2a8"/><circle cx="326.2" cy="276.7" r="1.2" fill="#b9b2a8"/><circle cx="620.5" cy="247.4" r="1.1" fill="#b9b2a8"/><circle cx="504.7" cy="278.9" r="1.3" fill="#b9b2a8"/><circle cx="264.9" cy="245.3" r="1.3" fill="#b9b2a8"/><circle cx="245.6" cy="275.5" r="1.6" fill="#b9b2a8"/><circle cx="241.5" cy="252.3" r="1.6" fill="#b9b2a8"/><circle cx="500.1" cy="275.5" r="1.1" fill="#b9b2a8"/><circle cx="211.1" cy="252.8" r="1.6" fill="#b9b2a8"/><circle cx="290.9" cy="255.2" r="1.2" fill="#b9b2a8"/><circle cx="374.8" cy="258.0" r="1.7" fill="#b9b2a8"/><circle cx="226.0" cy="240.2" r="1.7" fill="#b9b2a8"/><circle cx="634.3" cy="283.4" r="1.2" fill="#b9b2a8"/><circle cx="673.9" cy="280.8" r="1.0" fill="#b9b2a8"/><circle cx="558.5" cy="276.8" r="1.5" fill="#b9b2a8"/><circle cx="430.7" cy="252.7" r="1.1" fill="#b9b2a8"/><circle cx="266.3" cy="243.0" r="1.4" fill="#b9b2a8"/><circle cx="299.9" cy="275.6" r="0.8" fill="#b9b2a8"/><circle cx="647.6" cy="270.5" r="1.7" fill="#b9b2a8"/><circle cx="643.7" cy="279.6" r="1.4" fill="#b9b2a8"/><line x1="90" y1="290" x2="750" y2="290" stroke="#1c2a35" stroke-width="1.8"/><rect x="146" y="226" width="548" height="6" fill="#8f877c" stroke="#1c2a35" stroke-width="0.8"/><rect x="150" y="200" width="540" height="26" fill="#9aa5ae" stroke="#1c2a35" stroke-width="1.3"/><line x1="150" y1="205" x2="690" y2="205" stroke="#1c2a35" stroke-width="0.8"/><line x1="150" y1="221" x2="690" y2="221" stroke="#1c2a35" stroke-width="0.8"/><line x1="172" y1="194" x2="172" y2="276" stroke="#1c2a35" stroke-width="2" stroke-dasharray="0"/><rect x="166" y="193" width="12" height="7" rx="1" fill="#3d4a54"/><line x1="172" y1="276" x2="180" y2="276" stroke="#1c2a35" stroke-width="2"/><line x1="420" y1="194" x2="420" y2="276" stroke="#1c2a35" stroke-width="2" stroke-dasharray="0"/><rect x="414" y="193" width="12" height="7" rx="1" fill="#3d4a54"/><line x1="420" y1="276" x2="428" y2="276" stroke="#1c2a35" stroke-width="2"/><line x1="668" y1="194" x2="668" y2="276" stroke="#1c2a35" stroke-width="2" stroke-dasharray="0"/><rect x="662" y="193" width="12" height="7" rx="1" fill="#3d4a54"/><line x1="668" y1="276" x2="676" y2="276" stroke="#1c2a35" stroke-width="2"/><rect x="70" y="134.0" width="82" height="28" fill="url(#pipeG)" stroke="#1c2a35" stroke-width="1.2"/><path d="M74,130.0 l-6,6 l6,6 l-6,6 l6,6 l-6,6" fill="#fff" stroke="#1c2a35" stroke-width="1.1"/><rect x="150" y="125.0" width="7" height="46" rx="1" fill="#9aa5ae" stroke="#1c2a35" stroke-width="1"/><rect x="157" y="125.0" width="7" height="46" rx="1" fill="#9aa5ae" stroke="#1c2a35" stroke-width="1"/><rect x="148" y="129.4" width="18" height="3.2" rx="1" fill="#3d4a54"/><rect x="148" y="140.4" width="18" height="3.2" rx="1" fill="#3d4a54"/><rect x="148" y="152.4" width="18" height="3.2" rx="1" fill="#3d4a54"/><rect x="148" y="163.4" width="18" height="3.2" rx="1" fill="#3d4a54"/><path d="M164,132.0 L192,124.0 L192,172.0 L164,164.0 Z" fill="url(#pumpG)" stroke="#1c2a35" stroke-width="1.2"/><path d="M192,116.0 Q192,90.0 222,90.0 L238,90.0 Q264,90.0 264,118.0 L264,174.0 Q264,198.0 238,198.0 L218,198.0 Q192,198.0 192,174.0 Z" fill="url(#pumpG)" stroke="#1c2a35" stroke-width="1.5"/><path d="M200,108.0 Q204,96.0 222,96.0" fill="none" stroke="#9fd0b3" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/><line x1="252" y1="92.0" x2="252" y2="196.0" stroke="#2f6048" stroke-width="1.4"/><circle cx="257" cy="104.0" r="1.8" fill="#1c2a35"/><circle cx="257" cy="119.0" r="1.8" fill="#1c2a35"/><circle cx="257" cy="134.0" r="1.8" fill="#1c2a35"/><circle cx="257" cy="149.0" r="1.8" fill="#1c2a35"/><circle cx="257" cy="164.0" r="1.8" fill="#1c2a35"/><circle cx="257" cy="179.0" r="1.8" fill="#1c2a35"/><path d="M206,90.0 L212,52.0 L238,52.0 L244,90.0 Z" fill="url(#pumpG)" stroke="#1c2a35" stroke-width="1.3"/><rect x="202" y="44.0" width="46" height="8" rx="1" fill="#9aa5ae" stroke="#1c2a35" stroke-width="1"/><rect x="205.4" y="38.0" width="3.2" height="6" rx="0.8" fill="#3d4a54"/><rect x="216.4" y="38.0" width="3.2" height="6" rx="0.8" fill="#3d4a54"/><rect x="230.4" y="38.0" width="3.2" height="6" rx="0.8" fill="#3d4a54"/><rect x="241.4" y="38.0" width="3.2" height="6" rx="0.8" fill="#3d4a54"/><path d="M210,198.0 L206,200 L250,200 L246,198.0 Z" fill="#2f6048" stroke="#1c2a35" stroke-width="1.1"/><path d="M264,118.0 L288,128.0 L288,168.0 L264,178.0 Z" fill="url(#pumpG)" stroke="#1c2a35" stroke-width="1.2"/><rect x="270" y="141.0" width="12" height="14" rx="2" fill="#1c2a35"/><line x1="268" y1="148.0" x2="284" y2="148.0" stroke="#9aa5ae" stroke-width="4"/><rect x="288" y="127.0" width="76" height="42" rx="8" fill="url(#pumpG)" stroke="#1c2a35" stroke-width="1.3"/><line x1="300" y1="129.0" x2="300" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><line x1="309" y1="129.0" x2="309" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><line x1="318" y1="129.0" x2="318" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><line x1="327" y1="129.0" x2="327" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><line x1="336" y1="129.0" x2="336" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><line x1="345" y1="129.0" x2="345" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><line x1="354" y1="129.0" x2="354" y2="167.0" stroke="#2f6048" stroke-width="1" opacity="0.7"/><rect x="324" y="119.0" width="10" height="8" rx="1.5" fill="#c9a227" stroke="#1c2a35" stroke-width="0.8"/><circle cx="300" cy="157.0" r="4.5" fill="#d8ecf5" stroke="#1c2a35" stroke-width="0.9"/><line x1="296" y1="158.0" x2="304" y2="158.0" stroke="#c9a227" stroke-width="1.6"/><rect x="364" y="133.0" width="7" height="30" rx="2" fill="#4f8f6f" stroke="#1c2a35" stroke-width="1"/><path d="M304,200 L316,169.0 L346,169.0 L358,200 Z" fill="#2f6048" stroke="#1c2a35" stroke-width="1.1"/><line x1="371" y1="148.0" x2="420" y2="148.0" stroke="#7a8a96" stroke-width="7"/><line x1="371" y1="146.5" x2="420" y2="146.5" stroke="#c3cdd4" stroke-width="1.5"/><rect x="380" y="131.0" width="38" height="34" rx="3" fill="#f2c94c" fill-opacity="0.85" stroke="#1c2a35" stroke-width="1.1"/><line x1="384" y1="131.0" x2="384" y2="165.0" stroke="#a88a1e" stroke-width="0.8"/><line x1="393" y1="131.0" x2="393" y2="165.0" stroke="#a88a1e" stroke-width="0.8"/><line x1="402" y1="131.0" x2="402" y2="165.0" stroke="#a88a1e" stroke-width="0.8"/><line x1="411" y1="131.0" x2="411" y2="165.0" stroke="#a88a1e" stroke-width="0.8"/><path d="M386,200 L392,165.0 M412,165.0 L418,200" stroke="#1c2a35" stroke-width="1.1"/><g transform="translate(372.0,1.5999999999999943) scale(1.6)"><rect x="66" y="114" width="16" height="10" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.1"/><rect x="116" y="114" width="16" height="10" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.1"/><circle cx="71" cy="121" r="1.4" fill="#5a6773"/><circle cx="127" cy="121" r="1.4" fill="#5a6773"/><rect x="30" y="88" width="16" height="7" fill="#9aa5ae" stroke="#1c2a35" stroke-width="1"/><path d="M58,73 L52,75 Q46,77 46,83 L46,100 Q46,106 52,108 L58,110 Z" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.2"/><rect x="56" y="70" width="84" height="44" rx="3" fill="#dbe9f1" stroke="#1c2a35" stroke-width="1.4"/><rect x="59" y="75" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="80" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="85" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="90" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="95" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="100" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="105" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><rect x="59" y="110" width="78" height="2.2" rx="1.1" fill="#c3d3de" stroke="#8fa5b4" stroke-width="0.5"/><path d="M140,72 L152,75 Q162,78 162,87 L162,97 Q162,106 152,109 L140,112 Z" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.2"/><rect x="150" y="83" width="7" height="1.8" rx="0.9" fill="#5a6773"/><rect x="150" y="88" width="7" height="1.8" rx="0.9" fill="#5a6773"/><rect x="150" y="93" width="7" height="1.8" rx="0.9" fill="#5a6773"/><rect x="150" y="98" width="7" height="1.8" rx="0.9" fill="#5a6773"/><rect x="80" y="59" width="24" height="11" rx="1.5" fill="#c9d6de" stroke="#1c2a35" stroke-width="1.1"/><rect x="104" y="62" width="4" height="5" fill="#9aa5ae" stroke="#1c2a35" stroke-width="0.6"/><circle cx="122" cy="64" r="3" fill="none" stroke="#1c2a35" stroke-width="1.3"/><rect x="120.5" y="66.5" width="3" height="3.5" fill="#1c2a35"/></g><rect x="600.6" y="102.8" width="10" height="14" rx="1.5" fill="#3d4a54" stroke="#1c2a35" stroke-width="0.8"/><path d="M605.6,102.8 C605.6,82.8 645.6,86.8 657.6,80.8" fill="none" stroke="#5a6773" stroke-width="1.4"/><text x="663.6" y="70.8" font-size="12" fill="#1c2a35"><tspan font-weight="600" fill="#0b5c80">trend:</tspan> outboard bearing,</text><text x="663.6" y="85.8" font-size="12" fill="#1c2a35">vertical</text><rect x="155" y="206" width="10" height="12" rx="1.5" fill="#3d4a54" stroke="#1c2a35" stroke-width="0.8"/><line x1="160" y1="218" x2="100" y2="310" stroke="#5a6773" stroke-width="0.8"/><text x="100" y="324" text-anchor="start" font-size="12" fill="#1c2a35"><tspan font-weight="600" fill="#0b5c80">phase:</tspan> front corner</text><rect x="675" y="206" width="10" height="12" rx="1.5" fill="#3d4a54" stroke="#1c2a35" stroke-width="0.8"/><line x1="680" y1="218" x2="740" y2="310" stroke="#5a6773" stroke-width="0.8"/><text x="740" y="324" text-anchor="end" font-size="12" fill="#1c2a35"><tspan font-weight="600" fill="#0b5c80">phase:</tspan> rear corner</text><g transform="translate(540,265) rotate(-35)"><rect x="-3" y="-46" width="6" height="40" rx="2" fill="#b07a47" stroke="#1c2a35" stroke-width="0.8"/><rect x="-10" y="-56" width="20" height="12" rx="2" fill="#5a6773" stroke="#1c2a35" stroke-width="0.8"/></g><text x="560" y="324" text-anchor="middle" font-size="12" fill="#1c2a35"><tspan font-weight="600" fill="#a4262c">bump test</tspan> (pump off)</text><text x="528.8" y="65.6" text-anchor="middle" font-size="12" fill="#1c2a35">55 kW motor, 1,480 rpm</text><text x="225" y="30.0" text-anchor="middle" font-size="12" fill="#1c2a35">cooling-water pump</text><text x="110" y="122.0" text-anchor="middle" font-size="12" fill="#5a6773">suction</text><text x="252" y="64.0" text-anchor="start" font-size="12" fill="#5a6773">discharge</text><text x="326" y="112.0" text-anchor="middle" font-size="12" fill="#5a6773">bearing frame</text><text x="399" y="124.0" text-anchor="middle" font-size="12" fill="#5a6773">coupling</text><text x="700" y="217" text-anchor="start" font-size="12" fill="#5a6773">steel skid</text><text x="700" y="232" text-anchor="start" font-size="12" fill="#5a6773">grout</text><text x="714" y="262" text-anchor="start" font-size="12" fill="#5a6773">concrete plinth</text><text x="430" y="270" text-anchor="start" font-size="12" fill="#5a6773">hold-down bolt</text></svg><figcaption>The pump set and where each measurement below was taken.</figcaption></figure><ul><li><strong>Overall velocity trend</strong> at the motor’s outboard bearing, vertical: 1.9, 2.6, 3.4, then 4.3 mm/s RMS over four months.</li><li><strong>Spectrum:</strong> one dominant peak at 24.7 Hz, the 1× running speed. Harmonics are small.</li><li><strong>Phase</strong> at 24.7 Hz between the skid’s front and rear corners: about 175°.</li><li><strong>Bump test</strong> on the skid with the pump off: it rings at 26.0 Hz. Two successive peaks read 10.0 and 7.3 mm/s.</li><li><strong>Commissioning records</strong> from two years ago: the skid’s bump test rang at 31 Hz.</li></ul></div><p>Work through the tasks below as an engineer would. Write your reasoning before opening each expert comparison. There is no single numerical answer to find.</p><div class="question"><p><strong>1. What is physically vibrating, and in what pattern?</strong></p><details class="reveal" data-lock="10" data-keys="rock|bounc|phase|175|180|opposite|corner|running|rotor|24.7|frequen|structur|tilt|pitch|rotat|1x|1×|mode|pattern|together"><summary>Compare with an expert's reasoning</summary><div class="reveal-body"><p>The whole skid is moving at 1× running speed. A phase of about 175° between the front and rear corners means it is <strong>rocking</strong>, not bouncing. The spectrum suggests the source is at the rotor frequency, but the structure is clearly involved.</p><p><strong>Why 175° and not exactly 180°?</strong> Measured phase is never perfect. Sensor mounting, signal noise, small differences in local stiffness at each corner, and a little bouncing mixed in with the rocking all shift it slightly. In practice, a phase within <strong>180° ± 20°</strong> is read as out of phase (rocking), and within <strong>0° ± 20°</strong> as in phase (bouncing together).</p></div></details></div><div class="question"><p><strong>2. How severe is it? Which ISO zone is it in, and how fast is it changing?</strong></p><details class="reveal" data-lock="10" data-keys="iso|zone|4.3|4.5|2.8|1.9|mm/s|rms|trend|rising|rise|increas|accelerat|limit|alarm|sever|urgent|month|rate|worse|grow|danger|acceptab"><summary>Compare with an expert's reasoning</summary><div class="reveal-body"><p>4.3 mm/s RMS falls in <strong>zone C</strong> (2.8–4.5 mm/s) for Group 2 on a rigid foundation: acceptable only for a limited period. The trend is accelerating, so it will enter zone D (above 4.5 mm/s) at the next reading or soon after. This is urgent.</p></div></details></div><div class="question"><p><strong>3. Estimate the skid's damping ratio from the bump test.</strong></p><details class="reveal" data-num="0.050" data-tol="0.10"><summary>Compare with an expert's reasoning</summary><div class="reveal-body"><p><var>δ</var> = ln(10.0/7.3) = 0.315, so <var>ζ</var> ≈ <var>δ</var>/2π ≈ 0.050. That is typical of a bolted steel structure: lightly damped, so it amplifies strongly near resonance.</p></div></details></div><div class="question"><p><strong>4. Why did the problem appear only recently? Use <var>f</var><sub><var>n</var></sub> = (1/2π)√(<var>k</var>/<var>m</var>).</strong></p><details class="reveal" data-lock="10" data-keys="stiff|mass|31|26|frequen|fn|bolt|grout|loose|crack|corro|weld|drift|resonan|closer|near|running|24.7|dropp|fell|fall|decreas|lower|reduc|foundation|degrad|k"><summary>Compare with an expert's reasoning</summary><div class="reveal-body"><p><var>f</var><sub><var>n</var></sub> fell from 31 Hz to 26 Hz. The mass has not changed, so stiffness must have dropped by (26/31)² = 0.70, a <strong>30% loss of stiffness</strong>. Likely causes include loosened hold-down bolts, cracked or deteriorated grout, or corrosion and cracking at welds. As <var>k</var> fell, <var>f</var><sub><var>n</var></sub> drifted toward the 24.7 Hz running speed (now only 5% away), so the same small unbalance force produces ever-larger motion. That explains a rising trend with no change to the pump.</p></div></details></div><div class="question"><p><strong>5. What additional measurements would you request?</strong></p><details class="reveal" data-lock="8" data-keys="bolt|torque|grout|phase|bump|impact|hammer|run-up|runup|coast|sweep|ods|deflection|balanc|spectrum|measur|foot|feet|plinth|modal|alignment|accelerometer|sensor|temperature|crack"><summary>Compare with an expert's reasoning</summary><div class="reveal-body"><p>Check bolt torque and grout condition, and measure the phase and amplitude at each skid foot and on the plinth to locate the soft corner. Repeat bump tests on the skid and plinth separately. Do a run-up or coast-down test to see the response peak as speed sweeps through <var>f</var><sub><var>n</var></sub>. An operating deflection shape (Module 8) would show the motion directly. Also check the rotor balance, since unbalance supplies the force even if the structure is the amplifier.</p></div></details></div><div class="question"><p><strong>6. What modifications would reduce the vibration, and what should you avoid?</strong></p><details class="reveal" data-lock="8" data-keys="stiff|bolt|grout|balanc|mass|weight|frequen|separat|margin|20%|damp|isolat|avoid|torque|tighten|brace|gusset|resonan|speed|vfd|rpm|alarm|limit|shift|raise|increas|regrout|anchor"><summary>Compare with an expert's reasoning</summary><div class="reveal-body"><p>First, <strong>restore the stiffness</strong>: re-torque or replace the anchors and regrout. This should return <var>f</var><sub><var>n</var></sub> toward 31 Hz. Better still, stiffen the skid so <var>f</var><sub><var>n</var></sub> sits at least 20% above 24.7 Hz, which means above about 30 Hz with margin. Balance the rotor to reduce the force itself. <strong>Avoid adding mass:</strong> it lowers <var>f</var><sub><var>n</var></sub> further toward running speed. Do not simply raise the alarm limit.</p></div></details></div><div class="box intuition"><h3><span aria-hidden="true" class="ico">💡</span>Engineering Intuition</h3><p>The pump was the <em>source</em>, but the skid was the <em>amplifier</em>. Many “machine” vibration problems are really <strong style="font-weight:600">structural problems</strong>. Always ask both questions: what is pushing, and what is responding?</p></div></section><section aria-labelledby="kc-h" class="part" id="kc"><h2 id="kc-h"><span class="kicker">Check</span>Knowledge check</h2><p>Five questions covering the whole module. Aim to answer them without your notes.</p><div class="question"><p><strong>Q1 (conceptual).</strong> Sensors on the two feet of a motor show equal amplitude at 1× running speed, with a phase difference of 180°. Which description fits?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. The motor is bouncing vertically.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> Bouncing means both feet move together, at Δ<var>φ</var> ≈ 0°.</p></div></details><details class="option"><summary>B. The motor is rocking about a point between the feet.</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> Opposite motion at equal amplitude means rotation about the midpoint.</p></div></details><details class="option"><summary>C. The vibration has cancelled out, so the motor is still.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> The signals come from two different locations. Both feet really move; they just move in opposite directions.</p></div></details></div><div class="question"><p><strong>Q2 (calculation).</strong> A pump runs at 2,970 rpm with a 1× velocity of 4.5 mm/s RMS. What is the displacement?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. About 41 µm pk-pk</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> <var>D</var> = 27,009 × 4.5/2,970 = 40.9 µm pk-pk.</p></div></details><details class="option"><summary>B. About 20 µm pk-pk</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> That is the peak value, half of peak-to-peak. Check which form the formula gives.</p></div></details><details class="option"><summary>C. About 0.41 µm pk-pk</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> Check the formula: <var>D</var> = 27,009 <var>V</var>/<var>f</var> with <var>f</var> in CPM, not <var>D</var> = <var>V</var>/<var>f</var>.</p></div></details><details class="option"><summary>D. About 2,450 µm pk-pk</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> Frequency must be in CPM. Using Hz (49.5) would give this wrong result.</p></div></details></div><div class="question"><p><strong>Q3 (graph interpretation).</strong> A bearing’s monthly trend shows its crest factor rising from 3 to 6 over three months, then falling back to 3.5, while its overall RMS doubles over the same period. What is the most likely state of the bearing?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. The defect has healed: the crest factor is back near its healthy value.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> Bearing damage does not heal. The crest factor fell because the RMS rose to meet the peak, not because the impacts stopped.</p></div></details><details class="option"><summary>B. The damage has spread and is now advanced.</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> An early rise in crest factor with a flat RMS is a local defect producing impacts. A falling crest factor with a rising RMS means the impacts have become frequent enough to lift the average. Read the two trends together.</p></div></details><details class="option"><summary>C. The sensor is faulty, because the two trends disagree.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> The trends do not disagree. This is the normal pattern of a failing rolling-element bearing, as shown in Part C.</p></div></details></div><div class="question"><p><strong>Q4 (physical interpretation).</strong> A bump test shows successive peaks of 8.0 and 5.0 mm/s. What is the approximate damping ratio?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. 0.075</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> <var>δ</var> = ln(8/5) = 0.47, and <var>ζ</var> ≈ 0.47/2π = 0.075.</p></div></details><details class="option"><summary>B. 0.47</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> 0.47 is the logarithmic decrement <var>δ</var>. Divide by 2π to get <var>ζ</var>.</p></div></details><details class="option"><summary>C. 0.375</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> That is (8 − 5)/8, a simple percentage drop. Damping uses the logarithm of the ratio.</p></div></details></div><div class="question"><p><strong>Q5 (diagnosis).</strong> A gearbox's overall velocity is 2.1 mm/s RMS, comfortably in zone B, but technicians report an intermittent knocking sound. What is the best next step?</p><p class="hint">Choose an answer to open its feedback.</p><details class="option"><summary>A. Nothing. The RMS is within limits.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> RMS averages over time and can hide short impacts. The knocking is a warning sign.</p></div></details><details class="option"><summary>B. Look at the time waveform, peak and crest factor,<br>and acceleration at higher frequency.</summary><div class="reveal-body"><p><strong class="verdict-ok">✓ Correct.</strong> Impacts raise peak and crest factor and show in acceleration long before RMS velocity moves. Module 9 covers this in depth.</p></div></details><details class="option"><summary>C. Raise the alarm limit to avoid nuisance trips.</summary><div class="reveal-body"><p><strong class="verdict-no">✗ Not quite.</strong> That hides the evidence. Investigate the cause first.</p></div></details></div><div class="box note"><h3><span aria-hidden="true" class="ico">📌</span>Note</h3><p>For a graded version, copy these questions into a Canvas Quiz (New Quizzes). The feedback above can be pasted directly into each answer's feedback field.</p></div></section><section aria-labelledby="takeaways-h" class="part" id="takeaways"><h2 id="takeaways-h"><span class="kicker">Summary</span>Key takeaways</h2><ul><li>Vibration is oscillation about equilibrium, described by <strong>amplitude</strong> (how far), <strong>frequency</strong> (how fast) and <strong>phase</strong> (how points move relative to each other).</li><li>RMS is the energy-based amplitude used for trending and severity limits. RMS = peak/√2 <em>only</em> for a pure sine wave, and RMS can hide impacts.</li><li><var>v</var><sub>pk</sub> = <var>ω</var><var>y</var><sub>pk</sub> and <var>a</var><sub>pk</sub> = <var>ω</var>²<var>y</var><sub>pk</sub>. Displacement suits low frequencies, velocity the running-speed range, and acceleration high frequencies.</li><li>Real systems are modelled as <var>m</var>, <var>k</var> and <var>c</var>, using equivalent stiffness (series and parallel) and effective mass.</li><li>Free vibration occurs at <var>f</var><sub><var>n</var></sub> = (1/2π)√(<var>k</var>/<var>m</var>) and decays at a rate set by <var>ζ</var> = <var>c</var>/2√(<var>k</var><var>m</var>). Damping is measured with the logarithmic decrement.</li></ul><div class="box explain"><h3>Can you now explain...</h3><ul><li>...why a random signal's RMS is not its peak divided by √2?</li><li>...why an accelerometer, not a proximity probe, is used to find bearing defects at kHz frequencies?</li><li>...what a 180° phase difference between two points tells you about the motion?</li><li>...why doubling a machine's mass changes its natural frequency by only 29%?</li><li>...why the Pilbara skid's vibration rose although nothing about the pump changed?</li></ul></div></section><section aria-labelledby="next-h" class="part" id="next"><h2 id="next-h"><span class="kicker">Next</span>What's next?</h2><div class="box next"><p>We now know what a structure does when you strike it once and let go: it rings at its natural frequency and decays.</p><p>But a running pump never lets go. It pushes on its skid <strong>24.7 times every second</strong>, and that skid wants to vibrate at 26 Hz.</p><p class="next-question">What happens when you keep pushing a structure at almost exactly the frequency it prefers? And why can a tiny force then produce a huge vibration?</p><p>That is <strong>Module 2: Forced Vibration</strong>.</p></div></section></div></main>
+<footer class="page-foot">MCEN4003 Mechanical Vibration · Curtin University · Module 1, Part G</footer>
+</div>
+<script>
+/* MCEN4003 page script: equations + reading progress */
+(function(){
+  // equations: MathJax 4 with the sans-serif Fira maths font, for the whole page
+  if(document.getElementById('content')){
+    window.MathJax={loader:{paths:{mathjax:'https://cdn.jsdelivr.net/npm/mathjax@4.1.3','mathjax-fira':'https://cdn.jsdelivr.net/npm/@mathjax/mathjax-fira-font@4.1.3'}},
+      tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},
+      output:{displayOverflow:'scale'}, startup:{elements:['#content']}, options:{menuOptions:{settings:{enrich:false}}}};
+    var mj=document.createElement('script'); mj.async=true; mj.src='https://cdn.jsdelivr.net/npm/@mathjax/mathjax-fira-font@4.1.3/tex-mml-chtml-mathjax-fira.js'; document.head.appendChild(mj);
+  }
+  var bar=document.querySelector('.progress');
+  function prog(){ if(!bar) return; var h=document.documentElement; var max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+  window.addEventListener('scroll',prog,{passive:true}); window.addEventListener('load',prog); prog();
+  // fixed-size embedded animations (e.g. Tumult Hype, 1024x768): scale to the column width
+  function fitFrames(){ document.querySelectorAll('.hype-frame').forEach(function(f){
+    var w=+f.dataset.w||1024, i=f.querySelector('iframe'); if(!i) return;
+    i.style.transform='scale('+(f.clientWidth/w)+')'; }); }
+  window.addEventListener('resize',fitFrames); window.addEventListener('load',fitFrames); fitFrames();
+  // flip cards: tap / Enter / Space toggles (hover handled in CSS)
+  document.querySelectorAll('.flip-card').forEach(function(c){
+    function t(){ c.classList.toggle('is-flipped'); }
+    c.addEventListener('click',function(e){ if(window.matchMedia('(hover: none)').matches || e.detail===0) t(); });
+  });
+})();
+
+</script>
+<script>
+/* Answer-first lock: a comparison opens only after the student writes their own answer. */
+(function(){
+  var MIN = 10;
+  document.querySelectorAll('details[data-lock]').forEach(function (d, i) {
+    var n = +d.getAttribute('data-lock') || MIN, sum = d.querySelector('summary');
+    var key = 'mcen4003:' + location.pathname + ':answer' + i, id = 'ans-' + i;
+    var wrap = document.createElement('div'); wrap.className = 'ans-wrap';
+    wrap.innerHTML = '<label class="ans-lbl" for="' + id + '">Your reasoning</label>' +
+      '<textarea class="ans-box" id="' + id + '" rows="4" placeholder="Write your answer here, then open the comparison."></textarea>' +
+      '<p class="ans-count" aria-live="polite"></p>';
+    d.parentNode.insertBefore(wrap, d);
+    var ta = wrap.querySelector('textarea'), cnt = wrap.querySelector('.ans-count');
+    try { var v = localStorage.getItem(key); if (v) ta.value = v; } catch (e) {}
+    var KEYS = ['qwer','wert','erty','rtyu','tyui','yuio','uiop','asdf','sdfg','dfgh','fghj','ghjk','hjkl','zxcv','xcvb','cvbn','vbnm','qaz','wsx','edc','rfv','tgb','yhn','ujm'];
+    function real(w) {
+      w = w.toLowerCase().replace(/^[^a-z0-9°]+|[^a-z0-9°%]+$/g, '');
+      if (!w) return false;
+      if (/^[0-9.,°%\/×x-]+$/.test(w) || /^[0-9.,]+[a-z°%\/]{1,5}$/.test(w)) return true;   // numbers and units
+      if (w.length > 22 || !/[aeiouy]/.test(w) || /(.)\1\1/.test(w) || /[bcdfghjklmnpqrstvwxz]{5,}/.test(w)) return false;
+      for (var j = 0; j < KEYS.length; j++) if (w.indexOf(KEYS[j]) >= 0) return false;
+      return true;
+    }
+    var KEYS2 = (d.getAttribute('data-keys') || '').toLowerCase().split('|').filter(Boolean);
+    function relevant() {   // needs at least two different subject terms from this question
+      if (!KEYS2.length) return true;
+      var toks = ta.value.toLowerCase().match(/[^\s,;:()!?"]+/g) || [], hit = {};
+      toks.forEach(function (tk) { tk = tk.replace(/[.]+$/, ''); KEYS2.forEach(function (k) {
+        if (k.length <= 2 ? tk === k : tk.indexOf(k) === 0) hit[k] = 1; }); });
+      return Object.keys(hit).length >= 2;
+    }
+    function words() {   // counts real-looking words, each distinct word at most twice
+      var m = ta.value.trim().match(/\S+/g) || [], seen = {}, good = 0, bad = 0;
+      m.forEach(function (w) { if (real(w)) { var k = w.toLowerCase(); seen[k] = (seen[k] || 0) + 1; if (seen[k] <= 2) good++; } else bad++; });
+      words.bad = m.length > 0 && bad / m.length > 0.3; return good;
+    }
+    function update() {
+      var w = words(), rel = relevant(), ok = w >= n && !words.bad && rel;
+      d.classList.toggle('locked', !ok); sum.setAttribute('aria-disabled', ok ? 'false' : 'true');
+      cnt.classList.toggle('ok', ok);
+      cnt.textContent = ok ? '✓ Unlocked. Now compare your answer with the one below.'
+                           : words.bad ? 'This does not look like a real answer yet. Explain your reasoning in proper words to unlock the comparison.'
+                           : w >= n && !rel ? 'Your answer does not yet use the engineering ideas or data this question is about. Use them to unlock the comparison.'
+                           : w + ' / ' + n + ' words. Write your answer first to unlock the comparison.';
+      if (!ok && d.open) d.open = false;
+    }
+    ta.addEventListener('input', function () { try { localStorage.setItem(key, ta.value); } catch (e) {} update(); });
+    sum.addEventListener('click', function (e) { if (d.classList.contains('locked')) { e.preventDefault(); ta.focus(); } });
+    d.addEventListener('toggle', function () { if (d.open && d.classList.contains('locked')) d.open = false; });
+    update();
+  });
+})();
+</script><script>
+/* Numerical-answer lock: the comparison opens only when the entered value is within tolerance. */
+(function(){
+  document.querySelectorAll('details[data-num]').forEach(function (d, i) {
+    var target = +d.getAttribute('data-num'), tol = +d.getAttribute('data-tol') || 0.1, sum = d.querySelector('summary');
+    var key = 'mcen4003:' + location.pathname + ':num' + i, id = 'num-' + i;
+    var wrap = document.createElement('div'); wrap.className = 'ans-wrap';
+    wrap.innerHTML = '<label class="ans-lbl" for="' + id + '">Your answer: damping ratio <var>ζ</var></label>' +
+      '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input class="ans-box" id="' + id + '" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.12" style="min-height:0;width:160px;display:inline-block">' +
+      '<button type="button" class="num-check" style="font:inherit;font-size:14.5px;padding:8px 14px;border-radius:8px;border:1px solid #1d4f7a;background:#1d4f7a;color:#fff;cursor:pointer">Check</button></div>' +
+      '<p class="ans-count" aria-live="polite">Work it out on paper, then enter one number to unlock the comparison.</p>';
+    d.parentNode.insertBefore(wrap, d);
+    var inp = wrap.querySelector('input'), btn = wrap.querySelector('button'), cnt = wrap.querySelector('.ans-count');
+    function lock(on) { d.classList.toggle('locked', on); sum.setAttribute('aria-disabled', on ? 'true' : 'false'); if (on && d.open) d.open = false; }
+    function check(silent) {
+      var raw = inp.value.trim().replace(',', '.'), v = parseFloat(raw);
+      try { localStorage.setItem(key, inp.value); } catch (e) {}
+      if (raw === '' || !/^[-+]?(\d+\.?\d*|\.\d+)$/.test(raw)) { lock(true); cnt.classList.remove('ok'); if (!silent) cnt.textContent = 'Enter a single number only, for example 0.12.'; return; }
+      if (Math.abs(v - target) <= tol * target) { lock(false); cnt.classList.add('ok'); cnt.textContent = '✓ Within 10%. Now compare your working with the one below.'; return; }
+      lock(true); cnt.classList.remove('ok');
+      if (silent) return;
+      if (Math.abs(v / 100 - target) <= tol * target) cnt.textContent = 'Close, but enter ζ as a decimal, not a percentage.';
+      else if (Math.abs(v / (2 * Math.PI) - target) <= tol * target) cnt.textContent = 'That looks like the logarithmic decrement δ. How is δ related to ζ?';
+      else cnt.textContent = 'Not within 10% yet. Check your working and try again.';
+    }
+    btn.addEventListener('click', function () { check(false); });
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); check(false); } });
+    sum.addEventListener('click', function (e) { if (d.classList.contains('locked')) { e.preventDefault(); inp.focus(); } });
+    d.addEventListener('toggle', function () { if (d.open && d.classList.contains('locked')) d.open = false; });
+    try { var s = localStorage.getItem(key); if (s) inp.value = s; } catch (e) {}
+    lock(true); if (inp.value) check(true);
+  });
+})();
+</script></body>
+</html>
